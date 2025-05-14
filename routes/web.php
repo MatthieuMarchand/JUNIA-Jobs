@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Student\LoginStudentController;
 use App\Http\Controllers\Student\RegisterStudentController;
+use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,6 +14,10 @@ Route::prefix('students')->name('students.')->group(static function () {
     Route::resource('login', LoginStudentController::class)->only(['index', 'store']);
 
     Route::resource('register', RegisterStudentController::class)->only(['index', 'store']);
+
+    Route::middleware('auth:web')->group(function () {
+        Route::singleton('profile', StudentProfileController::class)->only(['show', 'edit', 'update']);
+    });
 });
 
 Route::get('/cv', []);

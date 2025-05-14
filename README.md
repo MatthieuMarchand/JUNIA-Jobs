@@ -3,12 +3,20 @@
 ### Description du projet
 Le projet a pour objectif de développer une plateforme web dédiée à la centralisation des CV
 des étudiants. Les CV seront générés automatiquement dans un format standardisé, à partir d’un
-formulaire complet recueillant toutes les informations nécessaires : données personnelles,
-biographie/lettre de motivation, parcours académique, expériences professionnelles, photo, etc.
+formulaire complet recueillant toutes les informations nécessaires : 
+- données personnelles,
+- biographie/lettre de motivation
+- parcours académique
+- expériences professionnelles
+- photo, etc.
 Chaque étudiant pourra sélectionner un ou plusieurs domaines de recherche correspondant à
-ses objectifs : contrat d’apprentissage dans le cadre d’une formation d’ingénieur, contrat de
-professionnalisation en 5e année, mobilité internationale, stage de première ou deuxième année,
-CDI, etc.
+ses objectifs : 
+- contrat d’apprentissage dans le cadre d’une formation d’ingénieur
+- contrat de professionnalisation en 5e année
+- mobilité internationale
+- stage de première ou deuxième année
+- CDI
+- etc.
 
 La plateforme mettra à disposition des entreprises partenaires (y compris le réseau ALUMNI
 JUNIA) un catalogue consultable de profils étudiants à la recherche d’opportunités. Un bouton

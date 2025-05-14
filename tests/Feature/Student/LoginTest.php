@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Student;
 
- use App\Models\User;
- use Illuminate\Foundation\Testing\RefreshDatabase;
- use Tests\TestCase;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
- class LoginTest extends TestCase
+class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -20,12 +20,12 @@ namespace Tests\Feature\Student;
     public function test_can_login_with_correct_credentials(): void
     {
         $user = User::factory()->create([
-            'password'=>'password'
+            'password' => 'password',
         ]);
 
         $response = $this->post('/students/login', [
-            'email'=> $user->email,
-            'password'=>'password'
+            'email' => $user->email,
+            'password' => 'password',
         ]);
 
         $response->assertStatus(200);
@@ -36,12 +36,12 @@ namespace Tests\Feature\Student;
     public function test_cannot_login_with_incorrect_credentials(): void
     {
         $user = User::factory()->create([
-            'password'=>'password'
+            'password' => 'password',
         ]);
 
         $response = $this->post('/students/login', [
-            'email'=> $user->email,
-            'password'=>'anotherpwd'
+            'email' => $user->email,
+            'password' => 'anotherpwd',
         ]);
 
         $response->assertStatus(403);

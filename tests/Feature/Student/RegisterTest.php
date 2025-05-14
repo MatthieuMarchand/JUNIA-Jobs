@@ -26,7 +26,7 @@ class RegisterTest extends TestCase
             'gdpr_consent' => true,
         ]);
 
-        $response->assertStatus(200);
+        $response->assertRedirect('/students/profile');
 
         $user = User::first();
         $this->assertAuthenticatedAs($user);

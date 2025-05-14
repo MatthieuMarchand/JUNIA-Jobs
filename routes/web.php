@@ -9,19 +9,16 @@ Route::get('/', function () {
 });
 
 // Compte
-Route::group([
-    'prefix' => 'students',
-    'namespace' => 'students.',
-], static function () {
-    Route::get('/login', [LoginStudentController::class, 'index']);
-    Route::post('/login', [LoginStudentController::class, 'store']);
+Route::prefix('students')->name('students.')->group(static function () {
+    Route::get('/login', [LoginStudentController::class, 'index'])->name('login');
+    Route::post('/login', [LoginStudentController::class, 'store'])->name('login.store');
 
-    Route::get('/register', [RegisterStudentController::class, 'index']);
-    Route::post('/register', [RegisterStudentController::class, 'store']);
+    Route::get('/register', [RegisterStudentController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterStudentController::class, 'store'])->name('register.store');
+
+    Route::get('/profile', [])->name('profile');
+    Route::put('/profile', [])->name('profile.update');
 });
-
-Route::get('/profile', []);
-Route::put('/profile', []);
 
 Route::get('/cv', []);
 

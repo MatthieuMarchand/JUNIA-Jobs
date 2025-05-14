@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use function abort;
+use function to_route;
 
 class LoginStudentController extends Controller
 {
@@ -30,5 +31,7 @@ class LoginStudentController extends Controller
         if (! $authenticated) {
             abort(403);
         }
+
+        return to_route('students.profile');
     }
 }

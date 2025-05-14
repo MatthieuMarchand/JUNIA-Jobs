@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use function to_route;
 
 class RegisterStudentController extends Controller
 {
@@ -31,5 +32,7 @@ class RegisterStudentController extends Controller
         ]);
 
         Auth::login($user);
+
+        return to_route('students.profile');
     }
 }

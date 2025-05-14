@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use function fake;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StudentProfile>
@@ -17,7 +18,11 @@ class StudentProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'first_name' => fake()->firstName,
+            'last_name' => fake()->lastName,
+            'summary' => fake()->paragraph,
+            'gdpr_consent' => true,
+            'phone_number' => fake()->phoneNumber,
         ];
     }
 }

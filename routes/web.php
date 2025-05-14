@@ -10,14 +10,9 @@ Route::get('/', function () {
 
 // Compte
 Route::prefix('students')->name('students.')->group(static function () {
-    Route::get('/login', [LoginStudentController::class, 'index'])->name('login');
-    Route::post('/login', [LoginStudentController::class, 'store'])->name('login.store');
+    Route::resource('login', LoginStudentController::class)->only(['index', 'store']);
 
-    Route::get('/register', [RegisterStudentController::class, 'index'])->name('register');
-    Route::post('/register', [RegisterStudentController::class, 'store'])->name('register.store');
-
-    Route::get('/profile', [])->name('profile');
-    Route::put('/profile', [])->name('profile.update');
+    Route::resource('register', RegisterStudentController::class)->only(['index', 'store']);
 });
 
 Route::get('/cv', []);

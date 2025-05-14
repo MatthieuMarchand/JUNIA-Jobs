@@ -33,6 +33,6 @@ class RegisterStudentController extends Controller
 
         Auth::login($user);
 
-        return to_route('students.profile');
+        return to_route('students.profile.show');
     }
 }

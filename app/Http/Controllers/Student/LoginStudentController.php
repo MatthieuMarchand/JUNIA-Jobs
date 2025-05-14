@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use function abort;
 use function to_route;
 
@@ -28,10 +27,10 @@ class LoginStudentController extends Controller
             'password' => $validated['password'],
         ]);
 
-        if (! $authenticated) {
+        if (!$authenticated) {
             abort(403);
         }
 
-        return to_route('students.profile');
+        return to_route('students.profile.show');
     }
 }

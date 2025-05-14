@@ -21,7 +21,6 @@ class StudentProfileFactory extends Factory
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
             'summary' => fake()->paragraph,
-            'gdpr_consent' => true,
             'phone_number' => fake()->phoneNumber,
         ];
     }

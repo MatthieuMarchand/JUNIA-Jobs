@@ -1,5 +1,9 @@
 ## Cahier des charges
 
+### Vocabulaire non-ambigu
+- compte = profil
+- CV = page web d'un profil étudiant
+
 ### Description du projet
 Le projet a pour objectif de développer une plateforme web dédiée à la centralisation des CV
 des étudiants. Les CV seront générés automatiquement dans un format standardisé, à partir d’un
@@ -19,9 +23,11 @@ ses objectifs :
 - etc.
 
 La plateforme mettra à disposition des entreprises partenaires (y compris le réseau ALUMNI
-JUNIA) un catalogue consultable de profils étudiants à la recherche d’opportunités. Un bouton
-"Convoquer" sera disponible sur chaque fiche profil, permettant à une entreprise d’inviter un
-candidat à un entretien. Lors de l’utilisation de cette fonctionnalité, un courriel automatique
+JUNIA) un catalogue consultable de profils étudiants à la recherche d’opportunités. 
+
+Un bouton "Convoquer" sera disponible sur chaque fiche profil, permettant à une entreprise d’inviter un
+candidat à un entretien. 
+Lors de l’utilisation de cette fonctionnalité, un courriel automatique
 sera envoyé au candidat concerné, contenant les informations de l’entreprise et les détails de la
 convocation.
 

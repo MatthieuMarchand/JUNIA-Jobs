@@ -16,7 +16,6 @@ class StudentProfile extends Model
         'last_name',
         'photo_url',
         'summary',
-        'gdpr_consent',
         'phone_number',
     ];
 

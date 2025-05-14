@@ -66,4 +66,8 @@ modernes.
 #### Design responsive :
 - Adaptation du design pour tous les types d’écrans.
 
+### Améliorations :
+- plusieurs CV par étudiant (ex: 1 pour l'alternance, 1 pur un stage)
+
+### Validation
 La validation de ce projet se fera lors d’une soutenance devant un jury prévue le 19/06/2025. 

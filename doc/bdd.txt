@@ -1,0 +1,76 @@
+Table User {
+  id int [pk, increment]
+  email varchar(255) [unique, not null]
+  password varchar(255) [not null]
+  role varchar(50) [not null, note: "'student', 'company', 'administrator'"]
+}
+
+Table StudentProfile {
+  user_id int [pk, ref: > User.id]
+  first_name varchar(255) [not null]
+  last_name varchar(255) [not null]
+  photo_url varchar(255)
+  summary text
+  gdpr_consent boolean [default: false, not null]
+  phone_number varchar(50)
+}
+
+Table AcademicRecord {
+  id int [pk, increment]
+  student_user_id int [ref: > StudentProfile.user_id, not null]
+  degree varchar(255) [not null]
+  institution varchar(255) [not null]
+  start_date date
+  end_date date
+  description text
+}
+
+Table ProfessionalExperience {
+  id int [pk, increment]
+  student_user_id int [ref: > StudentProfile.user_id, not null]
+  job_title varchar(255) [not null]
+  contact_type varchar(255) [not null]
+  company_name varchar(255) [not null]
+  location varchar(255)
+  start_date date [not null]
+  end_date date
+  description text
+}
+
+Table ContractType {
+  id int [pk, increment]
+  name varchar(255) [unique, not null]
+}
+
+Table StudentObjective {
+  student_user_id int [pk, ref: > StudentProfile.user_id]
+  contract_type_id int [pk, ref: > ContractType.id]
+  objective_details text
+}
+
+// Table Skill {
+//   id int [pk, increment]
+//   name varchar(255) [unique, not null]
+// }
+
+// Table StudentSkill {
+//   student_user_id int [pk, ref: > StudentProfile.user_id]
+//   skill_id int [pk, ref: > Skill.id]
+//   level varchar(100)
+// }
+
+Table CompanyProfile {
+  user_id int [pk, ref: > User.id]
+  company_name varchar(255) [not null]
+  description text
+  is_validated boolean
+}
+
+Table InterviewInvitation {
+  id int [pk, increment]
+  company_user_id int [ref: > CompanyProfile.user_id, not null]
+  student_user_id int [ref: > StudentProfile.user_id, not null]
+  sent_date timestamp [default: `now()`, not null]
+  invitation_details text [not null]
+  invitation_status varchar(50) [default: "'sent'", not null, note: "'sent', 'read', 'accepted', 'declined', 'interview_scheduled', 'completed'"]
+}

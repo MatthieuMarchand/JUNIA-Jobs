@@ -2,12 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\StudentProfile;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Http\UploadedFile;
 use function fake;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StudentProfile>
+ * @extends Factory<StudentProfile>
  */
 class StudentProfileFactory extends Factory
 {
@@ -19,10 +21,23 @@ class StudentProfileFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(),
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
             'summary' => fake()->paragraph,
             'phone_number' => fake()->phoneNumber,
         ];
+    }
+
+    public function withPhoto(): static
+    {
+        return $this->state(function (array $attributes) {
+            $photo = UploadedFile::fake()->image('profile.jpg');
+            $path = $photo->store('photos');
+
+            return [
+                'photo_path' => $path,
+            ];
+        });
     }
 }

@@ -1,61 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Cahier des charges
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Description du projet
+Le projet a pour objectif de développer une plateforme web dédiée à la centralisation des CV
+des étudiants. Les CV seront générés automatiquement dans un format standardisé, à partir d’un
+formulaire complet recueillant toutes les informations nécessaires : données personnelles,
+biographie/lettre de motivation, parcours académique, expériences professionnelles, photo, etc.
+Chaque étudiant pourra sélectionner un ou plusieurs domaines de recherche correspondant à
+ses objectifs : contrat d’apprentissage dans le cadre d’une formation d’ingénieur, contrat de
+professionnalisation en 5e année, mobilité internationale, stage de première ou deuxième année,
+CDI, etc.
 
-## About Laravel
+La plateforme mettra à disposition des entreprises partenaires (y compris le réseau ALUMNI
+JUNIA) un catalogue consultable de profils étudiants à la recherche d’opportunités. Un bouton
+"Convoquer" sera disponible sur chaque fiche profil, permettant à une entreprise d’inviter un
+candidat à un entretien. Lors de l’utilisation de cette fonctionnalité, un courriel automatique
+sera envoyé au candidat concerné, contenant les informations de l’entreprise et les détails de la
+convocation.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Objectifs
+- Concevoir une plateforme intuitive et facilement accessible.
+- Définir clairement les profils des utilisateurs cibles : étudiants, entreprises partenaires
+   et administrateurs.
+- Faciliter la diffusion des demandes proposées par les étudiants auprès des entreprises.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Fonctionnalités
+#### Page d'accueil :
+Page d’accueil dynamique mettant en valeur les principales fonctionnalités de la plateforme (recherche de contrat d’apprentissage, stages, mobilité internationale, CDI, etc.), ainsi que les entreprises partenaires. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Fonctionnalités côté étudiant :
+- Création de compte et authentification
+- Remplissage d’un formulaire pour générer un CV standardisé (juste une page web, pas un pdf)
+- Choix des domaines de recherche (stage, alternance, CDI, etc.)
+- Consultation et modification du profil 
 
-## Learning Laravel
+#### Fonctionnalités côté entreprise :
+Chaque entreprise accède à la plateforme via un identifiant et un mot de passe fournis
+par JUNIA, leur permettant :
+- Accès au catalogue des profils
+- Recherche par filtre (domaine, compétences, type de contrat)
+- Bouton "Convoquer" (avec génération automatique de courriel)
+- Un historique des profils convoqués
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Page de contact :
+Les autres entreprises pourront contacter l’administrateur via un formulaire dédié afin
+de faire une demande de création de compte. 
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+#### Fonctionnalités d’administration :
+- Gestion des comptes utilisateurs
+- Création des comptes entreprise 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Contraintes
+#### Conformité RGPD :
+- Mention légale sur la collecte des données.
+- Option de consentement pour les utilisateurs.
 
-## Laravel Sponsors
+#### Charte graphique :
+- Couleurs : Utilisation des couleurs de JUNIA, Choix de polices lisibles et
+modernes.
+- Logos et images : Intégration du logo et des images de JUNIA.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+#### Navigation intuitive :
+- Menu de navigation clair et accessible.
+- Accès rapide aux différentes sections.
 
-### Premium Partners
+#### Design responsive :
+- Adaptation du design pour tous les types d’écrans.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+La validation de ce projet se fera lors d’une soutenance devant un jury prévue le 19/06/2025. 

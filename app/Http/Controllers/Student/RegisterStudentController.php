@@ -14,7 +14,7 @@ class RegisterStudentController extends Controller
 {
     public function index()
     {
-        //
+        return view('students.register');
     }
 
     public function store(Request $request)

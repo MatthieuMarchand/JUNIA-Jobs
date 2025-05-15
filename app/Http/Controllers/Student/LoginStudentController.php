@@ -12,14 +12,14 @@ class LoginStudentController extends Controller
 {
     public function index()
     {
-        //
+        return view('students.login');
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'email' => 'email|required',
-            'password' => 'string|required',
+            'email' => 'required|email',
+            'password' => 'required|string',
         ]);
 
         $authenticated = Auth::attempt([
@@ -28,7 +28,7 @@ class LoginStudentController extends Controller
         ]);
 
         if (!$authenticated) {
-            abort(403);
+            return back()->withErrors(['password'=>'Mot de passe incorrect'])->withInput();
         }
 
         return to_route('students.profile.show');

@@ -44,7 +44,7 @@ class LoginTest extends TestCase
             'password' => 'anotherpwd',
         ]);
 
-        $response->assertStatus(403);
+        $response->assertSessionHasErrors(['password']);
 
         $this->assertGuest();
     }

@@ -1,3 +1,17 @@
+## Installation
+
+### Exécuter les migrations
+
+```
+php artisan migrate
+```
+
+### Mettre les fausses données de test
+
+```
+php artisan db:seed
+```
+
 ## Cahier des charges
 
 ### Vocabulaire non-ambigu

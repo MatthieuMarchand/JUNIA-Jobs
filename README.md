@@ -1,14 +1,45 @@
 ## Installation
 
+### Installer les dépendances
+
+```shell 
+
+yarn
+composer install
+```
+
+### Variables d'environnement
+
+```shell 
+cp .env.example .env
+php artisan key:generate
+
+cp .env.testing.example .env.testing
+php artisan key:generate --env=testing
+```
+
+### Lancer les serveurs
+
+Dans deux terminaux différents :
+
+```shell 
+yarn dev
+```
+
+```shell 
+
+php artisan serve
+```
+
 ### Exécuter les migrations
 
-```
+```shell 
 php artisan migrate
 ```
 
 ### Mettre les fausses données de test
 
-```
+```shell
 php artisan db:seed
 ```
 

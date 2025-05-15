@@ -36,6 +36,6 @@ class RegisterCompanyController extends Controller
 
         Auth::login($user);
 
-        return to_route('companies.profile.show');
+        return to_route('companies.profile.edit');
     }
 }

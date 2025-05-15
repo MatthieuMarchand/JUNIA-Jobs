@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Accueil')
+@section('title', 'Mon profil')
 
 @section('content')
     <h1 class="text-center">Bienvenue sur la plateforme CV ISEN</h1>

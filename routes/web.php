@@ -10,7 +10,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware('guest')->group(function () {
-    Route::resource('login', LoginController::class)->only(['index', 'store']);
+    Route::resource('login', LoginController::class)->only(['index', 'store'])->names([
+        'index' => 'login'
+    ]);
 });
 
 Route::prefix('students')->name('students.')->group(static function () {

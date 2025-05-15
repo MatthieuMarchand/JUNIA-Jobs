@@ -10,9 +10,9 @@ use function to_route;
 
 class StudentProfileController extends Controller
 {
-    public function index()
+    public function show()
     {
-        //
+        return view('students.profile');
     }
 
     public function edit()

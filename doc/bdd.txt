@@ -63,7 +63,6 @@ Table CompanyProfile {
   user_id int [pk, ref: > User.id]
   company_name varchar(255) [not null]
   description text
-  is_validated boolean
 }
 
 Table InterviewInvitation {

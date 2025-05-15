@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::resource('login', LoginController::class)->only(['index', 'store']);

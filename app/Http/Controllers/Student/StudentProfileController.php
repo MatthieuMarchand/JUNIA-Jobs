@@ -12,12 +12,12 @@ class StudentProfileController extends Controller
 {
     public function show()
     {
-        return view('students.profile');
+        // TODO : page pour consulter son profil
     }
 
     public function edit()
     {
-        //
+        return view('students.profile');
     }
 
     public function update(Request $request)

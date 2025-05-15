@@ -39,7 +39,7 @@ class RegisterTest extends TestCase
         $response = $this->post('/students/register', [
             'password' => 'password',
             'password_confirmation' => 'password',
-            'gdpr_consent' => true,
+            'gdpr_consent' => 'true',
         ]);
 
         $response->assertSessionHasErrors(['email']);
@@ -54,7 +54,7 @@ class RegisterTest extends TestCase
             'email' => 'text@example.com',
             'password' => 'password',
             'password_confirmation' => 'password2',
-            'gdpr_consent' => true,
+            'gdpr_consent' => 'true',
         ]);
 
         $response->assertSessionHasErrors(['password']);

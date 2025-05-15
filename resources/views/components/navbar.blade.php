@@ -8,7 +8,7 @@
 
     @auth
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('students.profile.show') ? 'active' : '' }}" href="{{ route('students.profile.show') }}">Mon profil</a>
+        <a class="nav-link {{ request()->routeIs('students.profile.edit') ? 'active' : '' }}" href="{{ route('students.profile.edit') }}">Mon profil</a>
       </li>
     @endauth
 
@@ -25,5 +25,11 @@
           <a class="btn btn-primary" href="{{ route('login') }}">Se connecter</a>
       </li>
     @endguest
+
+    @auth
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('home') }}">Se déconnecter</a>
+      </li>
+    @endauth
   </ul>
 </nav>

@@ -13,7 +13,7 @@
                 {{-- Email --}}
                 <div class="mb-3">
                     <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" name="email" id="email" required autocomplete="email" placeholder="name@example.com">
+                    <input type="email" class="form-control" name="email" autocomplete="email" placeholder="name@example.com" value="{{ old('email') }}">
                     @error('email')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
@@ -22,7 +22,7 @@
                 {{-- Mot de passe --}}
                 <div class="mb-3">
                     <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" name="password" id="password" required autocomplete="new-password">
+                    <input type="password" class="form-control" name="password" autocomplete="new-password">
                     @error('password')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
@@ -31,13 +31,12 @@
                 {{-- Confirmation mot de passe --}}
                 <div class="mb-3">
                     <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
-                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" required
-                           autocomplete="new-password">
+                    <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
 
                 {{-- RGPD --}}
                 <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" name="gdpr_consent" id="gdpr_consent" required>
+                    <input type="checkbox" class="form-check-input" name="gdpr_consent" value="{{ old('gdpr_consent') }}">
                     <label class="form-check-label" for="gdpr_consent">
                         J’accepte que mes données soient traitées dans le cadre de la gestion des candidatures.
                     </label>

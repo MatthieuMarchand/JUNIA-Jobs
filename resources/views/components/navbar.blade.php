@@ -6,9 +6,11 @@
       <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Accueil</a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link {{ request()->routeIs('students.profile.show') ? 'active' : '' }}" href="{{ route('students.profile.show') }}">Mon profil</a>
-    </li>
+    @auth
+      <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('students.profile.show') ? 'active' : '' }}" href="{{ route('students.profile.show') }}">Mon profil</a>
+      </li>
+    @endauth
 
     <li class="nav-item">
       <a class="nav-link" href="{{ route('home') }}">Lien n°1</a>

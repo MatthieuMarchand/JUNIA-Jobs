@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Student;
+namespace Tests\Feature\Company;
 
 use App\Enums\UserRole;
 use App\Models\User;
@@ -13,30 +13,30 @@ class RegisterTest extends TestCase
 
     public function test_can_display_form(): void
     {
-        $response = $this->get('/students/register');
+        $response = $this->get('/companies/register');
 
         $response->assertStatus(200);
     }
 
-    public function test_register_as_student(): void
+    public function test_register_as_company(): void
     {
-        $response = $this->post('/students/register', [
+        $response = $this->post('/companies/register', [
             'email' => 'text@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
             'gdpr_consent' => true,
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/companies/profile');
 
         $user = User::first();
         $this->assertAuthenticatedAs($user);
-        $this->assertSame(UserRole::Student, $user->role);
+        $this->assertSame(UserRole::Company, $user->role);
     }
 
     public function test_cannot_register_without_email(): void
     {
-        $response = $this->post('/students/register', [
+        $response = $this->post('/companies/register', [
             'password' => 'password',
             'password_confirmation' => 'password',
             'gdpr_consent' => true,
@@ -50,7 +50,7 @@ class RegisterTest extends TestCase
 
     public function test_cannot_register_with_unmatching_passwords(): void
     {
-        $response = $this->post('/students/register', [
+        $response = $this->post('/companies/register', [
             'email' => 'text@example.com',
             'password' => 'password',
             'password_confirmation' => 'password2',
@@ -65,7 +65,7 @@ class RegisterTest extends TestCase
 
     public function test_cannot_register_without_consenting_gdpr(): void
     {
-        $response = $this->post('/students/register', [
+        $response = $this->post('/companies/register', [
             'email' => 'text@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',

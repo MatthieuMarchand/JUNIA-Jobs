@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Company;
 
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use function to_route;
 
-class RegisterStudentController extends Controller
+class RegisterCompanyController extends Controller
 {
     public function index()
     {
-        return view('students.register');
+        //
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'email' => ['required', 'email', Rule::unique(User::class)],
@@ -30,11 +31,11 @@ class RegisterStudentController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'gdpr_consent' => true,
-            'role' => UserRole::Student,
+            'role' => UserRole::Company,
         ]);
 
         Auth::login($user);
 
-        return to_route('students.profile.show');
+        return to_route('companies.profile.show');
     }
 }

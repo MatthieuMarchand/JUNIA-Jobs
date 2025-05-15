@@ -55,7 +55,7 @@
 
             <p class="text-center mb-0">
                 Vous avez déjà un compte ?
-                <a href="{{ route('login.index') }}">Se connecter</a>
+                <a href="{{ route('login') }}">Se connecter</a>
             </p>
         </div>
     </div>

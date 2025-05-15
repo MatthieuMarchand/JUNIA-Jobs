@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Student;
+namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -12,7 +12,7 @@ class LoginTest extends TestCase
 
     public function test_can_display_form(): void
     {
-        $response = $this->get('/students/login');
+        $response = $this->get('/login');
 
         $response->assertStatus(200);
     }
@@ -23,12 +23,12 @@ class LoginTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response = $this->post('/students/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/profile');
 
         $this->assertAuthenticatedAs($user);
     }
@@ -39,7 +39,7 @@ class LoginTest extends TestCase
             'password' => 'password',
         ]);
 
-        $response = $this->post('/students/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'anotherpwd',
         ]);

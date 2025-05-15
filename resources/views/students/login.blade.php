@@ -7,7 +7,7 @@
         <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
             <h2 class="mb-4 text-center">Connexion</h2>
 
-            <form action="{{ route('students.login.store') }}" method="POST" novalidate>
+            <form action="{{ route('login.store') }}" method="POST" novalidate>
                 @csrf
 
                 {{-- Email --}}
@@ -15,7 +15,7 @@
                     <label for="email" class="form-label">Adresse email</label>
                     <input type="email" class="form-control" name="email" id="email" required autocomplete="email" placeholder="name@example.com">
                     @error('email')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -24,7 +24,7 @@
                     <label for="password" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control" name="password" id="password" required autocomplete="current-password">
                     @error('password')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
                 </div>
 

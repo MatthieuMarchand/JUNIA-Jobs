@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function abort;
 use function to_route;
 
-class LoginStudentController extends Controller
+class LoginController extends Controller
 {
     public function index()
     {
@@ -28,7 +26,7 @@ class LoginStudentController extends Controller
         ]);
 
         if (!$authenticated) {
-            return back()->withErrors(['password'=>'Mot de passe incorrect'])->withInput();
+            return back()->withErrors(['password' => 'Mot de passe incorrect'])->withInput();
         }
 
         return to_route('students.profile.show');

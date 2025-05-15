@@ -25,8 +25,8 @@ class StudentProfileController extends Controller
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'summary' => 'required|string|max:1000',
-            'phone_number' => 'required|string|max:255',
+            'summary' => 'nullable|string|max:1000',
+            'phone_number' => 'nullable|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

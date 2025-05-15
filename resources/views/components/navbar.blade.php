@@ -1,5 +1,5 @@
 <nav class="navbar px-3 mb-3">
-  <a class="navbar-brand" href="{{  route('home') }}">JUNIA Jobs</a>
+  <a class="navbar-brand" href="{{  route('home') }}"><strong>JUNIA Jobs</strong></a>
 
   <ul class="nav nav-underline">
     <li class="nav-item">

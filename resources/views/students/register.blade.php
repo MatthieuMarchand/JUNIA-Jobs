@@ -36,8 +36,8 @@
 
                 {{-- RGPD --}}
                 <div class="form-check mb-3">
-                    <input type="checkbox" class="form-check-input" name="gdpr_consent" value="{{ old('gdpr_consent') }}">
-                    <label class="form-check-label" for="gdpr_consent">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="gdpr_consent" value="{{ old('gdpr_consent') }}">
                         J’accepte que mes données soient traitées dans le cadre de la gestion des candidatures.
                     </label>
                     @error('gdpr_consent')

@@ -1,3 +1,11 @@
+$primary: #f25c3c;
+// orange --> #fd7e14;
+// rouge-orange --> #f03e1f;
+// vermillon --> #f2542d;
+// orange brûlé --> #f25c3c;
+$secondary: green;
+// $font-family-base: 'Segoe UI', sans-serif;
+
 @import "bootstrap/scss/bootstrap";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

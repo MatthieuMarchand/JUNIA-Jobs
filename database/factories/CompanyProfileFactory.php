@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\CompanyProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CompanyProfile>
+ * @extends Factory<CompanyProfile>
  */
 class CompanyProfileFactory extends Factory
 {
@@ -17,7 +18,8 @@ class CompanyProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->company,
+            'description' => $this->faker->paragraph,
         ];
     }
 }

@@ -18,6 +18,10 @@ Route::middleware('guest')->group(function () {
     ]);
 });
 
+Route::middleware('auth:web')->group(function () {
+    Route::post('/logout', LogoutController::class)->name('logout');
+});
+
 Route::prefix('students')->name('students.')->group(static function () {
     Route::middleware('guest')->group(function () {
         Route::resource('register', RegisterStudentController::class)->only(['index', 'store']);
@@ -40,17 +44,4 @@ Route::prefix('companies')->name('companies.')->group(static function () {
     });
 });
 
-Route::middleware('auth:web')->group(function () {
-    Route::post('/logout', LogoutController::class)->name('logout');
-});
 
-Route::get('/cv', []);
-
-Route::get('/profiles/convoques', []);
-
-Route::get('/contact', []);
-Route::post('/contact', []);
-
-Route::get('/admin/users', []);
-Route::get('/admin/companies', []);
-Route::post('/admin/companies', []);

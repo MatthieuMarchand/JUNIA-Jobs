@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // "password" est le mot de passe de tous les utilisateurs générés
+        // (voir UserFactory)
+        
         User::factory()->admin()->create([
             'email' => 'admin@example.com',
-            'password' => 'password',
         ]);
 
         User::factory()
@@ -27,16 +29,13 @@ class DatabaseSeeder extends Seeder
             ->has(StudentProfile::factory())
             ->create([
                 'email' => 'student@example.com',
-                'password' => 'password',
             ]);
 
         User::factory()
             ->student()
             ->has(StudentProfile::factory())
             ->count(10)
-            ->create([
-                'password' => 'password',
-            ]);
+            ->create();
 
         User::factory()
             ->company()
@@ -44,7 +43,6 @@ class DatabaseSeeder extends Seeder
             ->has(CompanyRegistrationRequest::factory()->approved())
             ->create([
                 'email' => 'company@example.com',
-                'password' => 'password',
             ]);
 
         User::factory()
@@ -52,7 +50,6 @@ class DatabaseSeeder extends Seeder
             ->has(CompanyRegistrationRequest::factory()->unapproved())
             ->create([
                 'email' => 'unapprovedcompany@example.com',
-                'password' => 'password',
             ]);
     }
 }

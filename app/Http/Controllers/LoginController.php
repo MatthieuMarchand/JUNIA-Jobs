@@ -29,6 +29,6 @@ class LoginController extends Controller
             return back()->withErrors(['password' => 'Mot de passe incorrect'])->withInput();
         }
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit');
     }
 }

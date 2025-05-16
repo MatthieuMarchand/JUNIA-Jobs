@@ -17,7 +17,9 @@ class StudentProfileController extends Controller
 
     public function edit()
     {
-        return view('students.profile');
+        return view('students.profile', [
+            'studentProfile' => Auth::user()->studentProfile()->firstOrNew(), // si pas de studentProfile, en crée un (pas dans la db)
+        ]);
     }
 
     public function update(Request $request)

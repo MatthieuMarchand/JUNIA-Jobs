@@ -40,7 +40,7 @@ class UpdateProfileTest extends TestCase
             'photo' => UploadedFile::fake()->image('profile.jpg'),
         ]);
 
-        $response->assertRedirect('/students/profile/edit');
+        $response->assertRedirect('/students/profile');
 
         $profile->refresh();
         $this->assertSame('John', $profile->first_name);
@@ -67,7 +67,7 @@ class UpdateProfileTest extends TestCase
             'photo' => UploadedFile::fake()->image('profile.jpg'),
         ]);
 
-        $response->assertRedirect('/students/profile/edit');
+        $response->assertRedirect('/students/profile');
 
         $this->assertDatabaseCount(StudentProfile::class, 1);
     }

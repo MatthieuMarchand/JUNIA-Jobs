@@ -8,7 +8,7 @@
 
     @auth
       <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('students.profile.edit') ? 'active' : '' }}" href="{{ route('students.profile.edit') }}">Mon profil</a>
+        <a class="nav-link {{ (request()->routeIs('students.profile.show') || request()->routeIs('students.profile.edit')) ? 'active' : '' }}" href="{{ route('students.profile.show') }}">Mon profil</a>
       </li>
     @endauth
 

@@ -15,7 +15,9 @@ class StudentProfileController extends Controller
 {
     public function show()
     {
-        // TODO : page pour consulter son profilStudentProfileController
+        return view('students.profile', [
+            'studentProfile' => Auth::user()->studentProfile()->firstOrNew(),
+        ]);
     }
 
     // Permet de récupérer tous les profils étudiant
@@ -64,6 +66,6 @@ class StudentProfileController extends Controller
 
         $profile->save();
 
-        return to_route('students.profile.edit');
+        return to_route('students.profile.show');
     }
 }

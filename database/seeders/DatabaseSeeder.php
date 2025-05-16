@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // "password" est le mot de passe de tous les utilisateurs générés
         // (voir UserFactory)
-        
+
         User::factory()->admin()->create([
             'email' => 'admin@example.com',
         ]);

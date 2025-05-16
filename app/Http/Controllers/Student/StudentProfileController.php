@@ -3,16 +3,28 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\StudentProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+
 use function to_route;
 
 class StudentProfileController extends Controller
 {
     public function show()
     {
-        // TODO : page pour consulter son profil
+        // TODO : page pour consulter son profilStudentProfileController
+    }
+
+    // Permet de récupérer tous les profils étudiant
+    public function index()
+    {
+        Gate::authorize('viewAny', StudentProfile::class);
+        $students = StudentProfile::all();
+
+        return view('students.profiles.index', compact('students'));
     }
 
     public function edit()

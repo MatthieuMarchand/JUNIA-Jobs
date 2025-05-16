@@ -25,6 +25,8 @@ Route::prefix('students')->name('students.')->group(static function () {
 
     Route::middleware('auth:web')->group(function () {
         Route::singleton('profile', StudentProfileController::class)->only(['show', 'edit', 'update']);
+        // Get all student's profiles
+        Route::get('/profiles', [StudentProfileController::class, 'index']);
     });
 });
 
@@ -44,8 +46,6 @@ Route::middleware('auth:web')->group(function () {
 
 Route::get('/cv', []);
 
-// Profils
-Route::get('/profiles', []);
 Route::get('/profiles/convoques', []);
 
 Route::get('/contact', []);

@@ -18,62 +18,67 @@ class RegisterTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_register_as_company(): void
+    public function test_create_company_request(): void
     {
         $response = $this->post('/companies/register', [
             'email' => 'text@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-            'gdpr_consent' => true,
+            'company_name' => 'Example',
+            'message' => 'Hello, world!',
+            'gdpr_consent' => 'true',
         ]);
 
-        $response->assertRedirect('/companies/profile/edit');
+        $response->assertOk();
+
+        $this->assertGuest();
 
         $user = User::first();
-        $this->assertAuthenticatedAs($user);
+
+        $this->assertSame('text@example.com', $user->email);
+        $this->assertNotNull($user->password);
         $this->assertSame(UserRole::Company, $user->role);
+        $this->assertTrue($user->gdpr_consent);
+
+        $this->assertSame("Example", $user->companyRegistrationRequest->company_name);
+        $this->assertSame('Hello, world!', $user->companyRegistrationRequest->message);
+        $this->assertFalse($user->companyRegistrationRequest->approved);
     }
 
     public function test_cannot_register_without_email(): void
     {
         $response = $this->post('/companies/register', [
-            'password' => 'password',
-            'password_confirmation' => 'password',
-            'gdpr_consent' => true,
+            'company_name' => 'Example',
+            'message' => 'Hello, world!',
+            'gdpr_consent' => 'true',
         ]);
 
         $response->assertSessionHasErrors(['email']);
 
         $this->assertDatabaseCount(User::class, 0);
-        $this->assertGuest();
     }
 
-    public function test_cannot_register_with_unmatching_passwords(): void
+    public function test_cannot_register_without_company_name(): void
     {
         $response = $this->post('/companies/register', [
             'email' => 'text@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password2',
-            'gdpr_consent' => true,
+            'message' => 'Hello, world!',
+            'gdpr_consent' => 'true',
         ]);
 
-        $response->assertSessionHasErrors(['password']);
+        $response->assertSessionHasErrors(['company_name']);
 
         $this->assertDatabaseCount(User::class, 0);
-        $this->assertGuest();
     }
 
     public function test_cannot_register_without_consenting_gdpr(): void
     {
         $response = $this->post('/companies/register', [
             'email' => 'text@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'company_name' => 'Example',
+            'message' => 'Hello, world!',
         ]);
 
         $response->assertSessionHasErrors(['gdpr_consent']);
 
         $this->assertDatabaseCount(User::class, 0);
-        $this->assertGuest();
     }
 }

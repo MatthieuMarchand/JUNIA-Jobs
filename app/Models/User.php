@@ -48,6 +48,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'role' => UserRole::class,
+            'gdpr_consent' => 'boolean',
         ];
     }
 
@@ -59,5 +60,10 @@ class User extends Authenticatable
     public function companyProfile(): HasOne
     {
         return $this->hasOne(CompanyProfile::class);
+    }
+
+    public function companyRegistrationRequest(): HasOne
+    {
+        return $this->hasOne(CompanyRegistrationRequest::class);
     }
 }

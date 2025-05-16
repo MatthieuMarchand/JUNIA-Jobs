@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Student;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +19,7 @@ class LoginTest extends TestCase
 
     public function test_can_login_with_correct_credentials(): void
     {
-        $user = User::factory()->create([
+        $user = User::factory()->student()->create([
             'password' => 'password',
         ]);
 
@@ -35,7 +35,7 @@ class LoginTest extends TestCase
 
     public function test_cannot_login_with_incorrect_credentials(): void
     {
-        $user = User::factory()->create([
+        $user = User::factory()->student()->create([
             'password' => 'password',
         ]);
 

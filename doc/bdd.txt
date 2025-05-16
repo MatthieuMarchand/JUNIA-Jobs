@@ -3,6 +3,7 @@ Table User {
   email varchar(255) [unique, not null]
   password varchar(255) [not null]
   role varchar(50) [not null, note: "'student', 'company', 'administrator'"]
+  gdpr_consent boolean [default: false, not null]
 }
 
 Table StudentProfile {
@@ -11,7 +12,6 @@ Table StudentProfile {
   last_name varchar(255) [not null]
   photo_path varchar(255)
   summary text
-  gdpr_consent boolean [default: false, not null]
   phone_number varchar(50)
 }
 
@@ -61,8 +61,15 @@ Table StudentObjective {
 
 Table CompanyProfile {
   user_id int [pk, ref: > User.id]
-  company_name varchar(255) [not null]
+  name varchar(255) [not null]
   description text
+}
+
+Table CompanyRegistrationRequest {
+  user_id int [pk, ref: > User.id]
+  company_name varchar(255) [not null]
+  message varchar(255) [not null]
+  approved boolean [default: false, not null]
 }
 
 Table InterviewInvitation {

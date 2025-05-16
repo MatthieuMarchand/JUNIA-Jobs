@@ -13,13 +13,6 @@ use function to_route;
 
 class StudentProfileController extends Controller
 {
-    public function show()
-    {
-        return view('students.profile', [
-            'studentProfile' => Auth::user()->studentProfile()->firstOrNew(),
-        ]);
-    }
-
     // Permet de récupérer tous les profils étudiant
     public function index()
     {
@@ -27,6 +20,13 @@ class StudentProfileController extends Controller
         $students = StudentProfile::all();
 
         return view('students.profiles.index', compact('students'));
+    }
+
+    public function show()
+    {
+        return view('students.profile', [
+            'studentProfile' => Auth::user()->studentProfile()->firstOrNew(),
+        ]);
     }
 
     public function edit()

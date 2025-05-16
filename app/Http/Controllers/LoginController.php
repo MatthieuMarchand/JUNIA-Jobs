@@ -50,7 +50,7 @@ class LoginController extends Controller
         return match ($user->role) {
             UserRole::Student => to_route('students.profile.show'),
             UserRole::Company => to_route('companies.profile.show'),
-            //            UserRole::Admin => to_route('admin.dashboard'),
+            UserRole::Administrator => to_route('home'),
         };
     }
 }

@@ -24,7 +24,7 @@
                     <input type="password" class="form-control" name="password" id="password" required autocomplete="current-password"
                            value="{{ old('password') }}">
                     <small class="mb-0">
-                        <a href="{{ route('password-reset.request.create') }}">Réinitialiser le mot de passe</a>
+                        <a href="{{ route('password-reset.request.create') }}">Mot de passe oublié ?</a>
                     </small>
                     @error('password')
                     <div class="text-danger small mt-1">{{ $message }}</div>

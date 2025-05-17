@@ -3,12 +3,12 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Utils\RouteGuesser;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Str;
 use Tests\TestCase;
-use function route;
+use function resolve;
 
 class PasswordResetRequestTest extends TestCase
 {
@@ -34,15 +34,14 @@ class PasswordResetRequestTest extends TestCase
         $response->assertRedirectBack();
         $response->assertSessionHas('success', "Un mail a été envoyé à $user->email si un compte utilisateur existe avec cette adresse.");
 
-        Notification::assertSentTo([$user], ResetPasswordNotification::class, function ($notification) use ($user) {
-            $mailData = $notification->toMail($user)->toArray();
+        $routeGuesser = resolve(RouteGuesser::class);
 
-            $token = "RANDOM_TOKEN";
-            $fakeRoute = route('password-reset.create', ['token' => $token]);
-            $routeStart = Str::before($fakeRoute, $token);
+        Notification::assertSentTo([$user], ResetPasswordNotification::class,
+            function (ResetPasswordNotification $notification) use ($user, $routeGuesser) {
+                $actionUrl = $notification->toMail($user)->actionUrl;
 
-            return Str::startsWith($mailData["actionUrl"], $routeStart);
-        });
+                return $routeGuesser->fromUrl($actionUrl)->getName() === 'password-reset.create';
+            });
     }
 
     public function test_submit_do_not_send_email_but_display_it_has_been_sent_if_user_dont_exists(): void

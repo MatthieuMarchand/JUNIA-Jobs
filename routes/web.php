@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
+use App\Http\Controllers\Admin\CompanyRegisterRequestController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\PasswordResetRequestController;
 use App\Http\Controllers\Company\CompanyProfileController;
@@ -50,6 +52,16 @@ Route::prefix('companies')->name('companies.')->group(static function () {
     Route::middleware('auth:web')->group(function () {
         Route::singleton('profile', CompanyProfileController::class)->only(['show', 'edit', 'update']);
     });
+});
+
+Route::prefix('admin')->name('admin.')->middleware('auth:web')->group(static function () {
+    Route::get('/', [CompanyRegisterRequestController::class, 'index'])
+        ->name('companies.requests.index');
+
+    Route::get('/companies/requests', [CompanyRegisterRequestController::class, 'index'])
+        ->name('companies.requests.index');
+    Route::post('/companies/requests/{registrationRequest}/approve', ApproveCompanyRegisterRequestController::class)
+        ->name('companies.requests.approve');
 });
 
 

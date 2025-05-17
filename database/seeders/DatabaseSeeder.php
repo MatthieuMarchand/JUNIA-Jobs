@@ -51,5 +51,11 @@ class DatabaseSeeder extends Seeder
             ->create([
                 'email' => 'unapprovedcompany@example.com',
             ]);
+
+        User::factory()
+            ->company()
+            ->has(CompanyRegistrationRequest::factory()->unapproved())
+            ->count(10)
+            ->create();
     }
 }

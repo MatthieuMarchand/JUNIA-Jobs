@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\CompanyRegistrationRequest;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class CompanyRegistrationRequestFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(),
             'company_name' => $this->faker->company(),
             'message' => $this->faker->sentence(),
             'approved' => false,

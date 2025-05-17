@@ -16,9 +16,16 @@ use function view;
 
 class PasswordResetController extends Controller
 {
-    public function create(string $token)
+    public function create(Request $request, string $token)
     {
-        return view('auth.reset-password', ['token' => $token]);
+        $request->validate([
+            'email' => 'nullable|email',
+        ]);
+
+        return view('auth.reset-password', [
+            'token' => $token,
+            'email' => $request->get('email'),
+        ]);
     }
 
     public function store(Request $request)

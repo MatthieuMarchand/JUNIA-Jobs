@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
 use App\Http\Controllers\Auth\PasswordResetController;
@@ -55,7 +56,7 @@ Route::prefix('companies')->name('companies.')->group(static function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware('auth:web')->group(static function () {
-    Route::get('/', [CompanyRegisterRequestController::class, 'index'])
+    Route::get('/', AdminDashboardController::class)
         ->name('companies.requests.index');
 
     Route::get('/companies/requests', [CompanyRegisterRequestController::class, 'index'])

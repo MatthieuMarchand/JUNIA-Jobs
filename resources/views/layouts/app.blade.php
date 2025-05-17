@@ -19,10 +19,36 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    @include('components.navbar')
+@include('components.navbar')
 
-    <main>
-        @yield('content')
-    </main>
+<main>
+    @yield('content')
+</main>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    @session('success')
+    <x-toast type="success">
+        {{ $value }}
+    </x-toast>
+    @endsession
+    
+    @session('error')
+    <x-toast type="error">
+        {{ $value }}
+    </x-toast>
+    @endsession
+
+    @session('info')
+    <x-toast type="info">
+        {{ $value }}
+    </x-toast>
+    @endsession
+
+    @session('warning')
+    <x-toast type="warning">
+        {{ $value }}
+    </x-toast>
+    @endsession
+</div>
 </body>
 </html>

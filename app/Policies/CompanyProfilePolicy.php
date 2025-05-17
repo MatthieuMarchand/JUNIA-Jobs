@@ -3,27 +3,27 @@
 namespace App\Policies;
 
 use App\Enums\UserRole;
-use App\Models\StudentProfile;
+use App\Models\CompanyProfile;
 use App\Models\User;
 
-class StudentProfilePolicy
+class CompanyProfilePolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->role === UserRole::Company
+        return $user->role === UserRole::Student
             || $user->role === UserRole::Administrator;
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, StudentProfile $studentProfile): bool
+    public function view(User $user, CompanyProfile $studentProfile): bool
     {
         return $user->id === $studentProfile->user_id
-            || $user->role === UserRole::Company
+            || $user->role === UserRole::Student
             || $user->role === UserRole::Administrator;
     }
 
@@ -32,13 +32,13 @@ class StudentProfilePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === UserRole::Student;
+        return $user->role === UserRole::Company;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, StudentProfile $studentProfile): bool
+    public function update(User $user, CompanyProfile $studentProfile): bool
     {
         return $user->id === $studentProfile->user_id
             || $user->role === UserRole::Administrator;
@@ -47,7 +47,7 @@ class StudentProfilePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, StudentProfile $studentProfile): bool
+    public function delete(User $user, CompanyProfile $studentProfile): bool
     {
         return $user->id === $studentProfile->user_id
             || $user->role === UserRole::Administrator;
@@ -56,7 +56,7 @@ class StudentProfilePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, StudentProfile $studentProfile): bool
+    public function restore(User $user, CompanyProfile $studentProfile): bool
     {
         return false;
     }
@@ -64,7 +64,7 @@ class StudentProfilePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, StudentProfile $studentProfile): bool
+    public function forceDelete(User $user, CompanyProfile $studentProfile): bool
     {
         return false;
     }

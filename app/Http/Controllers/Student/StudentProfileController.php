@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\StudentProfile;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-
 use function to_route;
 
 class StudentProfileController extends Controller
@@ -22,22 +22,41 @@ class StudentProfileController extends Controller
         return view('students.profiles.index', compact('students'));
     }
 
+    private function getStudentProfile(): StudentProfile
+    {
+        // Si pas de studentProfile existant en bdd, on en instancie un à la volée (il n'est pas créé en bdd, seulement en php).
+        // Comme ça la vue reçoit toujours un studentProfile non null
+        return Auth::user()->studentProfile()->firstOrNew();
+    }
+
     public function show()
     {
+        $studentProfile = $this->getStudentProfile();
+
+        Gate::authorize('view', $studentProfile);
+
         return view('students.profile', [
-            'studentProfile' => Auth::user()->studentProfile()->firstOrNew(),
+            'studentProfile' => $studentProfile,
         ]);
     }
 
     public function edit()
     {
+        $studentProfile = $this->getStudentProfile();
+
+        Gate::authorize('update', $studentProfile);
+
         return view('students.profile', [
-            'studentProfile' => Auth::user()->studentProfile()->firstOrNew(), // si pas de studentProfile, en crée un (pas dans la db)
+            'studentProfile' => $studentProfile,
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
+        $studentProfile = $this->getStudentProfile();
+
+        Gate::authorize('update', $studentProfile);
+
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -46,25 +65,21 @@ class StudentProfileController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = Auth::user();
+        $studentProfile->first_name = $validated['first_name'];
+        $studentProfile->last_name = $validated['last_name'];
+        $studentProfile->summary = $validated['summary'];
+        $studentProfile->phone_number = $validated['phone_number'];
 
-        $profile = $user->studentProfile()->firstOrNew();
-
-        $profile->first_name = $validated['first_name'];
-        $profile->last_name = $validated['last_name'];
-        $profile->summary = $validated['summary'];
-        $profile->phone_number = $validated['phone_number'];
-
-        if ($profile->photo_path && $request->has('photo')) {
-            Storage::delete($profile->photo_path);
-            $profile->photo_path = null;
+        if ($studentProfile->photo_path && $request->has('photo')) {
+            Storage::delete($studentProfile->photo_path);
+            $studentProfile->photo_path = null;
         }
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('photos');
-            $profile->photo_path = $path;
+            $studentProfile->photo_path = $path;
         }
 
-        $profile->save();
+        $studentProfile->save();
 
         return to_route('students.profile.show');
     }

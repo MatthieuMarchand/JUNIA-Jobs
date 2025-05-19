@@ -7,7 +7,8 @@ Table User {
 }
 
 Table StudentProfile {
-  user_id int [pk, ref: > User.id]
+  id int [pk]
+  user_id int [ref: > User.id]
   first_name varchar(255) [not null]
   last_name varchar(255) [not null]
   photo_path varchar(255)
@@ -37,27 +38,26 @@ Table ProfessionalExperience {
   description text
 }
 
-Table ContractType {
+Table ResearchArea {
   id int [pk, increment]
   name varchar(255) [unique, not null]
 }
 
-Table StudentObjective {
-  student_user_id int [pk, ref: > StudentProfile.user_id]
-  contract_type_id int [pk, ref: > ContractType.id]
-  objective_details text
+Table StudentProfileResearchArea {
+  student_profile_id int [pk, ref: > StudentProfile.user_id]
+  research_area_id int [pk, ref: > ResearchArea.id]
 }
 
-// Table Skill {
-//   id int [pk, increment]
-//   name varchar(255) [unique, not null]
-// }
+Table Skill {
+  id int [pk, increment]
+  name varchar(255) [unique, not null]
+}
 
-// Table StudentSkill {
-//   student_user_id int [pk, ref: > StudentProfile.user_id]
-//   skill_id int [pk, ref: > Skill.id]
-//   level varchar(100)
-// }
+Table StudentSkill {
+  student_user_id int [pk, ref: > StudentProfile.user_id]
+  skill_id int [pk, ref: > Skill.id]
+  level varchar(100)
+}
 
 Table CompanyProfile {
   user_id int [pk, ref: > User.id]

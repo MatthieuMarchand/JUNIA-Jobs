@@ -57,5 +57,7 @@ class DatabaseSeeder extends Seeder
             ->has(CompanyRegistrationRequest::factory()->unapproved())
             ->count(10)
             ->create();
+
+        $this->call(ResearchAreasSeeder::class);
     }
 }

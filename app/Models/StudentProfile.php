@@ -6,6 +6,7 @@ use Database\Factories\StudentProfileFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
 
 class StudentProfile extends Model
@@ -35,5 +36,10 @@ class StudentProfile extends Model
         }
 
         return Storage::temporaryUrl($this->photo_path, now()->addMinute());
+    }
+
+    public function researchAreas(): BelongsToMany
+    {
+        return $this->belongsToMany(ResearchArea::class, 'student_profile_research_areas');
     }
 }

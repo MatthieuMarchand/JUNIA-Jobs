@@ -63,6 +63,8 @@ class StudentProfileController extends Controller
             'summary' => 'nullable|string|max:1000',
             'phone_number' => 'nullable|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'research_area_ids' => ['nullable', 'array'],
+            'research_area_ids.*' => 'exists:research_areas,id',
         ]);
 
         $studentProfile->first_name = $validated['first_name'];
@@ -77,6 +79,10 @@ class StudentProfileController extends Controller
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('photos');
             $studentProfile->photo_path = $path;
+        }
+
+        if ($request->has('research_area_ids')) {
+            $studentProfile->researchAreas()->sync($request->research_area_ids);
         }
 
         $studentProfile->save();

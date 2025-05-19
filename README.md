@@ -61,8 +61,10 @@ formulaire complet recueillant toutes les informations nécessaires :
 - parcours académique
 - expériences professionnelles
 - photo, etc.
-  Chaque étudiant pourra sélectionner un ou plusieurs domaines de recherche correspondant à
-  ses objectifs :
+
+Chaque étudiant pourra sélectionner un ou plusieurs domaines de recherche correspondant à
+ses objectifs :
+
 - contrat d’apprentissage dans le cadre d’une formation d’ingénieur
 - contrat de professionnalisation en 5e année
 - mobilité internationale

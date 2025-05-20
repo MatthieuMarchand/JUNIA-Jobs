@@ -12,10 +12,13 @@ class CompanyProfile extends Model
     /** @use HasFactory<CompanyProfileFactory> */
     use HasFactory;
 
+    use Traits\HasPhoto;
+
     public $timestamps = false;
 
     protected $fillable = [
         'name',
+        'photo_path',
         'description',
     ];
 

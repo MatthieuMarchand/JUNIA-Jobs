@@ -4,8 +4,8 @@ namespace Database\Factories;
 
 use App\Models\StudentProfile;
 use App\Models\User;
+use Database\Factories\Traits\HasFakePhoto;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Http\UploadedFile;
 use function fake;
 
 /**
@@ -13,6 +13,8 @@ use function fake;
  */
 class StudentProfileFactory extends Factory
 {
+    use HasFakePhoto;
+
     /**
      * Define the model's default state.
      *
@@ -27,17 +29,5 @@ class StudentProfileFactory extends Factory
             'summary' => fake()->paragraph,
             'phone_number' => fake()->phoneNumber,
         ];
-    }
-
-    public function withPhoto(): static
-    {
-        return $this->state(function (array $attributes) {
-            $photo = UploadedFile::fake()->image('profile.jpg');
-            $path = $photo->store('photos');
-
-            return [
-                'photo_path' => $path,
-            ];
-        });
     }
 }

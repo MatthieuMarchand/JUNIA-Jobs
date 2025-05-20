@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\CompanyProfile;
+use App\Models\User;
+use Database\Factories\Traits\HasFakePhoto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CompanyProfileFactory extends Factory
 {
+    use HasFakePhoto;
+
     /**
      * Define the model's default state.
      *
@@ -18,6 +22,7 @@ class CompanyProfileFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(),
             'name' => $this->faker->company,
             'description' => $this->faker->paragraph,
         ];

@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use function to_route;
 
 class CompanyProfileController extends Controller
@@ -40,11 +41,21 @@ class CompanyProfileController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required|string|max:2000',
         ]);
 
         $companyProfile->name = $validated['name'];
         $companyProfile->description = $validated['description'];
+
+        if ($companyProfile->photo_path && $request->has('photo')) {
+            Storage::delete($companyProfile->photo_path);
+            $companyProfile->photo_path = null;
+        }
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos');
+            $companyProfile->photo_path = $path;
+        }
 
         $companyProfile->save();
 

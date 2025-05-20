@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Skill;
 use App\Models\StudentProfile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -63,8 +64,12 @@ class StudentProfileController extends Controller
             'summary' => 'nullable|string|max:1000',
             'phone_number' => 'nullable|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
             'research_area_ids' => ['nullable', 'array'],
             'research_area_ids.*' => 'exists:research_areas,id',
+
+            'skill_names' => ['nullable', 'array'],
+            'skill_names.*' => 'string',
         ]);
 
         $studentProfile->first_name = $validated['first_name'];
@@ -83,6 +88,16 @@ class StudentProfileController extends Controller
 
         if ($request->has('research_area_ids')) {
             $studentProfile->researchAreas()->sync($request->research_area_ids);
+        }
+
+        if ($request->has('skill_names')) {
+            // Pas le plus optimisé, mais le nombre de compétences reste faible (<100 en général).
+            // Donc, on peut se le permettre pour l'instant.
+            foreach ($request->skill_names as $name) {
+                Skill::firstOrCreate(['name' => $name]);
+            }
+
+            $studentProfile->skills()->sync($request->skill_names);
         }
 
         $studentProfile->save();

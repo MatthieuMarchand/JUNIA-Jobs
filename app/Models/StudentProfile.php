@@ -42,4 +42,9 @@ class StudentProfile extends Model
     {
         return $this->belongsToMany(ResearchArea::class, 'student_profile_research_areas');
     }
+
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(Skill::class, 'student_profile_skills');
+    }
 }

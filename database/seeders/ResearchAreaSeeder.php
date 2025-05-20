@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\ResearchArea;
 use Illuminate\Database\Seeder;
 
-class ResearchAreasSeeder extends Seeder
+class ResearchAreaSeeder extends Seeder
 {
     /**
      * Run the database seeds.

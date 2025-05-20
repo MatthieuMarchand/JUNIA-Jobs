@@ -44,23 +44,22 @@ Table ResearchArea {
 }
 
 Table StudentProfileResearchArea {
-  student_profile_id int [pk, ref: > StudentProfile.user_id]
+  student_profile_id int [pk, ref: > StudentProfile.id]
   research_area_id int [pk, ref: > ResearchArea.id]
 }
 
 Table Skill {
-  id int [pk, increment]
-  name varchar(255) [unique, not null]
+  name varchar(255) [pk, not null]
 }
 
-Table StudentSkill {
-  student_user_id int [pk, ref: > StudentProfile.user_id]
-  skill_id int [pk, ref: > Skill.id]
-  level varchar(100)
+Table StudentProfileSkill {
+  student_profile_id int [pk, ref: > StudentProfile.id]
+  skill_name int [pk, ref: > Skill.name]
 }
 
 Table CompanyProfile {
-  user_id int [pk, ref: > User.id]
+  id int [pk]
+  user_id int [ref: > User.id]
   name varchar(255) [not null]
   description text
 }
@@ -74,8 +73,8 @@ Table CompanyRegistrationRequest {
 
 Table InterviewInvitation {
   id int [pk, increment]
-  company_user_id int [ref: > CompanyProfile.user_id, not null]
-  student_user_id int [ref: > StudentProfile.user_id, not null]
+  company_profile_id int [ref: > CompanyProfile.id, not null]
+  student_profile_id int [ref: > StudentProfile.id, not null]
   sent_date timestamp [default: `now()`, not null]
   invitation_details text [not null]
   invitation_status varchar(50) [default: "'sent'", not null, note: "'sent', 'read', 'accepted', 'declined', 'interview_scheduled', 'completed'"]

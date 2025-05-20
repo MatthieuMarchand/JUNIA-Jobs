@@ -60,6 +60,8 @@ formulaire complet recueillant toutes les informations nécessaires :
 - biographie/lettre de motivation
 - parcours académique
 - expériences professionnelles
+- compétences
+- domaines de recherche (voir ci-dessous)
 - photo, etc.
 
 Chaque étudiant pourra sélectionner un ou plusieurs domaines de recherche correspondant à
@@ -107,11 +109,11 @@ internationale, CDI, etc.), ainsi que les entreprises partenaires.
 Chaque entreprise accède à la plateforme via un identifiant et un mot de passe fournis
 par JUNIA, leur permettant :
 > [!Important]
-> Nous proposons que l'entreprise définisse son propre mot de passe dès le formulaire d'inscription, car c'est plus sécurisé que de communiquer un mot
-> de passe.
+> Nous proposons que l'entreprise définisse son propre mot de passe suite à l'approbation de sa requête.
+> [Car c'est plus sécurisé que de communiquer le mot de passe](https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html#user-resets-password)
 
 - Accès au catalogue des profils
-- Recherche par filtre (domaine, compétences, type de contrat)
+- Recherche par filtre (domaine, compétences, type de contrat) -> différence entre domaine et type de contrat ?)
 - Bouton "Convoquer" (avec génération automatique de courriel)
 - Un historique des profils convoqués
 

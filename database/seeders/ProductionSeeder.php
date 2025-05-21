@@ -14,7 +14,7 @@ class ProductionSeeder extends Seeder
      **/
     public function run(): void
     {
-        $this->call(ResearchAreaSeeder::class);
+        $this->call(ContractTypeSeeder::class);
         $this->call(SkillSeeder::class);
     }
 }

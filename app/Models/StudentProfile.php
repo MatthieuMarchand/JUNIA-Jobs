@@ -30,9 +30,9 @@ class StudentProfile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function researchAreas(): BelongsToMany
+    public function contactTypes(): BelongsToMany
     {
-        return $this->belongsToMany(ResearchArea::class, 'student_profile_research_areas');
+        return $this->belongsToMany(ContractType::class, 'student_profile_contract_types');
     }
 
     public function skills(): BelongsToMany

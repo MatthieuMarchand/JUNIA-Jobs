@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class ResearchArea extends Model
+class ContractType extends Model
 {
     public $timestamps = false;
 
@@ -16,6 +16,6 @@ class ResearchArea extends Model
 
     public function studentProfiles(): BelongsToMany
     {
-        return $this->belongsToMany(StudentProfile::class, 'student_profile_research_areas');
+        return $this->belongsToMany(StudentProfile::class, 'student_profile_contract_types');
     }
 }

@@ -58,6 +58,6 @@ class DatabaseSeeder extends Seeder
             ->count(10)
             ->create();
 
-        $this->call(ResearchAreaSeeder::class);
+        $this->call(ContractTypeSeeder::class);
     }
 }

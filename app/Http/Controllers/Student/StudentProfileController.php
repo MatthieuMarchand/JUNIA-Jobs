@@ -65,8 +65,8 @@ class StudentProfileController extends Controller
             'phone_number' => 'nullable|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
-            'research_area_ids' => ['nullable', 'array'],
-            'research_area_ids.*' => 'exists:research_areas,id',
+            'contract_type_ids' => ['nullable', 'array'],
+            'contract_type_ids.*' => 'exists:contract_types,id',
 
             'skill_names' => ['nullable', 'array'],
             'skill_names.*' => 'string',
@@ -86,8 +86,8 @@ class StudentProfileController extends Controller
             $studentProfile->photo_path = $path;
         }
 
-        if ($request->has('research_area_ids')) {
-            $studentProfile->researchAreas()->sync($request->research_area_ids);
+        if ($request->has('contract_type_ids')) {
+            $studentProfile->contactTypes()->sync($request->contract_type_ids);
         }
 
         if ($request->has('skill_names')) {

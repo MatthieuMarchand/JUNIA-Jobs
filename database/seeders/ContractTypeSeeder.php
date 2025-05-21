@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\ResearchArea;
+use App\Models\ContractType;
 use Illuminate\Database\Seeder;
 
-class ResearchAreaSeeder extends Seeder
+class ContractTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $areas = [
+        $types = [
             [
                 "name" => "Apprenti ingénieur",
                 "description" => "Contrat d’apprentissage dans le cadre d’une formation d’ingénieur",
@@ -35,8 +35,8 @@ class ResearchAreaSeeder extends Seeder
             ],
         ];
 
-        foreach ($areas as $area) {
-            ResearchArea::create($area);
+        foreach ($types as $type) {
+            ContractType::create($type);
         }
     }
 }

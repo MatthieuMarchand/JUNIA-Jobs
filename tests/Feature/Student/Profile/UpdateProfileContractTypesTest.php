@@ -2,52 +2,52 @@
 
 namespace Tests\Feature\Student\Profile;
 
-use App\Models\ResearchArea;
+use App\Models\ContractType;
 use App\Models\StudentProfile;
 use Database\Seeders\ProductionSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UpdateProfileResearchAreasTest extends TestCase
+class UpdateProfileContractTypesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_update_areas_if_present(): void
+    public function test_update_contract_types_if_present(): void
     {
         $this->seed(ProductionSeeder::class);
 
         $profile = StudentProfile::factory()->create();
 
-        $firstArea = ResearchArea::first();
-        $lastArea = ResearchArea::latest('id')->first();
+        $firstContract = ContractType::first();
+        $lastContract = ContractType::latest('id')->first();
 
-        $profile->researchAreas()->sync([$firstArea->id]);
+        $profile->contactTypes()->sync([$firstContract->id]);
 
         $response = $this->actingAs($profile->user)->patch('/students/profile', [
             ...$profile->toArray(),
-            'research_area_ids' => [$lastArea->id],
+            'contract_type_ids' => [$lastContract->id],
         ]);
 
         $response->assertRedirect('/students/profile');
 
         $profile->refresh();
-        $this->assertSame([$lastArea->id], $profile->researchAreas()->pluck('id')->toArray());
+        $this->assertSame([$lastContract->id], $profile->contactTypes()->pluck('id')->toArray());
     }
 
-    public function test_do_not_update_areas_if_not_present(): void
+    public function test_do_not_update_contract_types_if_not_present(): void
     {
         $this->seed(ProductionSeeder::class);
 
         $profile = StudentProfile::factory()->create();
 
-        $firstArea = ResearchArea::first();
-        $profile->researchAreas()->sync([$firstArea->id]);
+        $firstContract = ContractType::first();
+        $profile->contactTypes()->sync([$firstContract->id]);
 
         $response = $this->actingAs($profile->user)->patch('/students/profile', $profile->toArray());
 
         $response->assertRedirect('/students/profile');
 
         $profile->refresh();
-        $this->assertSame([$firstArea->id], $profile->researchAreas()->pluck('id')->toArray());
+        $this->assertSame([$firstContract->id], $profile->contactTypes()->pluck('id')->toArray());
     }
 }

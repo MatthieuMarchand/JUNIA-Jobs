@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ContractType;
+use App\Models\StudentProfile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,10 +12,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('research_areas', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
+        Schema::create('student_profile_contract_types', function (Blueprint $table) {
+            $table->foreignIdFor(StudentProfile::class);
+            $table->foreignIdFor(ContractType::class);
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('research_areas');
+        Schema::dropIfExists('student_profile_contract_types');
     }
 };

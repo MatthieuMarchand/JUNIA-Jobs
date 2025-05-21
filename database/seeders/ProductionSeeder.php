@@ -16,5 +16,6 @@ class ProductionSeeder extends Seeder
     {
         $this->call(ContractTypeSeeder::class);
         $this->call(SkillSeeder::class);
+        $this->call(DomainSeeder::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Domain;
 use App\Models\Skill;
 use App\Models\StudentProfile;
 use Illuminate\Http\RedirectResponse;
@@ -70,6 +71,9 @@ class StudentProfileController extends Controller
 
             'skill_names' => ['nullable', 'array'],
             'skill_names.*' => 'string',
+
+            'domain_names' => ['nullable', 'array'],
+            'domain_names.*' => 'string',
         ]);
 
         $studentProfile->first_name = $validated['first_name'];
@@ -98,6 +102,16 @@ class StudentProfileController extends Controller
             }
 
             $studentProfile->skills()->sync($request->skill_names);
+        }
+
+        if ($request->has('domain_names')) {
+            // Pas le plus optimisé, mais le nombre de domaines reste faible (<100 en général).
+            // Donc, on peut se le permettre pour l'instant.
+            foreach ($request->domain_names as $name) {
+                Domain::firstOrCreate(['name' => $name]);
+            }
+
+            $studentProfile->domains()->sync($request->domain_names);
         }
 
         $studentProfile->save();

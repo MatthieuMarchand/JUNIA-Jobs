@@ -39,4 +39,9 @@ class StudentProfile extends Model
     {
         return $this->belongsToMany(Skill::class, 'student_profile_skills');
     }
+
+    public function domains(): BelongsToMany
+    {
+        return $this->belongsToMany(Domain::class, 'student_profile_domains');
+    }
 }

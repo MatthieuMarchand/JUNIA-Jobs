@@ -37,7 +37,7 @@ class StudentProfileController extends Controller
 
         Gate::authorize('view', $studentProfile);
 
-        return view('students.profile', [
+        return view('students.profile.show', [
             'studentProfile' => $studentProfile,
         ]);
     }
@@ -48,7 +48,7 @@ class StudentProfileController extends Controller
 
         Gate::authorize('update', $studentProfile);
 
-        return view('students.profile', [
+        return view('students.profile.edit', [
             'studentProfile' => $studentProfile,
         ]);
     }

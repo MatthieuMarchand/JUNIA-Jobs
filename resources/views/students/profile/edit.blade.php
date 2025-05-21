@@ -5,22 +5,10 @@
 @section('content')
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <h2 class="mb-4">
-                @if (request()->routeIs('students.profile.show'))
-                    Mon profil
-                @else
-                    Modifier mon profil
-                @endif
-            </h2>
+            <h2 class="mb-4">Modifier mon profil</h2>
 
-            @if (request()->routeIs('students.profile.show'))
-                <form action="{{ route('students.profile.edit') }}" method="GET" novalidate>
-                    <fieldset disabled>
-            @else
-                <form action="{{ route('students.profile.update') }}" method="POST" novalidate>
-                    @method("PATCH")
-            @endif
-
+            <form action="{{ route('students.profile.update') }}" method="POST" novalidate>
+                @method("PATCH")
                 @csrf
 
                 <div class="mb-3">
@@ -62,22 +50,10 @@
                     @enderror
                 </div>
 
-                @if (request()->routeIs('students.profile.show'))
-                    </fieldset>
-                @endif
-
                 <div class="d-grid gap-2 mt-4">
-                    <button type="submit" class="btn btn-primary">
-                        @if (request()->routeIs('students.profile.show'))
-                            Modifier
-                        @else
-                            Sauvegarder
-                        @endif
-                    </button>
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
 
-                    @unless(request()->routeIs('students.profile.show'))
-                        <a href="{{ route('students.profile.show') }}" class="btn btn-outline-secondary">Annuler</a>
-                    @endunless
+                    <a href="{{ route('students.profile.show') }}" class="btn btn-outline-secondary">Annuler</a>
                 </div>
             </form>
         </div>

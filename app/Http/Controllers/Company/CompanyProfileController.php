@@ -15,7 +15,13 @@ class CompanyProfileController extends Controller
 {
     public function show()
     {
-        return view('students.profile');
+        $companyProfile = $this->getCompanyProfile();
+
+        Gate::authorize('view', $companyProfile);
+
+        return view('companies.profile.show', [
+            'companyProfile' => $companyProfile,
+        ]);
     }
 
     private function getCompanyProfile(): CompanyProfile
@@ -41,7 +47,10 @@ class CompanyProfileController extends Controller
         $companyProfile = $this->getCompanyProfile();
 
         Gate::authorize('update', $companyProfile);
-        // TODO : créer la vue pour l'édition du profil de l'entreprise
+
+        return view('companies.profile.edit', [
+            'companyProfile' => $companyProfile,
+        ]);
     }
 
     public function update(Request $request): RedirectResponse
@@ -70,6 +79,6 @@ class CompanyProfileController extends Controller
 
         $companyProfile->save();
 
-        return to_route('companies.profile.edit');
+        return to_route('companies.profile.show');
     }
 }

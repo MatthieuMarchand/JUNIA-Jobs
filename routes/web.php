@@ -26,7 +26,7 @@ Route::middleware('auth:web')->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(static function () {
         Route::get('/', AdminDashboardController::class)
-            ->name('companies.requests.index');
+            ->name('home');
 
         Route::get('/companies/requests', [CompanyRegisterRequestController::class, 'index'])
             ->name('companies.requests.index');

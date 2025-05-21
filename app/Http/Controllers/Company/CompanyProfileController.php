@@ -34,7 +34,7 @@ class CompanyProfileController extends Controller
         if ($profile) {
             return $profile;
         }
-        
+
         return new CompanyProfile([
             'name' => $user->companyRegistrationRequest->name,
             'description' => '',

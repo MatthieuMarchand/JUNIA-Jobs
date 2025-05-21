@@ -21,6 +21,10 @@
 <body>
 @include('components.navbar')
 
+<div class="container">
+    {{ Breadcrumbs::render() }}
+</div>
+
 <main>
     @yield('content')
 </main>
@@ -31,7 +35,7 @@
         {{ $value }}
     </x-toast>
     @endsession
-    
+
     @session('error')
     <x-toast type="error">
         {{ $value }}

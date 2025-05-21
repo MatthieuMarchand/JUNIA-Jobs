@@ -17,7 +17,7 @@ class ApproveCompanyRegisterRequestController extends Controller
         if ($registrationRequest->approved) {
             return redirect()
                 ->route('admin.companies.requests.index')
-                ->with('error', 'Cette requête a déjà été approuvée.');
+                ->with('error', 'Cette demande a déjà été approuvée.');
         }
 
         $registrationRequest->update([
@@ -29,6 +29,6 @@ class ApproveCompanyRegisterRequestController extends Controller
 
         return redirect()
             ->route('admin.companies.requests.index')
-            ->with('success', "Requête approuvée ! Un email a été envoyé à l'entreprise pour qu'elle crée son mot de passe.");
+            ->with('success', "Demande approuvée ! Un email a été envoyé à l'entreprise pour qu'elle crée son mot de passe.");
     }
 }

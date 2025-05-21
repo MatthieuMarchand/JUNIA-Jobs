@@ -61,6 +61,7 @@ Table CompanyProfile {
   id int [pk]
   user_id int [ref: > User.id]
   name varchar(255) [not null]
+  photo_path varchar(255)
   description text
 }
 

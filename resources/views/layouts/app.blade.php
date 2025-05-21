@@ -21,9 +21,12 @@
 <body>
 @include('components.navbar')
 
-<div class="container">
-    {{ Breadcrumbs::render() }}
-</div>
+@if(Breadcrumbs::exists())
+    <div class="container">
+        {{ Breadcrumbs::render() }}
+        {{ }}
+    </div>
+@endif
 
 <main>
     @yield('content')

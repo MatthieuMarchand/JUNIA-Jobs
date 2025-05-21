@@ -3,6 +3,12 @@
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
+// Home
+Breadcrumbs::for(
+    'home',
+    fn(BreadcrumbTrail $trail) => $trail->push('Accueil', route('home'))
+);
+
 // Admin
 Breadcrumbs::for(
     'admin.home',

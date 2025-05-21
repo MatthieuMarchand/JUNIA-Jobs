@@ -43,6 +43,15 @@ Table ResearchArea {
   name varchar(255) [unique, not null]
 }
 
+Table Domains {
+  name varchar(255) [pk, not null]
+}
+
+Table StudentProfileReseachDomains{
+  student_profile_id int [pk, ref: > StudentProfile.id]
+  domain_name int [pk, ref: > Domains.name]
+}
+
 Table StudentProfileResearchArea {
   student_profile_id int [pk, ref: > StudentProfile.id]
   research_area_id int [pk, ref: > ResearchArea.id]

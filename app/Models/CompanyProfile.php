@@ -17,6 +17,7 @@ class CompanyProfile extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'user_id',
         'name',
         'photo_path',
         'description',

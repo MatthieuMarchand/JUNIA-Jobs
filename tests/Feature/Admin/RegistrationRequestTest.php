@@ -64,7 +64,7 @@ class RegistrationRequestTest extends TestCase
         $response = $this->actingAs($user)->post("/admin/companies/requests/{$registrationRequest->id}/approve");
 
         $response->assertRedirect('/admin/companies/requests');
-        $response->assertSessionHas('success', "Requête approuvée ! Un email a été envoyé à l'entreprise pour qu'elle crée son mot de passe.");
+        $response->assertSessionHas('success', "Demande approuvée ! Un email a été envoyé à l'entreprise pour qu'elle crée son mot de passe.");
 
         $registrationRequest->refresh();
 
@@ -111,6 +111,6 @@ class RegistrationRequestTest extends TestCase
         $response = $this->actingAs($user)->post("/admin/companies/requests/{$registrationRequest->id}/approve");
 
         $response->assertRedirect('/admin/companies/requests');
-        $response->assertSessionHas('error', 'Cette requête a déjà été approuvée.');
+        $response->assertSessionHas('error', 'Cette demande a déjà été approuvée.');
     }
 }

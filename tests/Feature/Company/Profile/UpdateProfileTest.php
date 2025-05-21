@@ -33,7 +33,7 @@ class UpdateProfileTest extends TestCase
             'description' => 'Lorem',
         ]);
 
-        $response->assertRedirect('/companies/profile/edit');
+        $response->assertRedirect('/companies/profile');
 
         $profile->refresh();
         $this->assertSame('Airbus', $profile->name);
@@ -50,7 +50,7 @@ class UpdateProfileTest extends TestCase
             'description' => 'Lorem',
         ]);
 
-        $response->assertRedirect('/companies/profile/edit');
+        $response->assertRedirect();
 
         $this->assertDatabaseCount(CompanyProfile::class, 1);
     }

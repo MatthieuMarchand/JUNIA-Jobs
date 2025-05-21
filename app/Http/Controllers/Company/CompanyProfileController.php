@@ -36,7 +36,8 @@ class CompanyProfileController extends Controller
         }
 
         return new CompanyProfile([
-            'name' => $user->companyRegistrationRequest->name,
+            'user_id' => $user->id,
+            'name' => $user->companyRegistrationRequest?->name,
             'description' => '',
             'photo_path' => null,
         ]);

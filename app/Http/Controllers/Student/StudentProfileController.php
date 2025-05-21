@@ -91,7 +91,7 @@ class StudentProfileController extends Controller
         }
 
         if ($request->has('contract_type_ids')) {
-            $studentProfile->contactTypes()->sync($request->contract_type_ids);
+            $studentProfile->contractTypes()->sync($request->contract_type_ids);
         }
 
         if ($request->has('skill_names')) {

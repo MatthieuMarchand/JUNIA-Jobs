@@ -30,7 +30,7 @@ class StudentProfile extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function contactTypes(): BelongsToMany
+    public function contractTypes(): BelongsToMany
     {
         return $this->belongsToMany(ContractType::class, 'student_profile_contract_types');
     }

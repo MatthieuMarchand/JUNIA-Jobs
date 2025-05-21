@@ -21,7 +21,7 @@ class UpdateProfileContractTypesTest extends TestCase
         $firstContract = ContractType::first();
         $lastContract = ContractType::latest('id')->first();
 
-        $profile->contactTypes()->sync([$firstContract->id]);
+        $profile->contractTypes()->sync([$firstContract->id]);
 
         $response = $this->actingAs($profile->user)->patch('/students/profile', [
             ...$profile->toArray(),
@@ -31,7 +31,7 @@ class UpdateProfileContractTypesTest extends TestCase
         $response->assertRedirect('/students/profile');
 
         $profile->refresh();
-        $this->assertSame([$lastContract->id], $profile->contactTypes()->pluck('id')->toArray());
+        $this->assertSame([$lastContract->id], $profile->contractTypes()->pluck('id')->toArray());
     }
 
     public function test_do_not_update_contract_types_if_not_present(): void
@@ -41,13 +41,13 @@ class UpdateProfileContractTypesTest extends TestCase
         $profile = StudentProfile::factory()->create();
 
         $firstContract = ContractType::first();
-        $profile->contactTypes()->sync([$firstContract->id]);
+        $profile->contractTypes()->sync([$firstContract->id]);
 
         $response = $this->actingAs($profile->user)->patch('/students/profile', $profile->toArray());
 
         $response->assertRedirect('/students/profile');
 
         $profile->refresh();
-        $this->assertSame([$firstContract->id], $profile->contactTypes()->pluck('id')->toArray());
+        $this->assertSame([$firstContract->id], $profile->contractTypes()->pluck('id')->toArray());
     }
 }

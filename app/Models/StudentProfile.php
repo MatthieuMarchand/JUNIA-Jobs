@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StudentProfile extends Model
 {
@@ -43,5 +44,10 @@ class StudentProfile extends Model
     public function domains(): BelongsToMany
     {
         return $this->belongsToMany(Domain::class, 'student_profile_domains');
+    }
+
+    public function professionalExperiences(): HasMany
+    {
+        return $this->hasMany(ProfessionalExperience::class);
     }
 }

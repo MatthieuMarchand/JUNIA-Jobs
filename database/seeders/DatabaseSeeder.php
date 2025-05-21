@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\CompanyProfile;
 use App\Models\CompanyRegistrationRequest;
+use App\Models\ProfessionalExperience;
 use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use function fake;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -26,14 +28,22 @@ class DatabaseSeeder extends Seeder
 
         User::factory()
             ->student()
-            ->has(StudentProfile::factory())
+            ->has(
+                StudentProfile::factory()->has(
+                    ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
+                )
+            )
             ->create([
                 'email' => 'student@example.com',
             ]);
 
         User::factory()
             ->student()
-            ->has(StudentProfile::factory())
+            ->has(
+                StudentProfile::factory()->has(
+                    ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
+                )
+            )
             ->count(10)
             ->create();
 

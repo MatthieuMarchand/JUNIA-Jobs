@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
 use App\Http\Controllers\Company\CompanyProfileController;
+use App\Http\Controllers\Student\ProfessionalExperienceController;
 use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,10 @@ Route::get('/', function () {
 Route::middleware('auth:web')->group(function () {
     Route::prefix('students')->name('students.')->group(static function () {
         Route::singleton('profile', StudentProfileController::class)->only(['show', 'edit', 'update']);
+        Route::prefix('profile')->name('profile.')->group(static function () {
+            Route::resource('professional-experiences', ProfessionalExperienceController::class);
+        });
+
         // Get all student's profiles
         Route::get('/profiles', [StudentProfileController::class, 'index']);
     });

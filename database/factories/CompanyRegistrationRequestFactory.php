@@ -19,7 +19,7 @@ class CompanyRegistrationRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::factory()->company(),
             'company_name' => $this->faker->company(),
             'message' => $this->faker->sentence(),
             'approved' => false,

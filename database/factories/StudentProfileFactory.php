@@ -23,7 +23,7 @@ class StudentProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => User::factory()->student(),
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
             'summary' => fake()->paragraph,

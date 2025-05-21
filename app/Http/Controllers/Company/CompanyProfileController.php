@@ -22,7 +22,18 @@ class CompanyProfileController extends Controller
     {
         // Si pas de companyProfile existant en bdd, on en instancie un à la volée (il n'est pas créé en bdd, seulement en php).
         // Comme ça la vue reçoit toujours un companyProfile non null
-        return Auth::user()->companyProfile()->firstOrNew();
+        $user = Auth::user();
+
+        $profile = $user->companyProfile()->first();
+        if ($profile) {
+            return $profile;
+        }
+        
+        return new CompanyProfile([
+            'name' => $user->companyRegistrationRequest->name,
+            'description' => '',
+            'photo_path' => null,
+        ]);
     }
 
     public function edit()

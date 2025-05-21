@@ -13,7 +13,7 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" name="email" required autocomplete="email" placeholder="name@example.com"
+                    <input type="email" class="form-control" name="email" required autocomplete="email" placeholder="nom@exemple.com"
                            value="{{ old('email') ?? $email }}">
                     @error('email')
                     <div class="text-danger small mt-1">{{ $message }}</div>
@@ -22,7 +22,7 @@
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Nouveau mot de passe</label>
-                    <input type="password" class="form-control" name="password" required autocomplete="new_password" placeholder="name@example.com"
+                    <input type="password" class="form-control" name="password" required autocomplete="new_password" placeholder="nom@exemple.com"
                            value="{{ old('password') }}">
                     @error('password')
                     <div class="text-danger small mt-1">{{ $message }}</div>

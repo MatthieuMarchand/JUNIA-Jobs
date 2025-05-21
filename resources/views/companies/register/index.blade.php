@@ -5,10 +5,18 @@
 @section('content')
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
         <div class="card shadow p-4" style="max-width: 450px; width: 100%;">
-            <h2 class="mb-4 text-center">Créer mon compte étudiant</h2>
+            <h2 class="mb-4 text-center">Créer un compte entreprise</h2>
 
-            <form action="{{ route('students.register.store') }}" method="POST" novalidate>
+            <form action="{{ route('companies.register.store') }}" method="POST" novalidate>
                 @csrf
+
+                <div class="mb-3">
+                    <label for="company_name" class="form-label">Nom de l'entreprise</label>
+                    <input type="text" class="form-control" name="company_name" autocomplete="company_name" placeholder="Exemple: Amazon" value="{{ old('company_name') }}">
+                    @error('company_name')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Adresse email</label>
@@ -19,16 +27,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" class="form-control" name="password" autocomplete="new-password">
-                    @error('password')
-                    <div class="text-danger small mt-1">{{ $message }}</div>
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" name="message" id="message" rows="3"
+                        placeholder="Exemple: Nous recherchons des alternants pour la rentée...">{{ old('message') }}</textarea>
+                    @error('message')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
-                    <input type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
 
                 <div class="form-check mb-3">
@@ -55,7 +59,7 @@
 
             <p class="text-center mb-0">
                 Vous êtes une entreprise ?
-                <a href="{{ route('companies.register.index') }}">Faire une demande</a>
+                <a href="{{ route('login') }}">Faire une demande</a>
             </p>
         </div>
     </div>

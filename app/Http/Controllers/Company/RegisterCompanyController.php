@@ -14,7 +14,7 @@ class RegisterCompanyController extends Controller
 {
     public function index()
     {
-        //
+        return view('companies.register.index');
     }
 
     public function store(Request $request)

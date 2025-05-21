@@ -12,7 +12,7 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" name="email" required autocomplete="email" placeholder="name@example.com"
+                    <input type="email" class="form-control" name="email" required autocomplete="email" placeholder="nom@exemple.com"
                            value="{{ old('email') }}">
                     @error('email')
                     <div class="text-danger small mt-1">{{ $message }}</div>

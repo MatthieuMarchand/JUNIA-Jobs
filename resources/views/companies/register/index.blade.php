@@ -58,8 +58,8 @@
             </p>
 
             <p class="text-center mb-0">
-                Vous êtes une entreprise ?
-                <a href="{{ route('login') }}">Faire une demande</a>
+                Vous êtes étudiant ?
+                <a href="{{ route('students.register.index') }}">S'inscrire</a>
             </p>
         </div>
     </div>

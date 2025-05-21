@@ -55,7 +55,7 @@
 
             <p class="text-center mb-0">
                 Vous êtes une entreprise ?
-                <a href="{{ route('companies.register.index') }}">Faire une demande</a>
+                <a href="{{ route('companies.register.index') }}">Faire sa demande</a>
             </p>
         </div>
     </div>

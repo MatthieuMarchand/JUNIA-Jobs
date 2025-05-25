@@ -4,11 +4,12 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
 use App\Http\Controllers\Company\CompanyProfileController;
+use App\Http\Controllers\Company\ListStudentsProfilesController;
 use App\Http\Controllers\Student\ProfessionalExperienceController;
 use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__ . '/web/auth.php';
+require __DIR__.'/web/auth.php';
 
 Route::get('/', function () {
     return view('index');
@@ -20,13 +21,12 @@ Route::middleware('auth:web')->group(function () {
         Route::prefix('profile')->name('profile.')->group(static function () {
             Route::resource('professional-experiences', ProfessionalExperienceController::class);
         });
-
-        // Get all student's profiles
         Route::get('/profiles', [StudentProfileController::class, 'index']);
     });
 
     Route::prefix('companies')->name('companies.')->group(static function () {
         Route::singleton('profile', CompanyProfileController::class)->only(['show', 'edit', 'update']);
+        Route::get('/students', ListStudentsProfilesController::class)->name('students');
     });
 
     Route::prefix('admin')->name('admin.')->group(static function () {
@@ -39,6 +39,3 @@ Route::middleware('auth:web')->group(function () {
             ->name('companies.requests.approve');
     });
 });
-
-
-

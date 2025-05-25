@@ -11,19 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+
 use function to_route;
 
 class StudentProfileController extends Controller
 {
-    // Permet de récupérer tous les profils étudiant
-    public function index()
-    {
-        Gate::authorize('viewAny', StudentProfile::class);
-        $students = StudentProfile::all();
-
-        return view('students.profiles.index', compact('students'));
-    }
-
     private function getStudentProfile(): StudentProfile
     {
         // Si pas de studentProfile existant en bdd, on en instancie un à la volée (il n'est pas créé en bdd, seulement en php).

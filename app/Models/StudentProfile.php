@@ -36,14 +36,24 @@ class StudentProfile extends Model
         return $this->belongsToMany(ContractType::class, 'student_profile_contract_types');
     }
 
-    public function skills(): BelongsToMany
-    {
-        return $this->belongsToMany(Skill::class, 'student_profile_skills');
-    }
-
     public function domains(): BelongsToMany
     {
-        return $this->belongsToMany(Domain::class, 'student_profile_domains');
+        return $this->belongsToMany(
+            Domain::class,
+            'student_profile_domains',
+            'student_profile_id',
+            'domain_name'
+        );
+    }
+
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Skill::class,
+            'student_profile_skills',
+            'student_profile_id',
+            'skill_name'
+        );
     }
 
     public function professionalExperiences(): HasMany

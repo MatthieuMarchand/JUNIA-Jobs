@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Skill extends Model
 {
-    protected $primaryKey = "name";
+    protected $primaryKey = 'name';
+
     public $incrementing = false;
+
     protected $keyType = 'string';
 
     public $timestamps = false;
@@ -19,6 +21,11 @@ class Skill extends Model
 
     public function studentProfiles(): BelongsToMany
     {
-        return $this->belongsToMany(StudentProfile::class, 'student_profile_skills');
+        return $this->belongsToMany(
+            StudentProfile::class,
+            'student_profile_skills',
+            'skill_name',
+            'student_profile_id'
+        );
     }
 }

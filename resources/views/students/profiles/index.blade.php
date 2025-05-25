@@ -66,24 +66,26 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                         <div class="card-body">
-                            @php
-                                $photoUrl = $student->temporaryPhotoUrl();
-                            @endphp
-
                             <div class="d-flex mb-3">
-                                @if($photoUrl)
-                                    <img src="{{ $photoUrl }}" alt="Photo de {{ $student->first_name }}" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
-                                @else
-                                    <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
-                                        <span>Pas de photo</span>
-                                    </div>
-                                @endif
-                                <div class="ms-3">
-                                    <h5 class="card-title">{{ $student->first_name }} {{ $student->last_name }}</h5>
-                                    @if($student->phone_number)
-                                        <p class="card-text"><strong>Téléphone :</strong> {{ $student->phone_number }}</p>
+                                <a href="{{ route('companies.students.show', $student->id) }}" class="text-decoration-none d-flex">
+                                    @php
+                                        $photoUrl = $student->temporaryPhotoUrl();
+                                    @endphp
+
+                                    @if($photoUrl)
+                                        <img src="{{ $photoUrl }}" alt="Photo de {{ $student->first_name }}" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                                    @else
+                                        <div class="bg-secondary text-white d-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
+                                            <span>Pas de photo</span>
+                                        </div>
                                     @endif
-                                </div>
+                                    <div class="ms-3">
+                                        <h5 class="card-title text-primary">{{ $student->first_name }} {{ $student->last_name }}</h5>
+                                        @if($student->phone_number)
+                                            <p class="card-text"><strong>Téléphone :</strong> {{ $student->phone_number }}</p>
+                                        @endif
+                                    </div>
+                                </a>
                             </div>
 
                             @if($student->summary)
@@ -107,6 +109,11 @@
                                     {{ $student->contractTypes->pluck('name')->implode(', ') }}
                                 </p>
                             @endif
+
+                            <!-- Ajouter un bouton "Voir plus" à la fin de la carte -->
+                            <div class="text-center mt-3">
+                                <a href="{{ route('companies.students.show', $student->id) }}" class="btn btn-outline-primary">Voir le profil complet</a>
+                            </div>
                         </div>
                     </div>
                 </div>

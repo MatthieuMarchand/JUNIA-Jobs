@@ -99,6 +99,6 @@ class ListStudentsProfilesController extends Controller
         $skills = Skill::all();
         $contractTypes = ContractType::all();
 
-        return view('students.profiles.index', compact('students', 'domains', 'skills', 'contractTypes'));
+        return view('companies.students.index', compact('students', 'domains', 'skills', 'contractTypes'));
     }
 }

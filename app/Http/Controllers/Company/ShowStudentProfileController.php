@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Models\StudentProfile;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
 
 class ShowStudentProfileController extends Controller
 {
@@ -37,7 +36,7 @@ class ShowStudentProfileController extends Controller
         //     ],
         // ]);
 
-        return view('students.profiles.show', [
+        return view('companies.students.show', [
             'student' => $studentProfile,
         ]);
     }

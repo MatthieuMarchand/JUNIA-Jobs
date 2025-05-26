@@ -19,17 +19,18 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-@include('components.header')
+<div class="min-vh-100">
 
-@if(Breadcrumbs::exists())
-    <div class="container">
-        {{ Breadcrumbs::render() }}
-    </div>
-@endif
+    @include('components.header')
 
-<main>
+    @if(Breadcrumbs::exists())
+        <div class="container">
+            {{ Breadcrumbs::render() }}
+        </div>
+    @endif
+
     @yield('content')
-</main>
+</div>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     @session('success')
@@ -56,5 +57,25 @@
     </x-toast>
     @endsession
 </div>
+
+<div class="container">
+    <footer class="py-5">
+        <div class="row">
+            <div class="col-6 col-md-2 mb-3"><h5>Légal</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="{{ route('legal.index') }}" class="nav-link p-0 text-body-secondary">Mentions légales</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('legal.gdpr') }}" class="nav-link p-0 text-body-secondary">RGPD</a></li>
+                    <li class="nav-item mb-2"><a href="{{ route('legal.conditions-of-use') }}" class="nav-link p-0 text-body-secondary">Conditions
+                            d'utilisation</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>© {{ now()->year }} {{ config('app.name') }}. Tous droits réservés.</p>
+        </div>
+    </footer>
+</div>
+
 </body>
 </html>

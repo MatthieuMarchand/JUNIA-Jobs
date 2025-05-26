@@ -17,6 +17,18 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/legal', function () {
+    return view('legal.index');
+})->name('legal.index');
+
+Route::get('/legal/conditions-of-use', function () {
+    return view('legal.conditions-of-use');
+})->name('legal.conditions-of-use');
+
+Route::get('/legal/gdpr', function () {
+    return view('legal.gdpr');
+})->name('legal.gdpr');
+
 Route::middleware('auth:web')->group(function () {
     Route::prefix('students')->name('students.')->group(static function () {
         Route::singleton('profile', StudentProfileController::class)->only(['show', 'edit', 'update']);

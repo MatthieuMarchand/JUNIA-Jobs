@@ -73,6 +73,30 @@
                         <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
                 </div>
+                
+                <div class="mb-3">
+                    <label for="domain_names" class="form-label">Domaines de recherche</label>
+
+                    <select class="form-select" data-create="true" name="domain_names[]" multiple>
+                        @foreach ($domains as $domain)
+                            <option value="{{ $domain->name }}"
+                                @if (in_array($domain->name, old('domain_names', $studentProfile->domains->pluck('name')->toArray())))
+                                    selected
+                                @endif
+                            >
+                                {{ $domain->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('domain_names')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+
+                    @error('domain_names.*')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary">Sauvegarder</button>

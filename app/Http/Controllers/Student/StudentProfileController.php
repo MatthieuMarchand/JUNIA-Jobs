@@ -37,11 +37,13 @@ class StudentProfileController extends Controller
     public function edit()
     {
         $studentProfile = $this->getStudentProfile();
+        $domains = Domain::all();
 
         Gate::authorize('update', $studentProfile);
 
         return view('students.profile.edit', [
             'studentProfile' => $studentProfile,
+            'domains' => $domains,
         ]);
     }
 

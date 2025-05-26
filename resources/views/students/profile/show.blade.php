@@ -37,7 +37,6 @@
                         <textarea class="form-control" name="summary" id="summary" rows="4"
                             placeholder="Parle un peu de toi...">{{ $studentProfile->summary }}</textarea>
                     </div>
-
                     
                     <div class="mb-3">
                         <label for="contract_type_ids" class="form-label">Type de contrat recherché</label>
@@ -45,6 +44,16 @@
                         <ul class="list-group" name="contract_type_ids">
                             @foreach ($studentProfile->contractTypes as $contractType)
                                 <li class="list-group-item list-group-item-dark">{{ $contractType->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="contract_type_ids" class="form-label">Type de contrat recherché</label>
+
+                        <ul class="list-group" name="contract_type_ids">
+                            @foreach ($studentProfile->domains as $domain)
+                                <li class="list-group-item list-group-item-dark">{{ $domain->name }}</li>
                             @endforeach
                         </ul>
                     </div>

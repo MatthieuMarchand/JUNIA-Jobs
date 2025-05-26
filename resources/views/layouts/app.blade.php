@@ -19,7 +19,7 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-@include('components.navbar')
+@include('components.header')
 
 @if(Breadcrumbs::exists())
     <div class="container">

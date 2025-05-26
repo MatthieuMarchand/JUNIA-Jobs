@@ -6,12 +6,6 @@
       <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Accueil</a>
     </li>
 
-    @auth
-      <li class="nav-item">
-        <a class="nav-link {{ (request()->routeIs('students.profile.show') || request()->routeIs('students.profile.edit')) ? 'active' : '' }}" href="{{ route('students.profile.show') }}">Mon profil</a>
-      </li>
-    @endauth
-
     <li class="nav-item">
       <a class="nav-link" href="{{ route('home') }}">Lien n°1</a>
     </li>
@@ -20,6 +14,19 @@
       <a class="nav-link" href="{{ route('home') }}">Lien n°2</a>
     </li>
 
+    @if (auth()->user()?->role == App\Enums\UserRole::Student)
+      <li class="nav-item">
+        <a class="nav-link {{ (request()->routeIs('students.profile.show') || request()->routeIs('students.profile.edit')) ? 'active' : '' }}" href="{{ route('students.profile.show') }}">Mon profil</a>
+      </li>
+    @endif
+
+    @if (auth()->user()?->role == App\Enums\UserRole::Company)
+      <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('companies.students') ? 'active' : '' }}" href="{{ route('companies.students') }}">Profils étudiants</a>
+      </li>
+    @endif
+
+    {{-- LOGIN / LOGOUT --}}
     @guest
       <li class="nav-item">
           <a class="btn btn-primary" href="{{ route('login') }}">Se connecter</a>
@@ -29,6 +36,7 @@
     @auth
     <form action="{{ route('logout') }}" method="post">
       @csrf
+
       <li class="nav-item">
         <button type="submit" class="nav-link">Se déconnecter</a>
       </li>

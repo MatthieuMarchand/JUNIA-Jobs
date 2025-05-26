@@ -11,7 +11,6 @@ use App\Models\Skill;
 use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-
 use function fake;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -35,9 +34,11 @@ class DatabaseSeeder extends Seeder
         $student = User::factory()
             ->student()
             ->has(
-                StudentProfile::factory()->has(
-                    ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
-                )
+                StudentProfile::factory()
+                    ->withPhoto()
+                    ->has(
+                        ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
+                    )
             )
             ->create([
                 'email' => 'student@example.com',
@@ -49,9 +50,11 @@ class DatabaseSeeder extends Seeder
         User::factory()
             ->student()
             ->has(
-                StudentProfile::factory()->has(
-                    ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
-                )
+                StudentProfile::factory()
+                    ->withPhoto()
+                    ->has(
+                        ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
+                    )
             )
             ->count(10)
             ->create()
@@ -61,7 +64,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()
             ->company()
-            ->has(CompanyProfile::factory())
+            ->has(CompanyProfile::factory()->withPhoto())
             ->has(CompanyRegistrationRequest::factory()->approved())
             ->create([
                 'email' => 'company@example.com',

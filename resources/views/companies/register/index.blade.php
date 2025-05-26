@@ -12,7 +12,8 @@
 
                 <div class="mb-3">
                     <label for="company_name" class="form-label">Nom de l'entreprise</label>
-                    <input type="text" class="form-control" name="company_name" autocomplete="company_name" placeholder="Exemple: Amazon" value="{{ old('company_name') }}">
+                    <input type="text" class="form-control" name="company_name" autocomplete="company_name" placeholder="Exemple: Amazon"
+                           value="{{ old('company_name') }}">
                     @error('company_name')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
@@ -20,7 +21,8 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Adresse email</label>
-                    <input type="email" class="form-control" name="email" autocomplete="email" placeholder="nom@exemple.com" value="{{ old('email') }}">
+                    <input type="email" class="form-control" name="email" autocomplete="email" placeholder="nom@exemple.com"
+                           value="{{ old('email') }}">
                     @error('email')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
@@ -29,16 +31,18 @@
                 <div class="mb-3">
                     <label for="message" class="form-label">Message</label>
                     <textarea class="form-control" name="message" id="message" rows="3"
-                        placeholder="Exemple: Nous recherchons des alternants pour la rentée...">{{ old('message') }}</textarea>
+                              placeholder="Exemple: Nous recherchons des alternants pour la rentrée...">{{ old('message') }}</textarea>
                     @error('message')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="form-check mb-3">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="gdpr_consent" value="true" {{ old('gdpr_consent') == 'true' ? 'checked' : '' }}>
-                        J’accepte que mes données soient traitées dans le cadre de la gestion des candidatures.
+                        <input type="checkbox" class="form-check-input" name="gdpr_consent"
+                               value="true" {{ old('gdpr_consent') == 'true' ? 'checked' : '' }}>
+                        J’accepte que mes données soient traitées dans le cadre de la gestion des candidatures. <a href="{{route('legal.gdpr')}}">Voir
+                            le RGPD</a>.
                     </label>
                     @error('gdpr_consent')
                     <div class="text-danger small mt-1">{{ $message }}</div>

@@ -5,7 +5,7 @@
 @section('content')
     <div class="card mx-auto" style="max-width: 600px;">
         <div class="card-body">
-            <h2 class="mb-4">Votre profile entreprise</h2>
+            <h2 class="mb-4">Votre profil entreprise</h2>
 
             <form action="{{ route('companies.profile.edit') }}" method="GET" novalidate>
                 <fieldset disabled>
@@ -14,18 +14,19 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Nom de l'entreprise</label>
                         <input type="text" class="form-control" name="name" id="name"
-                            value="{{ old('name', $companyProfile->name) }}"
-                            placeholder="Jean" autocomplete="given-name">
+                               value="{{ old('name', $companyProfile->name) }}"
+                               placeholder="BeeToGreen" autocomplete="given-name">
                         @error('name')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="6">{{ old('description', $companyProfile->description) }}</textarea>
+                        <textarea class="form-control" name="description" id="description"
+                                  rows="6">{{ old('description', $companyProfile->description) }}</textarea>
                         @error('description')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 

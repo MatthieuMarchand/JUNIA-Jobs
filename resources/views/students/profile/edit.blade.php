@@ -49,6 +49,30 @@
                         <div class="text-danger small mt-1">{{ $message }}</div>
                     @enderror
                 </div>
+                
+                <div class="mb-3">
+                    <label for="contract_type_ids" class="form-label">Type de contrat recherché</label>
+
+                    <select class="form-select" name="contract_type_ids[]" multiple>
+                        @foreach ($studentProfile->contractTypes as $contractType)
+                            <option value="{{ $contractType->id }}"
+                                @if (in_array($contractType->name, old('contract_type_ids', $studentProfile->contractTypes->pluck('name')->toArray())))
+                                    selected
+                                @endif
+                            >
+                                {{ $contractType->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('contract_type_ids')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+
+                    @error('contract_type_ids.*')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary">Sauvegarder</button>

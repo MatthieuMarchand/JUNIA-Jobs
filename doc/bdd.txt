@@ -21,8 +21,8 @@ Table AcademicRecord {
   student_user_id int [ref: > StudentProfile.user_id, not null]
   degree varchar(255) [not null]
   institution varchar(255) [not null]
-  start_date date
-  end_date date
+  start date
+  end date
   description text
 }
 
@@ -30,11 +30,11 @@ Table ProfessionalExperience {
   id int [pk, increment]
   student_user_id int [ref: > StudentProfile.user_id, not null]
   title varchar(255) [not null]
-  contact_type varchar(255) [not null]
+  contract_type varchar(255) [not null]
   company_name varchar(255) [not null]
   location varchar(255)
-  start_date date [not null]
-  end_date date
+  start date [not null]
+  end date
   description text
 }
 
@@ -85,7 +85,7 @@ Table InterviewInvitation {
   id int [pk, increment]
   company_profile_id int [ref: > CompanyProfile.id, not null]
   student_profile_id int [ref: > StudentProfile.id, not null]
-  sent_date timestamp [default: `now()`, not null]
+  sent timestamp [default: `now()`, not null]
   invitation_details text [not null]
   invitation_status varchar(50) [default: "'sent'", not null, note: "'sent', 'read', 'accepted', 'declined', 'interview_scheduled', 'completed'"]
 }

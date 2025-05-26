@@ -16,9 +16,6 @@
                         <input type="text" class="form-control" name="first_name" id="first_name"
                             value="{{ $studentProfile->first_name }}"
                             placeholder="Jean" autocomplete="given-name">
-                        @error('first_name')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -26,9 +23,6 @@
                         <input type="text" class="form-control" name="last_name" id="last_name"
                             value="{{ $studentProfile->last_name }}"
                             placeholder="Dupont" autocomplete="family-name">
-                        @error('last_name')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
@@ -36,36 +30,23 @@
                         <input type="tel" class="form-control" name="phone_number" id="phone_number"
                             value="{{ $studentProfile->phone_number }}"
                             placeholder="06 00 00 00 00" autocomplete="tel">
-                        @error('phone_number')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
                     </div>
 
                     <div class="mb-3">
                         <label for="summary" class="form-label">Description</label>
                         <textarea class="form-control" name="summary" id="summary" rows="4"
                             placeholder="Parle un peu de toi...">{{ $studentProfile->summary }}</textarea>
-                        @error('summary')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
                     </div>
 
+                    
                     <div class="mb-3">
                         <label for="contract_type_ids" class="form-label">Type de contrat recherché</label>
 
-                        <select class="form-select" name="contract_type_ids[]" multiple>
+                        <ul class="list-group" name="contract_type_ids">
                             @foreach ($studentProfile->contractTypes as $contractType)
-                                <option value="{{ $contractType->name }}">{{ $contractType->name }}</option>
+                                <li class="list-group-item list-group-item-dark">{{ $contractType->name }}</li>
                             @endforeach
-                        </select>
-
-                        @error('contract_type_ids')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-
-                        @error('contract_type_ids.*')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
+                        </ul>
                     </div>
                 </fieldset>
 

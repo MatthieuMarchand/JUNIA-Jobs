@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcademicRecordController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
@@ -10,7 +11,7 @@ use App\Http\Controllers\Student\ProfessionalExperienceController;
 use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__.'/web/auth.php';
+require __DIR__ . '/web/auth.php';
 
 Route::get('/', function () {
     return view('index');
@@ -21,8 +22,8 @@ Route::middleware('auth:web')->group(function () {
         Route::singleton('profile', StudentProfileController::class)->only(['show', 'edit', 'update']);
         Route::prefix('profile')->name('profile.')->group(static function () {
             Route::resource('professional-experiences', ProfessionalExperienceController::class);
+            Route::resource('academic-records', AcademicRecordController::class);
         });
-        Route::get('/profiles', [StudentProfileController::class, 'index']);
     });
 
     Route::prefix('companies')->name('companies.')->group(static function () {

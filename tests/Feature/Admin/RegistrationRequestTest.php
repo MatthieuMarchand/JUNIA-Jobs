@@ -4,7 +4,7 @@ namespace Tests\Feature\Admin;
 
 use App\Models\CompanyRegistrationRequest;
 use App\Models\User;
-use App\Notifications\ApprovedCompanyRegistration;
+use App\Notifications\ApprovedCompanyRegistrationNotification;
 use App\Utils\RouteGuesser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Notification;
@@ -70,8 +70,8 @@ class RegistrationRequestTest extends TestCase
 
         $routeGuesser = resolve(RouteGuesser::class);
 
-        Notification::assertSentTo($registrationRequest->user, ApprovedCompanyRegistration::class,
-            function (ApprovedCompanyRegistration $notification) use ($registrationRequest, $routeGuesser) {
+        Notification::assertSentTo($registrationRequest->user, ApprovedCompanyRegistrationNotification::class,
+            function (ApprovedCompanyRegistrationNotification $notification) use ($registrationRequest, $routeGuesser) {
                 $actionUrl = $notification->toMail($registrationRequest->user)->actionUrl;
 
                 return $routeGuesser->fromUrl($actionUrl)->getName() === 'password-reset.create';

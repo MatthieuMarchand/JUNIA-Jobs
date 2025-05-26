@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyRegistrationRequest;
-use App\Notifications\ApprovedCompanyRegistration;
+use App\Notifications\ApprovedCompanyRegistrationNotification;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Password;
 
@@ -25,7 +25,7 @@ class ApproveCompanyRegisterRequestController extends Controller
         ]);
 
         $token = Password::createToken($registrationRequest->user);
-        $registrationRequest->user->notify(new ApprovedCompanyRegistration($token));
+        $registrationRequest->user->notify(new ApprovedCompanyRegistrationNotification($token));
 
         return redirect()
             ->route('admin.companies.requests.index')

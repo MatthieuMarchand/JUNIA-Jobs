@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\AcademicRecordController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
 use App\Http\Controllers\Company\CompanyProfileController;
 use App\Http\Controllers\Company\ListStudentsProfilesController;
 use App\Http\Controllers\Company\ShowStudentProfileController;
+use App\Http\Controllers\Student\AcademicRecordController;
 use App\Http\Controllers\Student\ProfessionalExperienceController;
 use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;

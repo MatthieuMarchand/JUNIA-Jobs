@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\ProfessionalExperience;
+use App\Models\AcademicRecord;
 use App\Models\StudentProfile;
 use App\Models\User;
 
-class ProfessionalExperiencePolicy
+class AcademicRecordPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,9 +19,9 @@ class ProfessionalExperiencePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ProfessionalExperience $professionalExperience): bool
+    public function view(User $user, AcademicRecord $academicRecord): bool
     {
-        return $user->can('view', $professionalExperience->studentProfile);
+        return $user->can('view', $academicRecord->studentProfile);
     }
 
     /**
@@ -35,23 +35,23 @@ class ProfessionalExperiencePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ProfessionalExperience $professionalExperience): bool
+    public function update(User $user, AcademicRecord $academicRecord): bool
     {
-        return $user->can('update', $professionalExperience->studentProfile);
+        return $user->can('update', $academicRecord->studentProfile);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ProfessionalExperience $professionalExperience): bool
+    public function delete(User $user, AcademicRecord $academicRecord): bool
     {
-        return $user->can('delete', $professionalExperience->studentProfile);
+        return $user->can('delete', $academicRecord->studentProfile);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ProfessionalExperience $professionalExperience): bool
+    public function restore(User $user, AcademicRecord $academicRecord): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class ProfessionalExperiencePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ProfessionalExperience $professionalExperience): bool
+    public function forceDelete(User $user, AcademicRecord $academicRecord): bool
     {
         return false;
     }

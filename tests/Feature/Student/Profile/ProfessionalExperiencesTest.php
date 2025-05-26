@@ -76,7 +76,7 @@ class ProfessionalExperiencesTest extends TestCase
 
     public function test_cannot_update_other_user_experience(): void
     {
-        $otherUser = User::factory()->create();
+        $otherUser = User::factory()->student()->create();
         $experience = ProfessionalExperience::factory()->create();
 
         $response = $this->actingAs($otherUser)->patch("/students/profile/professional-experiences/$experience->id");
@@ -99,7 +99,7 @@ class ProfessionalExperiencesTest extends TestCase
 
     public function test_cannot_delete_other_user_experience(): void
     {
-        $otherUser = User::factory()->create();
+        $otherUser = User::factory()->student()->create();
         $experience = ProfessionalExperience::factory()->create();
 
         $response = $this->actingAs($otherUser)->delete("/students/profile/professional-experiences/$experience->id");

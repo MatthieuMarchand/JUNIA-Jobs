@@ -11,6 +11,7 @@ use App\Models\Skill;
 use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+
 use function fake;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -82,6 +83,16 @@ class DatabaseSeeder extends Seeder
             ->has(CompanyRegistrationRequest::factory()->unapproved())
             ->count(10)
             ->create();
+
+        User::factory()
+            ->company()
+            ->has(CompanyProfile::factory()->withPhoto())
+            ->has(CompanyRegistrationRequest::factory()->approved())
+            ->count(5)
+            ->create();
+
+        // Ajout des invitations entre entreprises et étudiants
+        $this->call(CompanyInviteStudentSeeder::class);
     }
 
     /**

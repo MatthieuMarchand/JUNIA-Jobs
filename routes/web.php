@@ -3,16 +3,21 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
+use App\Http\Controllers\Company\CompanyInvitationHistoryController;
+use App\Http\Controllers\Company\CompanyInviteStudentController;
 use App\Http\Controllers\Company\CompanyProfileController;
 use App\Http\Controllers\Company\ListStudentsProfilesController;
 use App\Http\Controllers\Company\ShowStudentProfileController;
 use App\Http\Controllers\Student\AcademicRecordController;
 use App\Http\Controllers\Student\ImportLinkedinPdfController;
 use App\Http\Controllers\Student\ProfessionalExperienceController;
+use App\Http\Controllers\Student\StudentAcceptInvitationController;
+use App\Http\Controllers\Student\StudentDeclineInvitationController;
+use App\Http\Controllers\Student\StudentInvitationHistoryController;
 use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__ . '/web/auth.php';
+require __DIR__.'/web/auth.php';
 
 Route::get('/', function () {
     return view('index');
@@ -38,13 +43,27 @@ Route::middleware('auth:web')->group(function () {
             Route::resource('professional-experiences', ProfessionalExperienceController::class);
             Route::resource('academic-records', AcademicRecordController::class);
         });
+
+        Route::get('/invitations/history', StudentInvitationHistoryController::class)
+            ->name('invitations.history');
+        Route::post('/invitations/{invitation}/accept', StudentAcceptInvitationController::class)
+            ->name('invitations.accept');
+        Route::post('/invitations/{invitation}/decline', StudentDeclineInvitationController::class)
+            ->name('invitations.decline');
     });
 
     Route::prefix('companies')->name('companies.')->group(static function () {
         Route::singleton('profile', CompanyProfileController::class)->only(['show', 'edit', 'update']);
         Route::get('/students', ListStudentsProfilesController::class)->name('students');
 
-        Route::get('/students/{studentProfile}', ShowStudentProfileController::class)->name('students.show');
+        Route::get('/students/{studentProfile}', ShowStudentProfileController::class)
+            ->name('students.show');
+
+        Route::post('/students/{studentProfile}/invite', CompanyInviteStudentController::class)
+            ->name('students.invite');
+
+        Route::get('/invitations', CompanyInvitationHistoryController::class)
+            ->name('invitations.history');
     });
 
     Route::prefix('admin')->name('admin.')->group(static function () {

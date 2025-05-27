@@ -130,9 +130,34 @@
             </div>
 
             <div class="card">
-                <div class="card-body text-center">
-                    <a href="#" class="btn btn-primary btn-lg">Contacter cet étudiant</a>
-                    <p class="text-muted mt-2">Vous pourrez envoyer une invitation à un entretien</p>
+                <div class="card-header">
+                    <h5>Inviter cet étudiant à un entretien</h5>
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('companies.students.invite', $student->id) }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="invitation_date" class="form-label">Date proposée pour l'entretien</label>
+                            <input type="date" class="form-control @error('invitation_date') is-invalid @enderror" 
+                                   id="invitation_date" name="invitation_date" 
+                                   min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
+                            @error('invitation_date')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="invitation_details" class="form-label">Détails de l'invitation</label>
+                            <textarea class="form-control @error('invitation_details') is-invalid @enderror" 
+                                      id="invitation_details" name="invitation_details" rows="4" 
+                                      placeholder="Décrivez le poste, le déroulement de l'entretien, etc." required></textarea>
+                            @error('invitation_details')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Envoyer l'invitation</button>
+                    </form>
                 </div>
             </div>
         </div>

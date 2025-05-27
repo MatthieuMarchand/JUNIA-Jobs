@@ -28,4 +28,8 @@ class CompanyProfile extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function CompanyInviteStudent(){
+        return $this->belongsToMany(CompanyInviteStudent::class);
+    }
+
 }

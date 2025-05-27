@@ -61,8 +61,7 @@ class StudentProfile extends Model
         return $this->hasMany(ProfessionalExperience::class);
     }
 
-    public function academicRecords(): HasMany
-    {
-        return $this->hasMany(AcademicRecord::class);
+    public function CompanyInviteStudent(){
+        return $this->belongsToMany(CompanyInviteStudent::class);
     }
 }

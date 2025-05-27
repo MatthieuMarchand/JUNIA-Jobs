@@ -15,6 +15,7 @@ class AcademicRecord extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'student_profile_id',
         'degree',
         'institution',
         'start',

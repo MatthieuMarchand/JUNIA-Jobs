@@ -7,6 +7,7 @@ use App\Http\Controllers\Company\CompanyProfileController;
 use App\Http\Controllers\Company\ListStudentsProfilesController;
 use App\Http\Controllers\Company\ShowStudentProfileController;
 use App\Http\Controllers\Student\AcademicRecordController;
+use App\Http\Controllers\Student\ImportLinkedinPdfController;
 use App\Http\Controllers\Student\ProfessionalExperienceController;
 use App\Http\Controllers\Student\StudentProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('/legal/gdpr', function () {
 Route::middleware('auth:web')->group(function () {
     Route::prefix('students')->name('students.')->group(static function () {
         Route::singleton('profile', StudentProfileController::class)->only(['show', 'edit', 'update']);
+        Route::post('profile/import/linkedin', ImportLinkedinPdfController::class)->name('profile.import.linkedin');
         Route::prefix('profile')->name('profile.')->group(static function () {
             Route::resource('professional-experiences', ProfessionalExperienceController::class);
             Route::resource('academic-records', AcademicRecordController::class);

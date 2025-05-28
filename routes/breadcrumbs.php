@@ -39,7 +39,7 @@ Breadcrumbs::for(
 // Student Profile
 Breadcrumbs::for(
     'students.profile.show',
-    fn(BreadcrumbTrail $trail) => $trail->push('Profil étudiant', route('students.profile.show'))
+    fn(BreadcrumbTrail $trail) => $trail->push('Mon profil', route('students.profile.show'))
 );
 
 Breadcrumbs::for(

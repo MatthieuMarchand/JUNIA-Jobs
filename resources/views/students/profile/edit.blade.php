@@ -3,7 +3,9 @@
 @section('title', 'Mon profil')
 
 @section('content')
-    <div class="mx-auto" style="max-width: 600px;">
+    <section class="container">
+        <h2 class="mb-4">Modifier mon profil</h2>
+
         <div class="accordion" id="accordion">
             <div class="accordion-item">
                 <h3 class="accordion-header">
@@ -46,15 +48,15 @@
                 </div>
             </div>
         </div>
+
         <div class="card mt-4">
             <div class="card-body">
-                <h2 class="mb-4">Modifier mon profil</h2>
+                <h3>Informations de base</h3>
 
-                <form action="{{ route('students.profile.update') }}" method="POST" novalidate>
+                <form action="{{ route('students.profile.update') }}" method="POST" class="row g-3" novalidate>
                     @method("PATCH")
                     @csrf
-
-                    <div class="mb-3">
+                    <div class="col-12 col-md-4">
                         <label for="first_name" class="form-label">Prénom</label>
                         <input type="text" class="form-control" name="first_name" id="first_name"
                                value="{{ old('first_name', $studentProfile->first_name) }}"
@@ -64,7 +66,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-12 col-md-4">
                         <label for="last_name" class="form-label">Nom</label>
                         <input type="text" class="form-control" name="last_name" id="last_name"
                                value="{{ old('last_name', $studentProfile->last_name) }}"
@@ -74,7 +76,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-12 col-md-4">
                         <label for="phone_number" class="form-label">Téléphone</label>
                         <input type="tel" class="form-control" name="phone_number" id="phone_number"
                                value="{{ old('phone_number', $studentProfile->phone_number) }}"
@@ -84,7 +86,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-12">
                         <label for="summary" class="form-label">Description</label>
                         <textarea class="form-control" name="summary" id="summary" rows="4"
                                   placeholder="Parle un peu de toi...">{{ old('summary', $studentProfile->summary) }}</textarea>
@@ -93,7 +95,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-12">
                         <label for="contract_type_ids" class="form-label">Type de contrat recherché</label>
 
                         <select class="form-select" name="contract_type_ids[]" multiple>
@@ -117,13 +119,13 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    <div class="col-12">
                         <label for="domain_names" class="form-label">Domaines de recherche</label>
 
                         <select class="form-select" data-create="true" name="domain_names[]" multiple>
                             @foreach ($domains as $domain)
                                 <option value="{{ $domain->name }}"
-                                        @if (in_array($domain->name, old('domain_names', $studentProfile->domains->pluck('name')->toArray())))
+                                        @if (in_array($domain->name, old('domain_names', $studentProfile->domains->pluck('name')->toArray()), true))
                                             selected
                                     @endif
                                 >
@@ -141,6 +143,30 @@
                         @enderror
                     </div>
 
+                    <div class="col-12">
+                        <label for="skill_names" class="form-label">Compétences</label>
+
+                        <select class="form-select" data-create="true" name="skill_names[]" multiple>
+                            @foreach ($skills as $skill)
+                                <option value="{{ $skill->name }}"
+                                        @if (in_array($skill->name, old('skill_names', $studentProfile->skills->pluck('name')->toArray()), true))
+                                            selected
+                                    @endif
+                                >
+                                    {{ $skill->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('skill_names')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+
+                        @error('skill_names.*')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="d-grid gap-2 mt-4">
                         <button type="submit" class="btn btn-primary">Sauvegarder</button>
 
@@ -149,6 +175,6 @@
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
 @endsection

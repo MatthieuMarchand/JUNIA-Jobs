@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-
 use function to_route;
 
 class StudentProfileController extends Controller
@@ -37,13 +36,12 @@ class StudentProfileController extends Controller
     public function edit()
     {
         $studentProfile = $this->getStudentProfile();
-        $domains = Domain::all();
-
         Gate::authorize('update', $studentProfile);
 
         return view('students.profile.edit', [
             'studentProfile' => $studentProfile,
-            'domains' => $domains,
+            'domains' => Domain::all(),
+            'skills' => Skill::all(),
         ]);
     }
 

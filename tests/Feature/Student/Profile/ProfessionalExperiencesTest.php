@@ -29,7 +29,8 @@ class ProfessionalExperiencesTest extends TestCase
             "description" => "Worked on various projects.",
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
+        $response->assertSessionHas('success', 'Expérience ajoutée avec succès.');
 
         $profile->refresh();
 
@@ -60,7 +61,8 @@ class ProfessionalExperiencesTest extends TestCase
             "description" => "Worked on various projects.",
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
+        $response->assertSessionHas('success', 'Expérience modifiée avec succès.');
 
         $profile->refresh();
 
@@ -91,7 +93,9 @@ class ProfessionalExperiencesTest extends TestCase
 
         $response = $this->actingAs($experience->studentProfile->user)->delete("/students/profile/professional-experiences/$experience->id");
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
+        $response->assertSessionHas('success', 'Expérience supprimée avec succès.');
+
         $this->assertDatabaseMissing('professional_experiences', [
             'id' => $experience->id,
         ]);

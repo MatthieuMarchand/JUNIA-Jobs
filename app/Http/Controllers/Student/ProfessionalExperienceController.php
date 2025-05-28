@@ -40,7 +40,8 @@ class ProfessionalExperienceController extends Controller
 
         $request->user()->studentProfile->professionalExperiences()->create($validated);
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit')
+            ->with('success', 'Expérience ajoutée avec succès.');
     }
 
     /**
@@ -82,7 +83,8 @@ class ProfessionalExperienceController extends Controller
 
         $professionalExperience->update($validated);
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit')
+            ->with('success', 'Expérience modifiée avec succès.');
     }
 
     /**
@@ -94,6 +96,7 @@ class ProfessionalExperienceController extends Controller
 
         $professionalExperience->delete();
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit')
+            ->with('success', 'Expérience supprimée avec succès.');
     }
 }

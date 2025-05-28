@@ -34,6 +34,7 @@ class UpdateProfileTest extends TestCase
         ]);
 
         $response->assertRedirect('/companies/profile');
+        $response->assertSessionHas('success', 'Profil mis à jour !');
 
         $profile->refresh();
         $this->assertSame('Airbus', $profile->name);

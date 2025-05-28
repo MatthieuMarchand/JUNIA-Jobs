@@ -40,6 +40,7 @@ class UpdateProfileTest extends TestCase
         ]);
 
         $response->assertRedirect('/students/profile');
+        $response->assertSessionHas('success', 'Profil mis à jour !');
 
         $profile->refresh();
         $this->assertSame('John', $profile->first_name);

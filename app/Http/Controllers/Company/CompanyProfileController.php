@@ -80,6 +80,7 @@ class CompanyProfileController extends Controller
 
         $companyProfile->save();
 
-        return to_route('companies.profile.show');
+        return to_route('companies.profile.show')
+            ->with('success', 'Profil mis à jour !');
     }
 }

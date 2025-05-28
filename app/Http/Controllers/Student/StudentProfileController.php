@@ -108,6 +108,7 @@ class StudentProfileController extends Controller
 
         $studentProfile->save();
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.show')
+            ->with('success', 'Profil mis à jour !');
     }
 }

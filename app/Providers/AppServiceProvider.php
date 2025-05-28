@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use App\Enums\UserRole;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use function config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Carbon::setLocale(config('app.locale'));
     }
 
     /**

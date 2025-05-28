@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AcademicRecord;
 use App\Models\CompanyProfile;
 use App\Models\CompanyRegistrationRequest;
 use App\Models\ContractType;
@@ -11,7 +12,6 @@ use App\Models\Skill;
 use App\Models\StudentProfile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-
 use function fake;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -40,6 +40,9 @@ class DatabaseSeeder extends Seeder
                     ->has(
                         ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
                     )
+                    ->has(
+                        AcademicRecord::factory()->count(fake()->numberBetween(1, 3))
+                    )
             )
             ->create([
                 'email' => 'student@example.com',
@@ -55,6 +58,9 @@ class DatabaseSeeder extends Seeder
                     ->withPhoto()
                     ->has(
                         ProfessionalExperience::factory()->count(fake()->numberBetween(1, 3))
+                    )
+                    ->has(
+                        AcademicRecord::factory()->count(fake()->numberBetween(1, 3))
                     )
             )
             ->count(10)

@@ -27,7 +27,8 @@ class AcademicRecordTest extends TestCase
             "description" => "Électronique, maths, informatique, gestion de projet.",
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
+        $response->assertSessionHas('success', 'Formation ajoutée avec succès.');
 
         $profile->refresh();
 
@@ -54,7 +55,8 @@ class AcademicRecordTest extends TestCase
             "description" => "Électronique, maths, informatique, gestion de projet.",
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
+        $response->assertSessionHas('success', 'Formation modifiée avec succès.');
 
         $profile->refresh();
 
@@ -83,7 +85,9 @@ class AcademicRecordTest extends TestCase
 
         $response = $this->actingAs($record->studentProfile->user)->delete("/students/profile/academic-records/$record->id");
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
+        $response->assertSessionHas('success', 'Formation supprimée avec succès.');
+        
         $this->assertDatabaseMissing('academic_records', [
             'id' => $record->id,
         ]);

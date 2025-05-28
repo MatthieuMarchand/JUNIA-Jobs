@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use function to_route;
+use function view;
 
 class AcademicRecordController extends Controller
 {
@@ -17,6 +18,8 @@ class AcademicRecordController extends Controller
     public function create()
     {
         Gate::authorize('create', AcademicRecord::class);
+
+        return view('students.profile.academic-records.create');
     }
 
     /**
@@ -36,7 +39,8 @@ class AcademicRecordController extends Controller
 
         $request->user()->studentProfile->academicRecords()->create($validated);
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit')
+            ->with('success', 'Formation ajoutée avec succès.');
     }
 
     /**
@@ -53,7 +57,10 @@ class AcademicRecordController extends Controller
     public function edit(AcademicRecord $academicRecord)
     {
         Gate::authorize('update', $academicRecord);
-        //
+
+        return view('students.profile.academic-records.edit', [
+            'academicRecord' => $academicRecord,
+        ]);
     }
 
     /**
@@ -73,7 +80,8 @@ class AcademicRecordController extends Controller
 
         $academicRecord->update($validated);
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit')
+            ->with('success', 'Formation modifiée avec succès.');
     }
 
     /**
@@ -85,6 +93,7 @@ class AcademicRecordController extends Controller
 
         $academicRecord->delete();
 
-        return to_route('students.profile.show');
+        return to_route('students.profile.edit')
+            ->with('success', 'Formation supprimée avec succès.');
     }
 }

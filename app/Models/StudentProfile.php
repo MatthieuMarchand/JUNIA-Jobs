@@ -61,7 +61,13 @@ class StudentProfile extends Model
         return $this->hasMany(ProfessionalExperience::class);
     }
 
-    public function CompanyInviteStudent(){
+    public function companyInviteStudent(): BelongsToMany
+    {
         return $this->belongsToMany(CompanyInviteStudent::class);
+    }
+
+    public function fullName(): string
+    {
+        return "$this->first_name $this->last_name";
     }
 }

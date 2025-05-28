@@ -178,7 +178,9 @@
             <div class="card-body">
                 <h3>Formation</h3>
 
-                <a class="btn btn-primary mb-4" href="{{route('students.profile.academic-records.create')}}">Ajouter une formation</a>
+                <a class="btn btn-primary mb-4" href="{{route('students.profile.academic-records.create')}}">
+                    <i class="bi bi-plus-lg"></i> Ajouter une formation
+                </a>
 
                 @foreach($studentProfile->academicRecords as $academicRecord)
                     @php
@@ -186,19 +188,23 @@
                     @endphp
                     <div class="d-flex">
                         <div>
-                            <h4>{{ $academicRecord->institution }}</h4>
+                            <h4 class="d-flex align-items-end gap-1">
+
+                                {{ $academicRecord->institution }}
+
+                                <a class="btn btn-secondary btn-sm" href="{{ route('students.profile.academic-records.edit', $academicRecord) }}">
+                                    <i class="bi bi-pencil-fill"></i> <span class="visually-hidden">Modifier</span>
+                                </a>
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#{{ $modalId }}"
+                                >
+                                    <i class="bi bi-trash-fill"></i> <span class="visually-hidden">Supprimer</span>
+                                </button>
+                            </h4>
                             <p>{{ $academicRecord->degree }} ({{$academicRecord->start->translatedFormat("M Y")}}
                                 - {{$academicRecord->end?->translatedFormat("M Y") ?? 'maintenant'}})</p>
-                        </div>
-                        <div class="ms-auto d-flex gap-1 align-items-start">
-                            <a class="btn btn-secondary" href="{{ route('students.profile.academic-records.edit', $academicRecord) }}">Modifier</a>
-                            <button
-                                class="btn btn-danger"
-                                data-bs-toggle="modal"
-                                data-bs-target="#{{ $modalId }}"
-                            >
-                                Supprimer
-                            </button>
                         </div>
 
                         <div class="modal fade" id="{{ $modalId }}" tabindex="-1" aria-labelledby="#{{ $modalId }}Label"
@@ -214,6 +220,69 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                         <form action="{{ route('students.profile.academic-records.destroy', $academicRecord) }}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+
+                                            <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Expérience professionnelles</h3>
+
+                <a class="btn btn-primary mb-4" href="{{route('students.profile.professional-experiences.create')}}">
+                    <i class="bi bi-plus-lg"></i> Ajouter une expérience
+                </a>
+
+                @foreach($studentProfile->professionalExperiences as $professionalExperience)
+                    @php
+                        $modalId = "deleteAcademicRecord-$professionalExperience->id"
+                    @endphp
+                    <div class="d-flex">
+                        <div>
+                            <h4 class="d-flex align-items-end gap-1">
+                                {{ $professionalExperience->title }}
+
+                                <a class="btn btn-secondary btn-sm"
+                                   href="{{ route('students.profile.professional-experiences.edit', $professionalExperience) }}">
+                                    <i class="bi bi-pencil-fill"></i> <span class="visually-hidden">Modifier</span>
+                                </a>
+                                <button
+                                    class="btn btn-danger btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#{{ $modalId }}"
+                                >
+                                    <i class="bi bi-trash-fill"></i> <span class="visually-hidden">Supprimer</span>
+                                </button>
+                            </h4>
+                            <p>{{ $professionalExperience->company_name }} ({{$professionalExperience->start->translatedFormat("M Y")}}
+                                - {{$professionalExperience->end?->translatedFormat("M Y") ?? 'maintenant'}})</p>
+                        </div>
+
+                        <div class="modal fade" id="{{ $modalId }}" tabindex="-1" aria-labelledby="#{{ $modalId }}Label"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="{{ $modalId }}Label">Supprimer
+                                            l'expérience {{$professionalExperience->title}}
+                                            chez {{$professionalExperience->company_name}}?</h1>
+                                    </div>
+                                    <div class="modal-body">
+                                        C'est définitif.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                        <form action="{{ route('students.profile.professional-experiences.destroy', $professionalExperience) }}"
+                                              method="POST">
                                             @method('DELETE')
                                             @csrf
 

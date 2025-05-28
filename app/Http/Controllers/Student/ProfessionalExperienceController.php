@@ -7,6 +7,7 @@ use App\Models\ProfessionalExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use function to_route;
+use function view;
 
 class ProfessionalExperienceController extends Controller
 {
@@ -16,6 +17,8 @@ class ProfessionalExperienceController extends Controller
     public function create()
     {
         Gate::authorize('create', ProfessionalExperience::class);
+
+        return view('students.profile.professional-experiences.create');
     }
 
     /**
@@ -46,7 +49,6 @@ class ProfessionalExperienceController extends Controller
     public function show(ProfessionalExperience $professionalExperience)
     {
         Gate::authorize('view', $professionalExperience);
-        //
     }
 
     /**
@@ -55,7 +57,10 @@ class ProfessionalExperienceController extends Controller
     public function edit(ProfessionalExperience $professionalExperience)
     {
         Gate::authorize('update', $professionalExperience);
-        //
+
+        return view('students.profile.professional-experiences.edit', [
+            'professionalExperience' => $professionalExperience,
+        ]);
     }
 
     /**

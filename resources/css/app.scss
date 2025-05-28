@@ -6,6 +6,9 @@ $secondary: #e9e9e9;
 // orange brûlé --> #f25c3c;
 // $font-family-base: 'Segoe UI', sans-serif;
 
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+
+@import "bootstrap-icons/font/bootstrap-icons";
 @import "bootstrap/scss/bootstrap";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';

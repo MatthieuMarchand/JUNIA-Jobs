@@ -1,7 +1,9 @@
 @props(['academicRecord'=>null])
 @php
     $submitText = ($academicRecord ? 'Modifier': 'Ajouter') . " la formation";
-    $route = $academicRecord ? route('students.profile.academic-records.update', $academicRecord) : route('students.profile.academic-records.store');
+    $route = $academicRecord
+        ? route('students.profile.academic-records.update', $academicRecord)
+        : route('students.profile.academic-records.store');
     $method = $academicRecord ? 'PATCH' : 'POST';
 @endphp
 

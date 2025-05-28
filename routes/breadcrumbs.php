@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\AcademicRecord;
+use App\Models\ProfessionalExperience;
 use App\Models\StudentProfile;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
@@ -62,6 +63,20 @@ Breadcrumbs::for(
     fn(BreadcrumbTrail $trail, AcademicRecord $academicRecord) => $trail
         ->parent('students.profile.edit')
         ->push('Modifier une formation', route('students.profile.academic-records.edit', $academicRecord))
+);
+
+Breadcrumbs::for(
+    'students.profile.professional-experiences.create',
+    fn(BreadcrumbTrail $trail) => $trail
+        ->parent('students.profile.edit')
+        ->push('Ajouter une expérience', route('students.profile.professional-experiences.create'))
+);
+
+Breadcrumbs::for(
+    'students.profile.professional-experiences.edit',
+    fn(BreadcrumbTrail $trail, ProfessionalExperience $professionalExperience) => $trail
+        ->parent('students.profile.edit')
+        ->push('Modifier une expérience', route('students.profile.professional-experiences.edit', $professionalExperience))
 );
 
 // Admin

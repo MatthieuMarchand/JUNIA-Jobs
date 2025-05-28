@@ -15,12 +15,18 @@ use App\Http\Controllers\Student\StudentAcceptInvitationController;
 use App\Http\Controllers\Student\StudentDeclineInvitationController;
 use App\Http\Controllers\Student\StudentInvitationHistoryController;
 use App\Http\Controllers\Student\StudentProfileController;
+use App\Models\CompanyProfile;
+use App\Models\StudentProfile;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__.'/web/auth.php';
+require __DIR__ . '/web/auth.php';
 
 Route::get('/', function () {
-    return view('index');
+    return view('index', [
+        'companiesCount' => CompanyProfile::count(),
+        'studentsCount' => StudentProfile::count(),
+        'companiesWithLogo' => CompanyProfile::whereNotNull('photo_path')->get(),
+    ]);
 })->name('home');
 
 Route::get('/legal', function () {

@@ -58,12 +58,14 @@ class StudentProfile extends Model
 
     public function professionalExperiences(): HasMany
     {
-        return $this->hasMany(ProfessionalExperience::class);
+        return $this->hasMany(ProfessionalExperience::class)
+            ->orderBy('start', 'desc');
     }
 
     public function academicRecords(): HasMany
     {
-        return $this->hasMany(AcademicRecord::class);
+        return $this->hasMany(AcademicRecord::class)
+            ->orderBy('start', 'desc');
     }
 
     public function companyInviteStudent(): BelongsToMany

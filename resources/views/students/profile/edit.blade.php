@@ -10,17 +10,17 @@
             <div class="accordion-item">
                 <h3 class="accordion-header">
                     <button
-                        class="accordion-button collapsed"
+                        class="accordion-button @if(!$errors->has('pdf')) collapsed @endif"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOne"
                         aria-expanded="false"
                         aria-controls="collapseOne"
                     >
-                        Importer le profil Linkedin français
+                        <span class="badge text-bg-primary me-2">Gagnez du temps !</span> Importez votre profil Linkedin
                     </button>
                 </h3>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                <div id="collapseOne" class="accordion-collapse collapse @if($errors->has('pdf')) show @endif" data-bs-parent="#accordion">
                     <div class="accordion-body">
                         <form action="{{ route('students.profile.import.linkedin') }}" method="POST" enctype="multipart/form-data">
                             @csrf

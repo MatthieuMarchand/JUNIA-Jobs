@@ -84,7 +84,7 @@ class ImportLinkedinPdfTest extends TestCase
             'pdf' => UploadedFile::fake()->create('linkedin.pdf'),
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
         $response->assertSessionHas('success', 'Votre profil a été mis à jour avec succès.');
 
         $profile->refresh();
@@ -128,7 +128,7 @@ class ImportLinkedinPdfTest extends TestCase
             'pdf' => UploadedFile::fake()->create('linkedin.pdf'),
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
         $response->assertSessionHas('error',
             "Impossible d'importer ce PDF. Veuillez vous rapprocher de l'équipe technique pour qu'ils adaptent l'import.");
     }
@@ -144,7 +144,7 @@ class ImportLinkedinPdfTest extends TestCase
                 'pdf' => UploadedFile::fake()->create('linkedin.pdf'),
             ]);
 
-            $response->assertRedirect('/students/profile');
+            $response->assertRedirect('/students/profile/edit');
 
             $profile->refresh();
 
@@ -184,7 +184,7 @@ class ImportLinkedinPdfTest extends TestCase
             'pdf' => UploadedFile::fake()->create('linkedin.pdf'),
         ]);
 
-        $response->assertRedirect('/students/profile');
+        $response->assertRedirect('/students/profile/edit');
 
         $this->assertNotNull($student->studentProfile()->first());
     }

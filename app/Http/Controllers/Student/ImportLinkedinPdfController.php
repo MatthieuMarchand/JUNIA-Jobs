@@ -75,10 +75,10 @@ class ImportLinkedinPdfController extends Controller
                 ]);
             }
 
-            return to_route('students.profile.show')
+            return to_route('students.profile.edit')
                 ->with('success', 'Votre profil a été mis à jour avec succès.');
         } catch (Throwable $e) {
-            return to_route('students.profile.show')
+            return to_route('students.profile.edit')
                 ->with('error', "Impossible d'importer ce PDF. Veuillez vous rapprocher de l'équipe technique pour qu'ils adaptent l'import.");
         }
     }

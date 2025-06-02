@@ -97,8 +97,8 @@
                     </div>
 
                     <div class="col-12">
-                        <label for="summary" class="form-label">Description</label>
-                        <textarea class="form-control" name="summary" id="summary" rows="4"
+                        <label for="summary" class="form-label">Résumé</label>
+                        <textarea class="form-control" name="summary" id="summary" rows="10"
                                   placeholder="Parle un peu de toi...">{{ old('summary', $studentProfile->summary) }}</textarea>
                         @error('summary')
                         <div class="text-danger small mt-1">{{ $message }}</div>

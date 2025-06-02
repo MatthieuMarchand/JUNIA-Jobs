@@ -9,6 +9,7 @@ use App\Services\StudentProfileExtractors\LinkedinPdf\LinesExtractor;
 use App\Services\StudentProfileExtractors\LinkedinPdf\ProfessionalExperiencesExtractor;
 use App\Services\StudentProfileExtractors\LinkedinPdf\SectionsLinesExtractor;
 use App\Services\StudentProfileExtractors\LinkedinPdf\SummaryExtractor;
+use Illuminate\Support\Str;
 use function array_map;
 use function explode;
 
@@ -33,11 +34,11 @@ class LinkedinPdfExtractor
         if (isset($sectionLines->name[0])) {
             [$firstName, $lastName] = explode(" ", $sectionLines->name[0]->text);
 
-            $profile->firstName = $firstName;
-            $profile->lastName = $lastName;
+            $profile->firstName = Str::limit($firstName, 255);
+            $profile->lastName = Str::limit($lastName, 255);
         }
 
-        $profile->summary = $this->summaryExtractor->extract($sectionLines->summary);
+        $profile->summary = Str::limit($this->summaryExtractor->extract($sectionLines->summary), 1000);
 
         $profile->skills = array_map(fn(LineDto $line) => $line->text, $sectionLines->skills);
 

@@ -7,9 +7,15 @@
         <div class="card-body">
             <h2 class="mb-4">Votre profil entreprise</h2>
 
+            @if($companyProfile->photo_path)
+                <div class="text-center mb-4">
+                    <img src="{{ $companyProfile->temporaryPhotoUrl() }}" alt="Logo de {{ $companyProfile->name }}" class="mb-3"
+                         style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+            @endif
+
             <form action="{{ route('companies.profile.edit') }}" method="GET" novalidate>
                 <fieldset disabled>
-                    @csrf
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Nom de l'entreprise</label>

@@ -53,9 +53,19 @@
             <div class="card-body">
                 <h3>Informations de base</h3>
 
-                <form action="{{ route('students.profile.update') }}" method="POST" class="row g-3" novalidate>
+                <form action="{{ route('students.profile.update') }}" method="POST" class="row g-3" enctype="multipart/form-data" novalidate>
                     @method("PATCH")
                     @csrf
+                    
+                    <div class="col-12">
+                        <label for="photo" class="form-label">Photo de profil</label>
+                        <input type="file" class="form-control" name="photo" id="photo" accept="image/*">
+                        <div class="form-text">Formats acceptés : JPG, PNG, GIF (max 5MB)</div>
+                        @error('photo')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="col-12 col-md-4">
                         <label for="first_name" class="form-label">Prénom</label>
                         <input type="text" class="form-control" name="first_name" id="first_name"

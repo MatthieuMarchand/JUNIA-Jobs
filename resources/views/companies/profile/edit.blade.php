@@ -7,9 +7,18 @@
         <div class="card-body">
             <h2 class="mb-4">Modifier votre profil entreprise</h2>
 
-            <form action="{{ route('companies.profile.update') }}" method="POST" novalidate>
+            <form action="{{ route('companies.profile.update') }}" method="POST" enctype="multipart/form-data" novalidate>
                 @method("PATCH")
                 @csrf
+
+                <div class="mb-3">
+                    <label for="photo" class="form-label">Logo de l'entreprise</label>
+                    <input type="file" class="form-control" name="photo" id="photo" accept="image/*">
+                    <div class="form-text">Formats acceptés : JPG, PNG, GIF (max 5MB)</div>
+                    @error('photo')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nom de l'entreprise</label>

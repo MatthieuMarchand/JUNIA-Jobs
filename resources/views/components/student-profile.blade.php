@@ -81,7 +81,7 @@
             <h3>Présentation</h3>
             <div class="card-body">
                 @if($studentProfile->summary)
-                    <p>{{ $studentProfile->summary }}</p>
+                    <p class="whitespace-pre">{{ $studentProfile->summary }}</p>
                 @else
                     <p class="text-muted">Aucune présentation disponible</p>
                 @endif
@@ -112,7 +112,7 @@
                                     {{ $experience->start->translatedFormat('M Y') }} -
                                     {{ $experience->end?->translatedFormat('M Y') ?? 'Présent' }}
                                 </p>
-                                <p class="card-text">{{ $experience->description }}</p>
+                                <p class="card-text whitespace-pre">{{ $experience->description }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -140,7 +140,7 @@
                                     {{ $record->start->translatedFormat('M Y') }} -
                                     {{ $record->end?->translatedFormat('M Y') ?? 'Présent' }}
                                 </p>
-                                <p class="card-text">{{ $record->description }}</p>
+                                <p class="card-text whitespace-pre">{{ $record->description }}</p>
                             </div>
                         </div>
                     @endforeach

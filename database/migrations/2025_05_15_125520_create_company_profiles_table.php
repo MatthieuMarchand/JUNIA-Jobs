@@ -13,7 +13,10 @@ return new class extends Migration {
     {
         Schema::create('company_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('name');
             $table->string('photo_path')->nullable();
             $table->text('description')->nullable();

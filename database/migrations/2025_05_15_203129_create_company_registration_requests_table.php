@@ -13,7 +13,10 @@ return new class extends Migration {
     {
         Schema::create('company_registration_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('company_name');
             $table->string('message');
             $table->boolean('approved')->default(false);

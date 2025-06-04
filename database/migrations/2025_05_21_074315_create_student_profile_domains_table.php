@@ -13,8 +13,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('student_profile_domains', function (Blueprint $table) {
-            $table->foreignIdFor(Domain::class);
-            $table->foreignIdFor(StudentProfile::class);
+            $table->foreignIdFor(Domain::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
+            $table->foreignIdFor(StudentProfile::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
         });
     }
 

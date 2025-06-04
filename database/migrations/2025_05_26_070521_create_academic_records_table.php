@@ -13,7 +13,10 @@ return new class extends Migration {
     {
         Schema::create('academic_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(StudentProfile::class);
+            $table->foreignIdFor(StudentProfile::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string("degree");
             $table->string("institution");
             $table->date("start");

@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\CompanyProfile;
+use App\Models\StudentProfile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,8 +14,14 @@ return new class extends Migration
     {
         Schema::create('interview_invitations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_profile_id')->constrained()->onDelete('cascade');
-            $table->foreignId('student_profile_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(CompanyProfile::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignIdFor(StudentProfile::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->dateTime('sent');
             $table->date('invitation_date');
             $table->text('invitation_details');

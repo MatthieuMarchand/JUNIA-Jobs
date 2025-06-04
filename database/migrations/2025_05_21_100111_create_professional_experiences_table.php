@@ -13,7 +13,10 @@ return new class extends Migration {
     {
         Schema::create('professional_experiences', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(StudentProfile::class);
+            $table->foreignIdFor(StudentProfile::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string("title");
             $table->string("contract_type");
             $table->string("company_name");

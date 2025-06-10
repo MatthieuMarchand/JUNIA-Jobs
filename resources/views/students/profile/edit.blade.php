@@ -96,6 +96,37 @@
                         @enderror
                     </div>
 
+                    <!-- NEW: Driver License and Vehicle Section -->
+                    <div class="col-12">
+                        <h4>Mobilité</h4>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="driver_license" id="driver_license" value="1"
+                                   @if(old('driver_license', $studentProfile->driver_license)) checked @endif>
+                            <label class="form-check-label" for="driver_license">
+                                <i class="bi bi-credit-card-2-front"></i> Permis de conduire
+                            </label>
+                        </div>
+                        @error('driver_license')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="vehicle" id="vehicle" value="1"
+                                   @if(old('vehicle', $studentProfile->vehicle)) checked @endif>
+                            <label class="form-check-label" for="vehicle">
+                                <i class="bi bi-car-front"></i> Véhicule personnel
+                            </label>
+                        </div>
+                        @error('vehicle')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="col-12">
                         <label for="summary" class="form-label">Résumé</label>
                         <textarea class="form-control" name="summary" id="summary" rows="10"
@@ -105,33 +136,56 @@
                         @enderror
                     </div>
 
+                    <!-- UPDATED: Contract Types with duration and rhythm -->
                     <div class="col-12">
-                        <label for="contract_type_ids" class="form-label">Type de contrat recherché</label>
-
-                        <select class="form-select" name="contract_type_ids[]" multiple>
-                            @foreach ($studentProfile->contractTypes as $contractType)
-                                <option value="{{ $contractType->id }}"
-                                        @if (in_array($contractType->name, old('contract_type_ids', $studentProfile->contractTypes->pluck('name')->toArray())))
-                                            selected
-                                    @endif
-                                >
-                                    {{ $contractType->name }}
-                                </option>
+                        <h4>Préférences de contrat</h4>
+                        <div id="contract-preferences">
+                            @foreach($studentProfile->contractTypes as $index => $contractType)
+                            <div class="contract-preference-item border p-3 mb-3 rounded">
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-4">
+                                        <label for="contract_preferences_{{ $index }}_contract_type_id" class="form-label">Type de contrat</label>
+                                        <select class="form-select" name="contract_preferences[{{ $index }}][contract_type_id]" id="contract_preferences_{{ $index }}_contract_type_id">
+                                            @foreach($contractTypes as $type)
+                                                <option value="{{ $type->id }}" @if($type->id == $contractType->id) selected @endif>
+                                                    {{ $type->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="contract_preferences_{{ $index }}_contract_duration" class="form-label">Durée souhaitée</label>
+                                        <input type="text" class="form-control" name="contract_preferences[{{ $index }}][contract_duration]" 
+                                               id="contract_preferences_{{ $index }}_contract_duration"
+                                               value="{{ old("contract_preferences.{$index}.contract_duration", $contractType->pivot->contract_duration) }}"
+                                               placeholder="Ex: 6 mois, 1 an, 2 ans...">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="contract_preferences_{{ $index }}_work_study_rhythm" class="form-label">Rythme d'alternance</label>
+                                        <input type="text" class="form-control" name="contract_preferences[{{ $index }}][work_study_rhythm]" 
+                                               id="contract_preferences_{{ $index }}_work_study_rhythm"
+                                               value="{{ old("contract_preferences.{$index}.work_study_rhythm", $contractType->pivot->work_study_rhythm) }}"
+                                               placeholder="Ex: 2j école / 3j entreprise">
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-danger btn-sm remove-contract-preference">
+                                            <i class="bi bi-trash"></i> Supprimer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                             @endforeach
-                        </select>
-
-                        @error('contract_type_ids')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-
-                        @error('contract_type_ids.*')
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" id="add-contract-preference">
+                            <i class="bi bi-plus"></i> Ajouter un type de contrat
+                        </button>
+                        @error('contract_preferences')
                         <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-12">
                         <label for="domain_names" class="form-label">Domaines de recherche</label>
-
                         <select class="form-select" data-create="true" name="domain_names[]" multiple>
                             @foreach ($domains as $domain)
                                 <option value="{{ $domain->name }}"
@@ -143,19 +197,13 @@
                                 </option>
                             @endforeach
                         </select>
-
                         @error('domain_names')
-                        <div class="text-danger small mt-1">{{ $message }}</div>
-                        @enderror
-
-                        @error('domain_names.*')
                         <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col-12">
                         <label for="skill_names" class="form-label">Compétences</label>
-
                         <select class="form-select" data-create="true" name="skill_names[]" multiple>
                             @foreach ($skills as $skill)
                                 <option value="{{ $skill->name }}"
@@ -167,12 +215,82 @@
                                 </option>
                             @endforeach
                         </select>
-
                         @error('skill_names')
                         <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
+                    </div>
 
-                        @error('skill_names.*')
+                    <!-- NEW: Hobbies Section -->
+                    <div class="col-12">
+                        <h4>Centres d'intérêt</h4>
+                        <div id="hobbies-container">
+                            @foreach($studentProfile->hobbies as $index => $hobby)
+                            <div class="hobby-item mb-2">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="hobbies[]" 
+                                           value="{{ old("hobbies.{$index}", $hobby->hobby_name) }}" 
+                                           placeholder="Ex: Football, Photographie, Cuisine...">
+                                    <button type="button" class="btn btn-outline-danger remove-hobby">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" id="add-hobby">
+                            <i class="bi bi-plus"></i> Ajouter un centre d'intérêt
+                        </button>
+                        @error('hobbies')
+                        <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- NEW: Certifications Section -->
+                    <div class="col-12">
+                        <h4>Certifications</h4>
+                        <div id="certifications-container">
+                            @foreach($studentProfile->certifications as $index => $certification)
+                            <div class="certification-item border p-3 mb-3 rounded">
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label for="certifications_{{ $index }}_title" class="form-label">Titre de la certification</label>
+                                        <input type="text" class="form-control" name="certifications[{{ $index }}][title]" 
+                                               id="certifications_{{ $index }}_title"
+                                               value="{{ old("certifications.{$index}.title", $certification->title) }}" 
+                                               placeholder="Ex: AWS Certified Solutions Architect">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="certifications_{{ $index }}_date_obtained" class="form-label">Date d'obtention</label>
+                                        <input type="date" class="form-control" name="certifications[{{ $index }}][date_obtained]" 
+                                               id="certifications_{{ $index }}_date_obtained"
+                                               value="{{ old("certifications.{$index}.date_obtained", $certification->date_obtained?->format('Y-m-d')) }}">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="certifications_{{ $index }}_description" class="form-label">Description</label>
+                                        <textarea class="form-control" name="certifications[{{ $index }}][description]" 
+                                                  id="certifications_{{ $index }}_description" rows="3"
+                                                  placeholder="Description de la certification...">{{ old("certifications.{$index}.description", $certification->description) }}</textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="certifications_{{ $index }}_link" class="form-label">Lien (optionnel)</label>
+                                        <input type="url" class="form-control" name="certifications[{{ $index }}][link]" 
+                                               id="certifications_{{ $index }}_link"
+                                               value="{{ old("certifications.{$index}.link", $certification->link) }}" 
+                                               placeholder="https://example.com/certification">
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-danger btn-sm remove-certification">
+                                            <i class="bi bi-trash"></i> Supprimer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" id="add-certification">
+                            <i class="bi bi-plus"></i> Ajouter une certification
+                        </button>
+                        @error('certifications')
                         <div class="text-danger small mt-1">{{ $message }}</div>
                         @enderror
                     </div>
@@ -308,4 +426,116 @@
         </div>
     </section>
 
+    <script>
+        // Add dynamic form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hobby functionality
+            let hobbyIndex = {{ $studentProfile->hobbies->count() }};
+            document.getElementById('add-hobby').addEventListener('click', function() {
+                const container = document.getElementById('hobbies-container');
+                const newHobby = document.createElement('div');
+                newHobby.className = 'hobby-item mb-2';
+                newHobby.innerHTML = `
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="hobbies[]" placeholder="Ex: Football, Photographie, Cuisine...">
+                        <button type="button" class="btn btn-outline-danger remove-hobby">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(newHobby);
+            });
+
+            // Remove hobby functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-hobby')) {
+                    e.target.closest('.hobby-item').remove();
+                }
+            });
+
+            // Add certification functionality
+            let certificationIndex = {{ $studentProfile->certifications->count() }};
+            document.getElementById('add-certification').addEventListener('click', function() {
+                const container = document.getElementById('certifications-container');
+                const newCertification = document.createElement('div');
+                newCertification.className = 'certification-item border p-3 mb-3 rounded';
+                newCertification.innerHTML = `
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Titre de la certification</label>
+                            <input type="text" class="form-control" name="certifications[${certificationIndex}][title]" placeholder="Ex: AWS Certified Solutions Architect">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label">Date d'obtention</label>
+                            <input type="date" class="form-control" name="certifications[${certificationIndex}][date_obtained]">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="certifications[${certificationIndex}][description]" rows="3" placeholder="Description de la certification..."></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Lien (optionnel)</label>
+                            <input type="url" class="form-control" name="certifications[${certificationIndex}][link]" placeholder="https://example.com/certification">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-danger btn-sm remove-certification">
+                                <i class="bi bi-trash"></i> Supprimer
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newCertification);
+                certificationIndex++;
+            });
+
+            // Remove certification functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-certification')) {
+                    e.target.closest('.certification-item').remove();
+                }
+            });
+
+            // Add contract preference functionality
+            let contractIndex = {{ $studentProfile->contractTypes->count() }};
+            document.getElementById('add-contract-preference').addEventListener('click', function() {
+                const container = document.getElementById('contract-preferences');
+                const newContract = document.createElement('div');
+                newContract.className = 'contract-preference-item border p-3 mb-3 rounded';
+                newContract.innerHTML = `
+                    <div class="row g-3">
+                        <div class="col-12 col-md-4">
+                            <label class="form-label">Type de contrat</label>
+                            <select class="form-select" name="contract_preferences[${contractIndex}][contract_type_id]">
+                                @foreach($contractTypes as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label class="form-label">Durée souhaitée</label>
+                            <input type="text" class="form-control" name="contract_preferences[${contractIndex}][contract_duration]" placeholder="Ex: 6 mois, 1 an, 2 ans...">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label class="form-label">Rythme d'alternance</label>
+                            <input type="text" class="form-control" name="contract_preferences[${contractIndex}][work_study_rhythm]" placeholder="Ex: 2j école / 3j entreprise">
+                        </div>
+                        <div class="col-12">
+                            <button type="button" class="btn btn-danger btn-sm remove-contract-preference">
+                                <i class="bi bi-trash"></i> Supprimer
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newContract);
+                contractIndex++;
+            });
+
+            // Remove contract preference functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-contract-preference')) {
+                    e.target.closest('.contract-preference-item').remove();
+                }
+            });
+        });
+    </script>
 @endsection

@@ -24,6 +24,13 @@ class StudentProfile extends Model
         'photo_path',
         'summary',
         'phone_number',
+        'driver_license',
+        'vehicle',
+    ];
+
+    protected $casts = [
+        'driver_license' => 'boolean',
+        'vehicle' => 'boolean',
     ];
 
     public function user(): BelongsTo
@@ -33,7 +40,8 @@ class StudentProfile extends Model
 
     public function contractTypes(): BelongsToMany
     {
-        return $this->belongsToMany(ContractType::class, 'student_profile_contract_types');
+        return $this->belongsToMany(ContractType::class, 'student_profile_contract_types')
+            ->withPivot('contract_duration', 'work_study_rhythm');
     }
 
     public function domains(): BelongsToMany
@@ -71,6 +79,16 @@ class StudentProfile extends Model
     public function companyInviteStudent(): BelongsToMany
     {
         return $this->belongsToMany(CompanyInviteStudent::class);
+    }
+
+    public function hobbies(): HasMany
+    {
+        return $this->hasMany(StudentProfileHobby::class);
+    }
+
+    public function certifications(): HasMany
+    {
+        return $this->hasMany(Certification::class);
     }
 
     public function fullName(): string

@@ -97,6 +97,12 @@ class DatabaseSeeder extends Seeder
             ->count(5)
             ->create();
 
+        // Ajout des hobbies et certifications pour les étudiants
+        $this->call([
+            StudentProfileHobbySeeder::class,
+            CertificationSeeder::class,
+        ]);
+
         // Ajout des invitations entre entreprises et étudiants
         $this->call(CompanyInviteStudentSeeder::class);
     }
@@ -114,8 +120,23 @@ class DatabaseSeeder extends Seeder
         $skills = Skill::inRandomOrder()->take(fake()->numberBetween(3, 6))->get();
         $profile->skills()->sync($skills->pluck('name')->toArray());
 
-        // 1 à 3 types de contrats
+        // 1 à 3 types de contrats avec durée et rythme
         $contractTypes = ContractType::inRandomOrder()->take(fake()->numberBetween(1, 3))->get();
-        $profile->contractTypes()->sync($contractTypes->pluck('id'));
+        $syncData = [];
+        
+        foreach ($contractTypes as $contractType) {
+            $syncData[$contractType->id] = [
+                'contract_duration' => fake()->randomElement(['6 mois', '1 an', '2 ans', '3 ans', 'Indéterminée']),
+                'work_study_rhythm' => fake()->randomElement(['2 jours école / 3 jours entreprise', '1 semaine école / 1 semaine entreprise', '2 semaines école / 2 semaines entreprise', 'Temps plein'])
+            ];
+        }
+        
+        $profile->contractTypes()->sync($syncData);
+
+        // Mettre à jour les champs driver_license et vehicle
+        $profile->update([
+            'driver_license' => fake()->boolean(70), // 70% de chance d'avoir le permis
+            'vehicle' => fake()->boolean(50), // 50% de chance d'avoir un véhicule
+        ]);
     }
 }

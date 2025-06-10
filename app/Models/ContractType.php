@@ -17,6 +17,6 @@ class ContractType extends Model
     public function studentProfiles(): BelongsToMany
     {
         return $this->belongsToMany(StudentProfile::class, 'student_profile_contract_types')
-            ->withPivot('contract_duration', 'alternance_temps_entreprise', 'rhythm');
+            ->withPivot('contract_duration', 'work_study_rhythm');
     }
 }

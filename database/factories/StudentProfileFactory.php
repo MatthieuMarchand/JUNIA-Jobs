@@ -28,6 +28,8 @@ class StudentProfileFactory extends Factory
             'last_name' => fake()->lastName,
             'summary' => fake()->paragraph,
             'phone_number' => fake()->phoneNumber,
+            'driver_license' => fake()->boolean(70),
+            'vehicle' => fake()->boolean(50),
         ];
     }
 }

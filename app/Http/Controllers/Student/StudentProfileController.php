@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContractType;
 use App\Models\Domain;
 use App\Models\Skill;
 use App\Models\StudentProfile;
@@ -17,13 +18,9 @@ class StudentProfileController extends Controller
 {
     private function getStudentProfile(): StudentProfile
     {
-        // Si pas de studentProfile existant en bdd, on en instancie un à la volée (il n'est pas créé en bdd, seulement en php).
-        // Comme ça la vue reçoit toujours un studentProfile non null
         return Auth::user()
             ->studentProfile()
-            ->with('academicRecords')
-            ->with('skills')
-            ->with('professionalExperiences')
+            ->with(['academicRecords', 'skills', 'professionalExperiences', 'contractTypes', 'domains', 'hobbies', 'certifications'])
             ->firstOrNew();
     }
 
@@ -47,6 +44,7 @@ class StudentProfileController extends Controller
             'studentProfile' => $studentProfile,
             'domains' => Domain::all(),
             'skills' => Skill::all(),
+            'contractTypes' => ContractType::all(),
         ]);
     }
 
@@ -62,22 +60,41 @@ class StudentProfileController extends Controller
             'summary' => 'nullable|string|max:1000',
             'phone_number' => 'nullable|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'driver_license' => 'boolean',
+            'vehicle' => 'boolean',
 
-            'contract_type_ids' => ['nullable', 'array'],
-            'contract_type_ids.*' => 'exists:contract_types,id',
+            'contract_preferences' => ['nullable', 'array'],
+            'contract_preferences.*.contract_type_id' => 'required|exists:contract_types,id',
+            'contract_preferences.*.contract_duration' => 'nullable|string|max:255',
+            'contract_preferences.*.work_study_rhythm' => 'nullable|string|max:255',
 
             'skill_names' => ['nullable', 'array'],
             'skill_names.*' => 'string',
 
             'domain_names' => ['nullable', 'array'],
             'domain_names.*' => 'string',
+
+            'hobbies' => ['nullable', 'array'],
+            'hobbies.*' => 'string|max:255',
+
+            'certifications' => ['nullable', 'array'],
+            'certifications.*.title' => 'required|string|max:255',
+            'certifications.*.date_obtained' => 'required|date',
+            'certifications.*.description' => 'nullable|string',
+            'certifications.*.link' => 'nullable|url',
         ]);
 
-        $studentProfile->first_name = $validated['first_name'];
-        $studentProfile->last_name = $validated['last_name'];
-        $studentProfile->summary = $validated['summary'];
-        $studentProfile->phone_number = $validated['phone_number'];
+        // Update basic fields
+        $studentProfile->fill([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'summary' => $validated['summary'],
+            'phone_number' => $validated['phone_number'],
+            'driver_license' => $validated['driver_license'] ?? false,
+            'vehicle' => $validated['vehicle'] ?? false,
+        ]);
 
+        // Handle photo upload
         if ($studentProfile->photo_path && $request->has('photo')) {
             Storage::delete($studentProfile->photo_path);
             $studentProfile->photo_path = null;
@@ -87,31 +104,51 @@ class StudentProfileController extends Controller
             $studentProfile->photo_path = $path;
         }
 
-        if ($request->has('contract_type_ids')) {
-            $studentProfile->contractTypes()->sync($request->contract_type_ids);
+        $studentProfile->save();
+
+        // Handle contract preferences with pivot data
+        if ($request->has('contract_preferences')) {
+            $syncData = [];
+            foreach ($validated['contract_preferences'] as $preference) {
+                $syncData[$preference['contract_type_id']] = [
+                    'contract_duration' => $preference['contract_duration'] ?? null,
+                    'work_study_rhythm' => $preference['work_study_rhythm'] ?? null,
+                ];
+            }
+            $studentProfile->contractTypes()->sync($syncData);
         }
 
+        // Handle skills
         if ($request->has('skill_names')) {
-            // Pas le plus optimisé, mais le nombre de compétences reste faible (<100 en général).
-            // Donc, on peut se le permettre pour l'instant.
-            foreach ($request->skill_names as $name) {
+            foreach ($validated['skill_names'] as $name) {
                 Skill::firstOrCreate(['name' => $name]);
             }
-
-            $studentProfile->skills()->sync($request->skill_names);
+            $studentProfile->skills()->sync($validated['skill_names']);
         }
 
+        // Handle domains
         if ($request->has('domain_names')) {
-            // Pas le plus optimisé, mais le nombre de domaines reste faible (<100 en général).
-            // Donc, on peut se le permettre pour l'instant.
-            foreach ($request->domain_names as $name) {
+            foreach ($validated['domain_names'] as $name) {
                 Domain::firstOrCreate(['name' => $name]);
             }
-
-            $studentProfile->domains()->sync($request->domain_names);
+            $studentProfile->domains()->sync($validated['domain_names']);
         }
 
-        $studentProfile->save();
+        // Handle hobbies
+        if ($request->has('hobbies')) {
+            $studentProfile->hobbies()->delete();
+            foreach ($validated['hobbies'] as $hobby) {
+                $studentProfile->hobbies()->create(['hobby_name' => $hobby]);
+            }
+        }
+
+        // Handle certifications
+        if ($request->has('certifications')) {
+            $studentProfile->certifications()->delete();
+            foreach ($validated['certifications'] as $certification) {
+                $studentProfile->certifications()->create($certification);
+            }
+        }
 
         return to_route('students.profile.show')
             ->with('success', 'Profil mis à jour !');

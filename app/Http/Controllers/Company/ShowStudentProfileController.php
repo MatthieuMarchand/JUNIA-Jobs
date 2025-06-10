@@ -25,17 +25,6 @@ class ShowStudentProfileController extends Controller
             },
         ]);
 
-        // Log::info('Affichage profil étudiant', [
-        //     'id' => $studentProfile->id,
-        //     'nom' => $studentProfile->first_name.' '.$studentProfile->last_name,
-        //     'relations_chargées' => [
-        //         'domains' => $studentProfile->domains->count(),
-        //         'skills' => $studentProfile->skills->count(),
-        //         'contract_types' => $studentProfile->contractTypes->count(),
-        //         'experiences' => $studentProfile->professionalExperiences->count(),
-        //     ],
-        // ]);
-
         return view('companies.students.show', [
             'student' => $studentProfile,
         ]);

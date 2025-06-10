@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Skill;
-use App\Models\StudentProfile;
 use App\Services\StudentProfileExtractors\LinkedinPdfExtractor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Throwable;
 use function now;
@@ -15,16 +13,11 @@ use function to_route;
 
 class ImportLinkedinPdfController extends Controller
 {
-    private function getStudentProfile(): StudentProfile
-    {
-        // Si pas de studentProfile existant en bdd, on en instancie un à la volée (il n'est pas créé en bdd, seulement en php).
-        // Comme ça la vue reçoit toujours un studentProfile non null
-        return Auth::user()->studentProfile()->firstOrNew();
-    }
+    use HasStudentProfile;
 
     public function __invoke(Request $request)
     {
-        $studentProfile = $this->getStudentProfile();
+        $studentProfile = $this->studentProfile();
 
         Gate::authorize('update', $studentProfile);
 

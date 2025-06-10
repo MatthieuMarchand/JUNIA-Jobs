@@ -14,6 +14,16 @@ Table StudentProfile {
   photo_path varchar(255)
   summary text
   phone_number varchar(50)
+  driver_license boolean [default: false, not null]
+  vehicle boolean [default: false, not null]
+}
+
+Table ContractPreference {
+  id int [pk, increment]
+  student_profile_id int [ref: > StudentProfile.id, not null]
+  contract_type varchar(255) [not null]
+  contract_duration varchar(255)
+  work_study_rhythm varchar(255)
 }
 
 Table AcademicRecord {
@@ -21,8 +31,8 @@ Table AcademicRecord {
   student_user_id int [ref: > StudentProfile.user_id, not null]
   degree varchar(255) [not null]
   institution varchar(255) [not null]
-  start date
-  end date
+  start_date date
+  end_date date
   description text
 }
 
@@ -33,8 +43,8 @@ Table ProfessionalExperience {
   contract_type varchar(255) [not null]
   company_name varchar(255) [not null]
   location varchar(255)
-  start date [not null]
-  end date
+  start_date date [not null]
+  end_date date
   description text
 }
 
@@ -43,13 +53,13 @@ Table ResearchArea {
   name varchar(255) [unique, not null]
 }
 
-Table Domains {
+Table Domain {
   name varchar(255) [pk, not null]
 }
 
-Table StudentProfileReseachDomains{
+Table StudentProfileDomain {
   student_profile_id int [pk, ref: > StudentProfile.id]
-  domain_name int [pk, ref: > Domains.name]
+  domain_name varchar(255) [pk, ref: > Domain.name]
 }
 
 Table StudentProfileResearchArea {
@@ -63,7 +73,21 @@ Table Skill {
 
 Table StudentProfileSkill {
   student_profile_id int [pk, ref: > StudentProfile.id]
-  skill_name int [pk, ref: > Skill.name]
+  skill_name varchar(255) [pk, ref: > Skill.name]
+}
+
+Table StudentProfileHobby {
+  student_profile_id int [pk, ref: > StudentProfile.id]
+  hobby_name varchar(255) [not null]
+}
+
+Table Certification {
+  id int [pk, increment]
+  student_profile_id int [ref: > StudentProfile.id, not null]
+  title varchar(255) [not null]
+  date_obtained date [not null]
+  description text
+  link varchar(255) [null]
 }
 
 Table CompanyProfile {

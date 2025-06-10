@@ -15,6 +15,9 @@ return new class extends Migration {
         Schema::create('student_profile_contract_types', function (Blueprint $table) {
             $table->foreignIdFor(StudentProfile::class);
             $table->foreignIdFor(ContractType::class);
+            $table->string('contract_duration')->nullable();
+            $table->string('alternance_temps_entreprise')->nullable();
+            $table->string('rhythm')->nullable();
         });
     }
 

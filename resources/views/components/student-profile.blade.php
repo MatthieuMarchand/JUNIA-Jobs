@@ -64,7 +64,22 @@
                             <li class="list-group-item">
                                 <strong>{{ $contractType->name }}</strong>
                                 @if($contractType->description)
-                                    <p class="text-muted small mb-0">{{ $contractType->description }}</p>
+                                    <p class="text-muted small mb-1">{{ $contractType->description }}</p>
+                                @endif
+                                @if($contractType->pivot->contract_duration)
+                                    <p class="text-muted small mb-1">
+                                        <i class="bi bi-clock"></i> <strong>Durée:</strong> {{ $contractType->pivot->contract_duration }}
+                                    </p>
+                                @endif
+                                @if($contractType->pivot->alternance_temps_entreprise)
+                                    <p class="text-muted small mb-1">
+                                        <i class="bi bi-building"></i> <strong>Temps en entreprise:</strong> {{ $contractType->pivot->alternance_temps_entreprise }}
+                                    </p>
+                                @endif
+                                @if($contractType->pivot->rhythm)
+                                    <p class="text-muted small mb-0">
+                                        <i class="bi bi-calendar-week"></i> <strong>Rythme:</strong> {{ $contractType->pivot->rhythm }}
+                                    </p>
                                 @endif
                             </li>
                         @endforeach

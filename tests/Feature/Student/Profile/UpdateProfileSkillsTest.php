@@ -4,7 +4,7 @@ namespace Tests\Feature\Student\Profile;
 
 use App\Models\Skill;
 use App\Models\StudentProfile;
-use Database\Seeders\ProductionSeeder;
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,7 +14,7 @@ class UpdateProfileSkillsTest extends TestCase
 
     public function test_update_skills_if_present(): void
     {
-        $this->seed(ProductionSeeder::class);
+        $this->seed(DatabaseSeeder::class);
 
         $profile = StudentProfile::factory()->create();
 
@@ -36,7 +36,7 @@ class UpdateProfileSkillsTest extends TestCase
 
     public function test_do_not_update_skills_if_not_present(): void
     {
-        $this->seed(ProductionSeeder::class);
+        $this->seed(DatabaseSeeder::class);
 
         $profile = StudentProfile::factory()->create();
 
@@ -55,7 +55,7 @@ class UpdateProfileSkillsTest extends TestCase
 
     public function test_create_skill_if_dont_exists(): void
     {
-        $this->seed(ProductionSeeder::class);
+        $this->seed(DatabaseSeeder::class);
 
         $profile = StudentProfile::factory()->create();
 

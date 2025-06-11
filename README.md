@@ -37,10 +37,10 @@ php artisan serve
 php artisan migrate
 ```
 
-### Mettre les fausses données de test
+### Mettre les fausses données de développement
 
 ```shell
-php artisan db:seed
+php artisan db:seed --class=DevelopmentSeeder
 ```
 
 ### Réinitialiser la db et remettre les jdd

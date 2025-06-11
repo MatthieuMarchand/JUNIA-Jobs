@@ -86,6 +86,13 @@ Breadcrumbs::for(
 );
 
 Breadcrumbs::for(
+    'admin.companies.index',
+    fn(BreadcrumbTrail $trail) => $trail
+        ->parent('admin.home')
+        ->push("Entreprises inscrites", route('admin.companies.index'))
+);
+
+Breadcrumbs::for(
     'admin.companies.requests.index',
     fn(BreadcrumbTrail $trail) => $trail
         ->parent('admin.home')

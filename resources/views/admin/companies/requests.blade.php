@@ -3,8 +3,11 @@
 @section('title', 'Entreprises en attente')
 
 @section('content')
+    @php
+        $requestsCount = $requests->count();
+    @endphp
     <section class="container">
-        <h1>{{ $requests->count() }} entreprise(s) en attente</h1>
+        <h1>{{ $requestsCount > 1 ? "$requestsCount entreprises en attente" : "1 entreprise en attente" }}</h1>
         <p class="mb-0">Accepter une demande enverra un mail à l'entreprise contenant un lien pour créer son mot de passe.</p>
         <p>Suite à ça, elle pourra remplir son profil et commencer à rechercher et contacter des étudiants.</p>
 

@@ -69,5 +69,10 @@
     {{-- <div>
         <h2>+ 20 entreprises partenaires</h2>
     </div> --}}
-</section>
+
+        {{--        <div class="d-flex">--}}
+        {{--            @foreach($companiesWithLogo as $company)--}}
+        {{--                <img class="w-25" src="{{ $company->temporaryPhotoUrl() }}" alt="">--}}
+        {{--            @endforeach--}}
+        {{--        </div>--}}
 @endsection

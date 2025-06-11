@@ -8,6 +8,14 @@
         <div class="row mt-4 g-3">
             <div class="col-6">
                 <section class="card shadow p-4">
+                    <h2 class="mb-4">{{ $studentsCount > 1 ? "$studentsCount comptes étudiant" : "1 compte étudiant" }}</h2>
+
+                    <a class="btn btn-primary me-auto" href="{{ route('admin.students.index') }}">Voir les comptes</a>
+                </section>
+            </div>
+
+            <div class="col-6">
+                <section class="card shadow p-4">
                     <h2 class="mb-4">{{ $companiesApprovedCount > 1 ? "$companiesApprovedCount entreprises inscrites" : "1 entreprise inscrite" }}</h2>
 
                     <a class="btn btn-primary me-auto" href="{{ route('admin.companies.index') }}">Voir les entreprises</a>

@@ -86,6 +86,13 @@ Breadcrumbs::for(
 );
 
 Breadcrumbs::for(
+    'admin.students.index',
+    fn(BreadcrumbTrail $trail) => $trail
+        ->parent('admin.home')
+        ->push("Comptes étudiant", route('admin.students.index'))
+);
+
+Breadcrumbs::for(
     'admin.companies.index',
     fn(BreadcrumbTrail $trail) => $trail
         ->parent('admin.home')

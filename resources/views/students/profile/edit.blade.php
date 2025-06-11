@@ -56,7 +56,7 @@
                 <form action="{{ route('students.profile.update') }}" method="POST" class="row g-3" enctype="multipart/form-data" novalidate>
                     @method("PATCH")
                     @csrf
-                    
+
                     <div class="col-12">
                         <label for="photo" class="form-label">Photo de profil</label>
                         <input type="file" class="form-control" name="photo" id="photo" accept="image/*">
@@ -141,39 +141,42 @@
                         <h4>Préférences de contrat</h4>
                         <div id="contract-preferences">
                             @foreach($studentProfile->contractTypes as $index => $contractType)
-                            <div class="contract-preference-item border p-3 mb-3 rounded">
-                                <div class="row g-3">
-                                    <div class="col-12 col-md-4">
-                                        <label for="contract_preferences_{{ $index }}_contract_type_id" class="form-label">Type de contrat</label>
-                                        <select class="form-select" name="contract_preferences[{{ $index }}][contract_type_id]" id="contract_preferences_{{ $index }}_contract_type_id">
-                                            @foreach($contractTypes as $type)
-                                                <option value="{{ $type->id }}" @if($type->id == $contractType->id) selected @endif>
-                                                    {{ $type->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <label for="contract_preferences_{{ $index }}_contract_duration" class="form-label">Durée souhaitée</label>
-                                        <input type="text" class="form-control" name="contract_preferences[{{ $index }}][contract_duration]" 
-                                               id="contract_preferences_{{ $index }}_contract_duration"
-                                               value="{{ old("contract_preferences.{$index}.contract_duration", $contractType->pivot->contract_duration) }}"
-                                               placeholder="Ex: 6 mois, 1 an, 2 ans...">
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <label for="contract_preferences_{{ $index }}_work_study_rhythm" class="form-label">Rythme d'alternance</label>
-                                        <input type="text" class="form-control" name="contract_preferences[{{ $index }}][work_study_rhythm]" 
-                                               id="contract_preferences_{{ $index }}_work_study_rhythm"
-                                               value="{{ old("contract_preferences.{$index}.work_study_rhythm", $contractType->pivot->work_study_rhythm) }}"
-                                               placeholder="Ex: 2j école / 3j entreprise">
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-danger btn-sm remove-contract-preference">
-                                            <i class="bi bi-trash"></i> Supprimer
-                                        </button>
+                                <div class="contract-preference-item border p-3 mb-3 rounded">
+                                    <div class="row g-3">
+                                        <div class="col-12 col-md-4">
+                                            <label for="contract_preferences_{{ $index }}_contract_type_id" class="form-label">Type de contrat</label>
+                                            <select class="form-select" name="contract_preferences[{{ $index }}][contract_type_id]"
+                                                    id="contract_preferences_{{ $index }}_contract_type_id">
+                                                @foreach($contractTypes as $type)
+                                                    <option value="{{ $type->id }}" @if($type->id == $contractType->id) selected @endif>
+                                                        {{ $type->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label for="contract_preferences_{{ $index }}_contract_duration" class="form-label">Durée
+                                                souhaitée</label>
+                                            <input type="text" class="form-control" name="contract_preferences[{{ $index }}][contract_duration]"
+                                                   id="contract_preferences_{{ $index }}_contract_duration"
+                                                   value="{{ old("contract_preferences.{$index}.contract_duration", $contractType->pivot->contract_duration) }}"
+                                                   placeholder="Ex: 6 mois, 1 an, 2 ans...">
+                                        </div>
+                                        <div class="col-12 col-md-4">
+                                            <label for="contract_preferences_{{ $index }}_work_study_rhythm" class="form-label">Rythme
+                                                d'alternance</label>
+                                            <input type="text" class="form-control" name="contract_preferences[{{ $index }}][work_study_rhythm]"
+                                                   id="contract_preferences_{{ $index }}_work_study_rhythm"
+                                                   value="{{ old("contract_preferences.{$index}.work_study_rhythm", $contractType->pivot->work_study_rhythm) }}"
+                                                   placeholder="Ex: 2j école / 3j entreprise">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-danger btn-sm remove-contract-preference">
+                                                <i class="bi bi-trash"></i> Supprimer
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <button type="button" class="btn btn-outline-primary" id="add-contract-preference">
@@ -225,16 +228,16 @@
                         <h4>Centres d'intérêt</h4>
                         <div id="hobbies-container">
                             @foreach($studentProfile->hobbies as $index => $hobby)
-                            <div class="hobby-item mb-2">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" name="hobbies[]" 
-                                           value="{{ old("hobbies.{$index}", $hobby->hobby_name) }}" 
-                                           placeholder="Ex: Football, Photographie, Cuisine...">
-                                    <button type="button" class="btn btn-outline-danger remove-hobby">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
+                                <div class="hobby-item mb-2">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="hobbies[]"
+                                               value="{{ old("hobbies.{$index}", $hobby->hobby_name) }}"
+                                               placeholder="Ex: Football, Photographie, Cuisine...">
+                                        <button type="button" class="btn btn-outline-danger remove-hobby">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <button type="button" class="btn btn-outline-primary" id="add-hobby">
@@ -250,41 +253,41 @@
                         <h4>Certifications</h4>
                         <div id="certifications-container">
                             @foreach($studentProfile->certifications as $index => $certification)
-                            <div class="certification-item border p-3 mb-3 rounded">
-                                <div class="row g-3">
-                                    <div class="col-12 col-md-6">
-                                        <label for="certifications_{{ $index }}_title" class="form-label">Titre de la certification</label>
-                                        <input type="text" class="form-control" name="certifications[{{ $index }}][title]" 
-                                               id="certifications_{{ $index }}_title"
-                                               value="{{ old("certifications.{$index}.title", $certification->title) }}" 
-                                               placeholder="Ex: AWS Certified Solutions Architect">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="certifications_{{ $index }}_date_obtained" class="form-label">Date d'obtention</label>
-                                        <input type="date" class="form-control" name="certifications[{{ $index }}][date_obtained]" 
-                                               id="certifications_{{ $index }}_date_obtained"
-                                               value="{{ old("certifications.{$index}.date_obtained", $certification->date_obtained?->format('Y-m-d')) }}">
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="certifications_{{ $index }}_description" class="form-label">Description</label>
-                                        <textarea class="form-control" name="certifications[{{ $index }}][description]" 
-                                                  id="certifications_{{ $index }}_description" rows="3"
-                                                  placeholder="Description de la certification...">{{ old("certifications.{$index}.description", $certification->description) }}</textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="certifications_{{ $index }}_link" class="form-label">Lien (optionnel)</label>
-                                        <input type="url" class="form-control" name="certifications[{{ $index }}][link]" 
-                                               id="certifications_{{ $index }}_link"
-                                               value="{{ old("certifications.{$index}.link", $certification->link) }}" 
-                                               placeholder="https://example.com/certification">
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="button" class="btn btn-danger btn-sm remove-certification">
-                                            <i class="bi bi-trash"></i> Supprimer
-                                        </button>
+                                <div class="certification-item border p-3 mb-3 rounded">
+                                    <div class="row g-3">
+                                        <div class="col-12 col-md-6">
+                                            <label for="certifications_{{ $index }}_title" class="form-label">Titre de la certification</label>
+                                            <input type="text" class="form-control" name="certifications[{{ $index }}][title]"
+                                                   id="certifications_{{ $index }}_title"
+                                                   value="{{ old("certifications.{$index}.title", $certification->title) }}"
+                                                   placeholder="Ex: AWS Certified Solutions Architect">
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label for="certifications_{{ $index }}_date_obtained" class="form-label">Date d'obtention</label>
+                                            <input type="date" class="form-control" name="certifications[{{ $index }}][date_obtained]"
+                                                   id="certifications_{{ $index }}_date_obtained"
+                                                   value="{{ old("certifications.{$index}.date_obtained", $certification->date_obtained?->format('Y-m-d')) }}">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="certifications_{{ $index }}_description" class="form-label">Description</label>
+                                            <textarea class="form-control" name="certifications[{{ $index }}][description]"
+                                                      id="certifications_{{ $index }}_description" rows="3"
+                                                      placeholder="Description de la certification...">{{ old("certifications.{$index}.description", $certification->description) }}</textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="certifications_{{ $index }}_link" class="form-label">Lien (optionnel)</label>
+                                            <input type="url" class="form-control" name="certifications[{{ $index }}][link]"
+                                                   id="certifications_{{ $index }}_link"
+                                                   value="{{ old("certifications.{$index}.link", $certification->link) }}"
+                                                   placeholder="https://example.com/certification">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-danger btn-sm remove-certification">
+                                                <i class="bi bi-trash"></i> Supprimer
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         </div>
                         <button type="button" class="btn btn-outline-primary" id="add-certification">
@@ -351,7 +354,7 @@
                                             @method('DELETE')
                                             @csrf
 
-                                            <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+                                            <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
                                         </form>
                                     </div>
                                 </div>
@@ -414,7 +417,7 @@
                                             @method('DELETE')
                                             @csrf
 
-                                            <button type="submit" class="btn btn-danger">Confirmer la suppression</button>
+                                            <button type="submit" class="btn btn-danger">Supprimer définitivement</button>
                                         </form>
                                     </div>
                                 </div>
@@ -507,13 +510,13 @@
                             <label class="form-label">Type de contrat</label>
                             <select class="form-select" name="contract_preferences[${contractIndex}][contract_type_id]">
                                 @foreach($contractTypes as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label class="form-label">Durée souhaitée</label>
-                            <input type="text" class="form-control" name="contract_preferences[${contractIndex}][contract_duration]" placeholder="Ex: 6 mois, 1 an, 2 ans...">
+                </select>
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="form-label">Durée souhaitée</label>
+                <input type="text" class="form-control" name="contract_preferences[${contractIndex}][contract_duration]" placeholder="Ex: 6 mois, 1 an, 2 ans...">
                         </div>
                         <div class="col-12 col-md-4">
                             <label class="form-label">Rythme d'alternance</label>

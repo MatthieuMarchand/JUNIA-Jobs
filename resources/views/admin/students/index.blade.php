@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Entreprises')
+@section('title', 'Comptes étudiant')
 
 @section('content')
     @php
-        $usersCount = $users->count();
+        $studentsCount = $users->count();
     @endphp
     <section class="container">
-        <h1>{{ $usersCount > 1 ? "$usersCount entreprises inscrites" : "1 entreprise inscrite" }}</h1>
+        <h1>{{ $studentsCount > 1 ? "$studentsCount comptes étudiant" : "1 compte étudiant" }}</h1>
 
         <div class="row mt-4 g-3">
             @foreach($users as $user)
@@ -16,7 +16,7 @@
                 @endphp
                 <div class="col-12 col-sm-6">
                     <article class="card shadow p-4">
-                        <h2 class="mb-4">{{ $user->companyProfile->name ?? "Sans nom" }}</h2>
+                        <h2 class="mb-4">{{ $user->studentProfile?->fullname() ?? "Sans nom" }}</h2>
 
                         <p>{{ $user->email }}</p>
 
@@ -34,7 +34,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title fs-5" id="{{ $modalId }}Label">
-                                            Supprimer l'entreprise {{$user->email}} ?
+                                            Supprimer le compte étudiant {{$user->email}} ?
                                         </h1>
                                     </div>
                                     <div class="modal-body">

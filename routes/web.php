@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\ApproveCompanyRegisterRequestController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\CompanyRegisterRequestController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Company\CompanyInvitationHistoryController;
 use App\Http\Controllers\Company\CompanyInviteStudentController;
 use App\Http\Controllers\Company\CompanyProfileController;
@@ -76,6 +77,8 @@ Route::middleware('auth:web')->group(function () {
     Route::prefix('admin')->name('admin.')->group(static function () {
         Route::get('/', AdminDashboardController::class)
             ->name('home');
+
+        Route::resource('students', StudentController::class)->only(['index', 'destroy']);
 
         Route::resource('companies', CompanyController::class)->only(['index', 'destroy']);
 

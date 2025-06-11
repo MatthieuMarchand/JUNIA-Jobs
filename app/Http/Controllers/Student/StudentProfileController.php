@@ -14,13 +14,7 @@ use function to_route;
 
 class StudentProfileController extends Controller
 {
-    private function getStudentProfile(): StudentProfile
-    {
-        return Auth::user()
-            ->studentProfile()
-            ->with(['academicRecords', 'skills', 'professionalExperiences', 'contractTypes', 'domains', 'hobbies', 'certifications'])
-            ->firstOrNew();
-    }
+    use HasStudentProfile;
 
     public function show()
     {

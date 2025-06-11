@@ -1,84 +1,87 @@
-<nav class="navbar px-3 mb-3">
-    <a class="navbar-brand" href="{{  route('home') }}"><strong>JUNIA Jobs</strong></a>
+<header>
+    <a href="{{  route('home') }}">
+        <img src="{{ asset('images/logos/junia_jobs.svg') }}" alt="Logo JUNIA Jobs">
+    </a>
 
-    <ul class="nav nav-underline">
-        <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Accueil</a>
-        </li>
+    <div id="burger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
-        @if (auth()->user()?->role === App\Enums\UserRole::Student)
-            <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('students.invitations.history')) active @endif"
-                   href="{{ route('students.invitations.history') }}"
-                >
-                    Invitations
-                </a>
-            </li>
+  <nav>
+      <ul>
+          <li><a class="{{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Accueil</a></li>
 
-            <li class="nav-item">
-                <a class="nav-link @if(in_array(request()->route()->getName(), ['students.profile.show', 'students.profile.edit'])) active @endif"
-                   href="{{ route('students.profile.show') }}"
-                >
-                    Profil
-                </a>
-            </li>
-        @endif
+          @if (auth()->user()?->role === App\Enums\UserRole::Student)
+              <li>
+                  <a class="{{ request()->routeIs('students.invitations.history') ? 'active' : '' }}" href="{{ route('students.invitations.history') }}">
+                      Invitations
+                  </a>
+              </li>
 
-        @if (auth()->user()?->role === App\Enums\UserRole::Company)
-            <li class="nav-item">
-                <a
-                    class="nav-link
-                    {{ request()->routeIs('companies.students') ? 'active' : '' }}"
-                    href="{{ route('companies.students') }}"
-                >
-                    Étudiants
-                </a>
-            </li>
+              <li>
+                  <a class="@if(in_array(request()->route()->getName(), ['students.profile.show', 'students.profile.edit'])) active @endif"
+                    href="{{ route('students.profile.show') }}"
+                  >
+                      Mon profil
+                  </a>
+              </li>
+          @endif
 
-            <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('companies.invitations.history')) active @endif"
-                   href="{{ route('companies.invitations.history') }}"
-                >
-                    Invitations envoyées
-                </a>
-            </li>
+          @if (auth()->user()?->role === App\Enums\UserRole::Company)
+              <li>
+                  <a
+                      class="{{ request()->routeIs('companies.students') ? 'active' : '' }}"
+                      href="{{ route('companies.students') }}"
+                  >
+                      Trouver des étudiants
+                  </a>
+              </li>
 
-            <li class="nav-item">
-                <a class="nav-link @if(in_array(request()->route()->getName(), ['companies.profile.show', 'companies.profile.edit'])) active @endif"
-                   href="{{ route('companies.profile.show') }}"
-                >
-                    Profil
-                </a>
-            </li>
-        @endif
+              <li>
+                  <a @if(request()->routeIs('companies.invitations.history')) active @endif"
+                    href="{{ route('companies.invitations.history') }}"
+                  >
+                      Invitations envoyées
+                  </a>
+              </li>
 
-        @if (auth()->user()?->role === App\Enums\UserRole::Administrator)
-            <li class="nav-item">
-                <a
-                    class="nav-link
-                    {{ request()->routeIs('admin.home') ? 'active' : '' }}"
-                    href="{{ route('admin.home') }}"
-                >
-                    Dashboard
-                </a>
-            </li>
-        @endif
+              <li>
+                  <a class="@if(in_array(request()->route()->getName(), ['companies.profile.show', 'companies.profile.edit'])) active @endif"
+                    href="{{ route('companies.profile.show') }}"
+                  >
+                      Profil
+                  </a>
+              </li>
+          @endif
 
-        {{-- LOGIN / LOGOUT --}}
-        @guest
-            <li class="nav-item">
-                <a class="btn btn-primary" href="{{ route('login') }}">Se connecter</a>
-            </li>
-        @endguest
+          @if (auth()->user()?->role === App\Enums\UserRole::Administrator)
+              <li>
+                  <a
+                      class="{{ request()->routeIs('admin.home') ? 'active' : '' }}"
+                      href="{{ route('admin.home') }}"
+                  >
+                      Tableau administrateur
+                  </a>
+              </li>
+          @endif
+      </ul>
+  </nav>
 
-        @auth
-            <li class="nav-item">
-                <form action="{{ route('logout') }}" method="post">
-                    @csrf
+  <div>
+    @guest
+      <a href="{{ route('students.register.index') }}">S'inscrire</a>
 
-                    <button class="nav-link" type="submit">Se déconnecter</button>
-                </form>
-            </li>
-        @endauth
-    </ul>
-</nav>
+      <a href="{{ route('login') }}">S'identifier</a>
+    @endguest
+
+    @auth
+      <form action="{{ route('logout') }}" method="post">
+          @csrf
+
+          <button type="submit">Se déconnecter</button>
+      </form>
+    @endauth
+  </div>
+</header>

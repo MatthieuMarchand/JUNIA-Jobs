@@ -1,0 +1,51 @@
+//? ----- ROOT -----
+:root {
+    --content-width: min(calc(100dvw - 16rem), 1200px);
+}
+@media (max-width: 600px) {
+    :root {
+        --content-width: calc(100dvw - 2rem);
+    }
+}
+
+//? ----- VARIABLES -----
+$font-black: "Delight-Black";
+$font-bold: "Satoshi-Bold";
+$font-regular: "Satoshi-Regular";
+
+$color-white: #f5f5f5;
+$color-black: #101010;
+$color-orange: #f2815e;
+$color-purple: #683f94;
+
+$content-width: var(--content-width);
+
+//? ----- MIXINS -----
+@mixin mq($width) {
+    @media (max-width: $width) {
+        @content;
+    }
+}
+
+//? ----- FONTS -----
+@font-face {
+    font-family: "Delight-Black";
+    src: url("../fonts/Delight-Black.woff2") format("woff2"),
+        url("../fonts/Delight-Black.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Satoshi-Bold";
+    src: url("../fonts/Satoshi-Bold.woff2") format("woff2"),
+        url("../fonts/Satoshi-Bold.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Satoshi-Regular";
+    src: url("../fonts/Satoshi-Regular.woff2") format("woff2"),
+        url("../fonts/Satoshi-Regular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}

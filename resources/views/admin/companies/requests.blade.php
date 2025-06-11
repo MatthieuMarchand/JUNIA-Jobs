@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Demande d\'inscription envoyée')
+@section('title', 'Entreprises en attente')
 
 @section('content')
     <section class="container">

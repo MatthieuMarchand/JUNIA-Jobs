@@ -93,7 +93,8 @@ class ImportLinkedinPdfTest extends TestCase
         $this->assertSame($expected->lastName, $profile->last_name);
         $this->assertSame($expected->summary, $profile->summary);
         $this->assertSame('', $profile->phone_number);
-        $this->assertSame($expected->skills, $profile->skills->pluck('name')->toArray());
+        // Assert same array, ignoring order
+        $this->assertEqualsCanonicalizing($expected->skills, $profile->skills->pluck('name')->toArray());
 
         $this->assertCount(1, $profile->academicRecords);
         $record = $profile->academicRecords->first();

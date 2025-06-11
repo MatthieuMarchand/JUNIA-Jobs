@@ -25,7 +25,11 @@ class UpdateProfileContractTypesTest extends TestCase
 
         $response = $this->actingAs($profile->user)->patch('/students/profile', [
             ...$profile->toArray(),
-            'contract_type_ids' => [$lastContract->id],
+            'contract_preferences' => [
+                [
+                    'contract_type_id' => $lastContract->id,
+                ],
+            ],
         ]);
 
         $response->assertRedirect('/students/profile');

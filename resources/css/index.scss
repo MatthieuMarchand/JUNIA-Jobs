@@ -198,8 +198,14 @@ header {
     background: $color-purple;
     border-top-left-radius: 4rem;
     border-top-right-radius: 4rem;
+
     padding: 10rem 0 16rem 0;
     gap: 20rem;
+
+    @include mq(600px) {
+        padding: 4rem 0 8rem 0;
+        gap: 8rem;
+    }
 
     h2 {
         font-family: $font-black;

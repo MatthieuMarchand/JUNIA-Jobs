@@ -1,5 +1,5 @@
 header {
-    width: $content-width;
+    max-width: $content-width;
     margin: auto;
 
     display: flex;
@@ -103,13 +103,12 @@ header {
 }
 
 .section-landing {
-    width: $content-width;
+    max-width: $content-width;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: 2rem;
     overflow: hidden;
-    height: 100dvh;
 
     @include mq(600px) {
         height: unset;
@@ -127,7 +126,6 @@ header {
         h1 {
             font-family: $font-black;
             font-size: 4.05svw;
-            white-space: nowrap;
             text-align: center;
             color: $color-orange;
             margin: unset;
@@ -151,18 +149,19 @@ header {
         grid-template-columns: repeat(10, 1fr);
         column-gap: 2rem;
         padding-top: 4rem;
+        height: 40vw;
 
         @include mq(600px) {
             grid-column: 1 / end;
             padding: unset;
+            height: 60vw;
         }
 
         img {
             grid-row: 1;
             width: 100%;
             height: auto;
-            box-shadow: 0 0.5rem 0.5rem 0.5rem
-                rgba($color: $color-orange, $alpha: 0.2);
+            box-shadow: 0 0.5rem 0.5rem 0.5rem rgba($color: $color-orange, $alpha: 0.2);
             z-index: -1;
             border-radius: 1rem;
 
@@ -206,6 +205,8 @@ header {
     background: $color-purple;
     border-top-left-radius: 4rem;
     border-top-right-radius: 4rem;
+    padding: 10rem 0 16rem 0;
+    gap: 20rem;
 
     h2 {
         font-family: $font-black;
@@ -213,10 +214,8 @@ header {
         text-align: center;
     }
 
-    & > div:nth-child(1) {
-        width: $content-width;
-        margin-top: 10rem;
-        margin-bottom: 15rem;
+    & > section:nth-child(1) {
+        max-width: $content-width;
 
         & > div {
             display: flex;
@@ -268,13 +267,31 @@ header {
         }
     }
 
-    & > div:nth-child(2) {
-        margin-top: 10rem;
+    & > section:nth-child(2) {
+        max-width: $content-width;
+
+        div {
+            margin-top: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            overflow: hidden;
+
+            img {
+                height: 10vh;
+                aspect-ratio: 1 / 1;
+                padding: 1rem;
+                background: $white;
+                border-radius: 1rem;
+            }
+        }
     }
 }
 
 footer {
-    width: $content-width;
+    max-width: $content-width;
     display: flex;
     justify-content: space-between;
     padding: 5rem 0 1.5rem 0;

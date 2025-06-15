@@ -25,6 +25,7 @@ class DevelopmentSeeder extends Seeder
         Storage::deleteDirectory('photos');
 
         $this->call(DatabaseSeeder::class);
+        $this->call(CompanySeeder::class);
 
         // "password" est le mot de passe de tous les utilisateurs générés
         // (voir UserFactory)

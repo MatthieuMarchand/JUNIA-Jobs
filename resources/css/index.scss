@@ -40,10 +40,6 @@ header {
         justify-content: center;
         gap: 2rem;
 
-        @include mq(600px) {
-            display: none;
-        }
-
         ul {
             padding: unset;
             margin: unset;
@@ -64,9 +60,6 @@ header {
         display: flex;
         justify-content: flex-end;
 
-        @include mq(600px) {
-            display: none;
-        }
 
         a {
             text-decoration: none;

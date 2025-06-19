@@ -1,0 +1,52 @@
+{
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-BeopsB42.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-mSm7cUeB.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "public/images/homepage-background.png": {
+    "file": "assets/homepage-background-BGkp21eu.png",
+    "src": "public/images/homepage-background.png"
+  },
+  "resources/css/app.scss": {
+    "file": "assets/app-CegZwqB2.css",
+    "src": "resources/css/app.scss",
+    "isEntry": true
+  },
+  "resources/fonts/Delight-Black.woff": {
+    "file": "assets/Delight-Black-DD_Tuo5X.woff",
+    "src": "resources/fonts/Delight-Black.woff"
+  },
+  "resources/fonts/Delight-Black.woff2": {
+    "file": "assets/Delight-Black-BZnrl5Kh.woff2",
+    "src": "resources/fonts/Delight-Black.woff2"
+  },
+  "resources/fonts/Satoshi-Bold.woff": {
+    "file": "assets/Satoshi-Bold-C2PhLWFc.woff",
+    "src": "resources/fonts/Satoshi-Bold.woff"
+  },
+  "resources/fonts/Satoshi-Bold.woff2": {
+    "file": "assets/Satoshi-Bold-Bd5kKQ_U.woff2",
+    "src": "resources/fonts/Satoshi-Bold.woff2"
+  },
+  "resources/fonts/Satoshi-Regular.woff": {
+    "file": "assets/Satoshi-Regular-CWSyEjGv.woff",
+    "src": "resources/fonts/Satoshi-Regular.woff"
+  },
+  "resources/fonts/Satoshi-Regular.woff2": {
+    "file": "assets/Satoshi-Regular-CPM9dct4.woff2",
+    "src": "resources/fonts/Satoshi-Regular.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CUH-au_d.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-CCl8E_5p.css"
+    ]
+  }
+}

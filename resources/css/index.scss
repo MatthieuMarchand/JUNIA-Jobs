@@ -95,6 +95,17 @@ header {
     z-index: -1;
 }
 
+@keyframes slideUp {
+    from {
+        transform: translateY(100%) rotate(var(--rotate));
+    }
+
+    to {
+        transform: translateY(var(--translateY)) rotate(var(--rotate));
+    }
+}
+
+
 .section-landing {
     max-width: $content-width;
     margin: auto;
@@ -158,32 +169,43 @@ header {
             z-index: -1;
             border-radius: 1rem;
 
+            transform: translateY(100%) rotate(var(--rotate));
+
             &:nth-child(1) {
                 grid-column: 5 / 11;
                 transform-origin: top left;
-                transform: translateY(1rem) rotate(5deg);
+
+                --translateY: 1rem;
+                --rotate: 5deg;
+                animation: slideUp .5s 0s ease-out forwards;
 
                 @include mq(600px) {
-                    transform: translateY(5rem) rotate(5deg);
+                    --translateY: 5rem;
+                    --rotate: 5deg;
                 }
             }
 
             &:nth-child(2) {
                 grid-column: 1 / 7;
                 transform-origin: top right;
-                transform: translateY(1rem) rotate(-5deg);
+
+                --translateY: 1rem;
+                --rotate: -5deg;
+                animation: slideUp .5s .2s ease-in-out forwards;
 
                 @include mq(600px) {
-                    transform: translateY(5rem) rotate(-5deg);
+                    --translateY: 5rem;
+                    --rotate: -5deg;
                 }
             }
 
             &:nth-child(3) {
                 grid-column: 3 / 9;
-                transform: rotate(0deg);
+                --rotate: 0;
+                animation: slideUp .5s .4s ease-in-out forwards;
 
                 @include mq(600px) {
-                    transform: translateY(4rem) rotate(0deg);
+                    --translateY: 4rem;
                 }
             }
         }

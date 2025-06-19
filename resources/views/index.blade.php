@@ -14,9 +14,9 @@
         </div>
 
         <div class="fake-cv">
-            <img src="{{ asset('images/test-cv.png') }}" alt="">
-            <img src="{{ asset('images/test-cv.png') }}" alt="">
-            <img src="{{ asset('images/test-cv.png') }}" alt="">
+            <img src="{{ asset('images/test-cv-3.png') }}" alt="">
+            <img src="{{ asset('images/test-cv-1.png') }}" alt="">
+            <img src="{{ asset('images/test-cv-2.png') }}" alt="">
         </div>
     </section>
 

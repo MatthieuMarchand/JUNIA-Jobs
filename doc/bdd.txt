@@ -1,115 +1,138 @@
-Table User {
-  id int [pk, increment]
-  email varchar(255) [unique, not null]
-  password varchar(255) [not null]
-  role varchar(50) [not null, note: "'student', 'company', 'administrator'"]
-  gdpr_consent boolean [default: false, not null]
-}
-
-Table StudentProfile {
-  id int [pk]
-  user_id int [ref: > User.id]
-  first_name varchar(255) [not null]
-  last_name varchar(255) [not null]
-  photo_path varchar(255)
-  summary text
-  phone_number varchar(50)
-  driver_license boolean [default: false, not null]
-  vehicle boolean [default: false, not null]
-}
-
-Table ContractPreference {
-  id int [pk, increment]
-  student_profile_id int [ref: > StudentProfile.id, not null]
-  contract_type varchar(255) [not null]
-  contract_duration varchar(255)
-  work_study_rhythm varchar(255)
-}
-
 Table AcademicRecord {
-  id int [pk, increment]
-  student_user_id int [ref: > StudentProfile.user_id, not null]
+  id int [pk, not null]
+  student_profile_id int [ref: > StudentProfile.id, not null]
   degree varchar(255) [not null]
   institution varchar(255) [not null]
-  start_date date
-  end_date date
+  start date [not null]
+  end date
   description text
-}
-
-Table ProfessionalExperience {
-  id int [pk, increment]
-  student_user_id int [ref: > StudentProfile.user_id, not null]
-  title varchar(255) [not null]
-  contract_type varchar(255) [not null]
-  company_name varchar(255) [not null]
-  location varchar(255)
-  start_date date [not null]
-  end_date date
-  description text
-}
-
-Table ResearchArea {
-  id int [pk, increment]
-  name varchar(255) [unique, not null]
-}
-
-Table Domain {
-  name varchar(255) [pk, not null]
-}
-
-Table StudentProfileDomain {
-  student_profile_id int [pk, ref: > StudentProfile.id]
-  domain_name varchar(255) [pk, ref: > Domain.name]
-}
-
-Table StudentProfileResearchArea {
-  student_profile_id int [pk, ref: > StudentProfile.id]
-  research_area_id int [pk, ref: > ResearchArea.id]
-}
-
-Table Skill {
-  name varchar(255) [pk, not null]
-}
-
-Table StudentProfileSkill {
-  student_profile_id int [pk, ref: > StudentProfile.id]
-  skill_name varchar(255) [pk, ref: > Skill.name]
-}
-
-Table StudentProfileHobby {
-  student_profile_id int [pk, ref: > StudentProfile.id]
-  hobby_name varchar(255) [not null]
 }
 
 Table Certification {
-  id int [pk, increment]
+  id int [pk, not null]
   student_profile_id int [ref: > StudentProfile.id, not null]
   title varchar(255) [not null]
   date_obtained date [not null]
   description text
-  link varchar(255) [null]
+  link varchar(255)
+}
+
+Table CompanyInviteStudentCompanyProfile {
+  company_profile_id int [ref: > CompanyProfile.id]
+  interview_invitation_id int [ref: > InterviewInvitation.id]
+}
+
+Table CompanyInviteStudentStudentProfile {
+  student_profile_id int [ref: > StudentProfile.id]
+  interview_invitation_id int [ref: > InterviewInvitation.id]
 }
 
 Table CompanyProfile {
-  id int [pk]
-  user_id int [ref: > User.id]
+  id int [pk, not null]
+  user_id int [ref: > User.id, not null]
   name varchar(255) [not null]
   photo_path varchar(255)
   description text
 }
 
 Table CompanyRegistrationRequest {
-  user_id int [pk, ref: > User.id]
+  id int [pk, not null]
+  user_id int [ref: > User.id, not null]
   company_name varchar(255) [not null]
   message varchar(255) [not null]
-  approved boolean [default: false, not null]
+  approved boolean [not null]
+}
+
+Table ContractType {
+  id int [pk, not null]
+  name varchar(255) [not null]
+  description varchar(255)
+}
+
+Table Domain {
+  name varchar(255) [pk, not null]
 }
 
 Table InterviewInvitation {
-  id int [pk, increment]
-  company_profile_id int [ref: > CompanyProfile.id, not null]
+  id int [pk, not null]
   student_profile_id int [ref: > StudentProfile.id, not null]
-  sent timestamp [default: `now()`, not null]
+  company_profile_id int [ref: > CompanyProfile.id, not null]
+  sent datetime [not null]
+  invitation_date date [not null]
   invitation_details text [not null]
-  invitation_status varchar(50) [default: "'sent'", not null, note: "'sent', 'read', 'accepted', 'declined', 'interview_scheduled', 'completed'"]
+  invitation_status varchar(255) [not null]
+  created_at datetime
+  updated_at datetime
+}
+
+Table Notification {
+  user_id int [ref: > User.id]
+}
+
+Table PasswordResetToken {
+  email varchar(255) [pk, not null]
+  token varchar(255) [not null]
+  created_at datetime
+}
+
+Table ProfessionalExperience {
+  id int [pk, not null]
+  student_profile_id int [ref: > StudentProfile.id, not null]
+  title varchar(255) [not null]
+  contract_type varchar(255) [not null]
+  company_name varchar(255) [not null]
+  location varchar(255)
+  start date [not null]
+  end date
+  description text
+}
+
+Table Skill {
+  name varchar(255) [pk, not null]
+}
+
+Table StudentProfileContractType {
+  student_profile_id int [ref: > StudentProfile.id, not null]
+  contract_type_id int [ref: > ContractType.id, not null]
+  contract_duration varchar(255)
+  work_study_rhythm varchar(255)
+}
+
+Table StudentProfileDomain {
+  domain_name varchar(255) [ref: > Domain.name, not null]
+  student_profile_id int [ref: > StudentProfile.id, not null]
+}
+
+Table StudentProfileHobby {
+  student_profile_id int [ref: > StudentProfile.id, pk, not null]
+  hobby_name varchar(255) [pk, not null]
+}
+
+Table StudentProfileSkill {
+  skill_name varchar(255) [ref: > Skill.name, not null]
+  student_profile_id int [ref: > StudentProfile.id, not null]
+}
+
+Table StudentProfile {
+  id int [pk, not null]
+  user_id int [ref: > User.id, not null]
+  first_name varchar(255) [not null]
+  last_name varchar(255) [not null]
+  photo_path varchar(255)
+  summary text
+  phone_number varchar(255)
+  driver_license boolean [default: false, not null]
+  vehicle boolean [default: false, not null]
+}
+
+Table User {
+  id int [pk, not null]
+  email varchar(255) [not null]
+  email_verified_at datetime
+  password varchar(255) [not null]
+  role varchar(50) [not null]
+  gdpr_consent boolean [default: false, not null]
+  remember_token varchar(255)
+  created_at datetime
+  updated_at datetime
 }
